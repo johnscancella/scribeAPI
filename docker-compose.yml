@@ -1,26 +1,16 @@
 mongodb:
   image: mongo:2.4
 
-anzac:
+scribe:
   build: .
   links:
     - mongodb:mongodb
-  command: anzac
   ports:
-    - 3000:80
+    - 80:80
+  environment:
+    - DEVISE_SECRET_TOKEN
+    - SECRET_KEY_BASE_TOKEN
+  volumes:
+    - .:/src
 
-whale_tales:
-  build: .
-  links:
-    - mongodb:mongodb
-  command: whale_tales
-  ports:
-    - 3000:80
-
-emigrant:
-  build: .
-  links:
-    - mongodb:mongodb
-  command: emigrant
-  ports:
-    - 3000:80
+    

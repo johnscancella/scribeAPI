@@ -16,4 +16,4 @@ RUN npm install
 
 EXPOSE 80
 
-ENTRYPOINT ["/src/start.sh"]
+ENTRYPOINT ["rails", "server", "-p", "80"]

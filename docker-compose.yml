@@ -10,7 +10,3 @@ scribe:
   environment:
     - DEVISE_SECRET_TOKEN
     - SECRET_KEY_BASE_TOKEN
-  volumes:
-    - .:/src
-
-    

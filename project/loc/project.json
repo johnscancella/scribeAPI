@@ -1,0 +1,47 @@
+{
+  "title": "Crowdsourcing POC",
+  "short_title": "LoC",
+  "summary": "Join us in transcribing whatever from the Library of Congress.",
+  "background": "/images/background.jpg",
+  "admin_email": "twan@loc.gov",
+  "logo": "/images/logo.png",
+  "favicon": "/images/favicon.ico",
+  "privacy_policy": "https://www.loc.gov/legal/#privacy_policy",
+  "terms_map": {
+    "group": "collection",
+    "subject set": "page",
+    "subject": "page",
+    "mark": "region"
+  },
+  "team_emails": [
+    "twan@loc.gov"
+  ],
+  "team": [
+    {
+      "name": "Tong Wang",
+      "role": "Code DJ",
+      "organization": "LC"
+    }
+  ],
+  "organizations": [
+    {
+      "title": "LC",
+      "description": "The largest library in the world.",
+      "url":"https://www.loc.gov",
+      "logo": "https://www.loc.gov/static/images/library-of-congress-logo.png"
+    }
+  ],
+
+  "analytics": {
+    "google_analytics_client_id": "UA-69673163-1"
+  },
+
+  "menus": {
+    "main": [
+      {"label": "Intro", "page": "intro"},
+      {"label": "Data", "page": "data"},
+      {"label": "About", "page": "about"}
+    ],
+    "footer": []
+  }
+}

@@ -18,7 +18,9 @@
       "tool_config" : {
         "displays_transcribe_button": false,
         "options": [
-          {"type": "rectangleTool", "label": "Headline", "color": "red", "generates_subject_type": "loc_headline", "help": {"file": "m_headline"}}
+          {"type": "rectangleTool", "label": "Headline", "color": "red", "generates_subject_type": "headline", "help": {"file": "m_headline"}},
+          {"type": "rectangleTool", "label": "Cartoon", "color": "blue", "generates_subject_type": "cartoon", "help": {"file": "m_cartoon"}},
+          {"type": "rectangleTool", "label": "Advertisement", "color": "darkorange", "generates_subject_type": "advertisement", "help": {"file": "m_advertisement"}}
         ]
       },
       "next_task": null

@@ -10,16 +10,84 @@
 
   "tasks": {
 
-
-    "loc_headline": {
-      "tool": "textTool",
-      "tool_config": {},
-      "instruction": "Enter the headline",
-      "examples": ["U. S. Cruiser Memphis on Rock", "Wilson Asks Trainmen to Halt Strike"],
+    "headline": {
+      "tool": "compositeTool",
+      "tool_config": {
+        "tools": {
+          "ar_headline": {
+            "tool": "textTool",
+            "examples": ["U. S. CRUISER MEMPHIS LOST WITH 20 MEN"],
+            "label": "Headline"
+          },
+          "ar_subhead": {
+            "tool": "textTool",
+            "examples": ["Great Swell Wrecks Vessel in San Domingo Harbor"],
+            "label": "Subheads"
+          }
+        }
+      },
+      "instruction": "Enter the headline and subhead(s)",
       "help": {
         "file": "t_headline"
       },
-      "generates_subject_type": "loc_transcribed_headline"
+      "generates_subject_type": "transcribed_headline"
+    },
+
+    "cartoon": {
+      "tool": "compositeTool",
+      "tool_config": {
+        "tools": {
+          "ca_series": {
+            "tool": "textTool",
+            "examples": ["S'MATTER POP?"],
+            "label": "Cartoon Series"
+          },
+          "ca_title": {
+            "tool": "textTool",
+            "examples": ["Uncle Si Is a Sly One"],
+            "label": "Cartoon Title"
+          },
+          "ca_author": {
+            "tool": "textTool",
+            "examples": ["C. M. PAYNE"],
+            "label": "Cartoon Author(s)"
+          }
+        }
+      },
+      "instruction": "Enter the cartoon series, title and author",
+      "help": {
+        "file": "t_cartoon"
+      },
+      "generates_subject_type": "transcribed_cartoon"
+    },
+
+    "advertisement": {
+      "tool": "compositeTool",
+      "tool_config": {
+        "tools": {
+          "ad_company": {
+            "tool": "textTool",
+            "examples": ["The COCA-COLA COMPANY"],
+            "label": "Company"
+          },
+          "ad_product": {
+            "tool": "textTool",
+            "examples": ["Coca-Cola"],
+            "label": "Product"
+          },
+          "ad_text": {
+            "tool": "textTool",
+            "examples": ["This is no ordinary drink-it-just-to-be-drinkging-something beverage."],
+            "label": "Text"
+          }
+        }
+      },
+      "instruction": "Enter the advertising company, product and text",
+      "help": {
+        "file": "t_advertisement"
+      },
+      "generates_subject_type": "transcribed_advertisement"
     }
+
   }
 }

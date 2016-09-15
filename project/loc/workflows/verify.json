@@ -11,7 +11,7 @@
 
   "tasks": {
 
-    "loc_transcribed_headline": {
+    "transcribed_headline": {
       "instruction": "Choose the best transcription or enter your own!",
       "tool": "verifyTool",
       "tool_config": {
@@ -19,6 +19,26 @@
       },
       "help": { "file": "v_headline" },
       "generates_subject_type": "consensus_headline"
+    },
+
+    "transcribed_cartoon": {
+      "instruction": "Choose the best transcription or enter your own!",
+      "tool": "verifyTool",
+      "tool_config": {
+        "displays_transcribe_button": true
+      },
+      "help": { "file": "v_cartoon" },
+      "generates_subject_type": "consensus_cartoon"
+    },
+
+    "transcribed_advertisement": {
+      "instruction": "Choose the best transcription or enter your own!",
+      "tool": "verifyTool",
+      "tool_config": {
+        "displays_transcribe_button": true
+      },
+      "help": { "file": "v_advertisement" },
+      "generates_subject_type": "consensus_advertisement"
     }
   }
 }

@@ -5,12 +5,53 @@
   "generates_subjects": true,
   "generates_subjects_for": "transcribe",
 
-  "first_task":"mark_primary",
+  "first_task":"article_present",
 
   "tasks": {
-    "mark_primary": {
+
+    "article_present": {
+      "tool": "pickOne",
+      "instruction": "Are there any *unmarked* article headlines present?",
+      "tool_config": {
+        "options": [
+          {"value": "yes", "label": "Yes", "next_task": "mark_headline" },
+          {"value": "no", "label": "No"}
+        ]
+      },
+      "next_task": "cartoon_present"
+    },
+
+    "mark_headline": {
       "tool": "pickOneMarkOne",
-      "instruction": "",
+      "instruction": "Draw a rectangle around each *unmarked* headline and subheads if presented.",
+      "generates_subjects": true,
+      "help": {
+        "file": "mark_headline"
+      },
+      "tool_config" : {
+        "displays_transcribe_button": false,
+        "options": [
+          {"type": "rectangleTool", "label": "Headline", "color": "red", "generates_subject_type": "headline", "help": {"file": "m_headline"}}
+        ]
+      },
+      "next_task": "cartoon_present"
+    },
+
+    "cartoon_present": {
+      "tool": "pickOne",
+      "instruction": "Are there any *unmarked* cartoons present?",
+      "tool_config": {
+        "options": [
+          {"value": "yes", "label": "Yes", "next_task": "mark_cartoon" },
+          {"value": "no", "label": "No"}
+        ]
+      },
+      "next_task": "advertisement_present"
+    },
+
+    "mark_cartoon": {
+      "tool": "pickOneMarkOne",
+      "instruction": "Draw a rectangle around each *unmarked* cartoon including it's title and author(s).",
       "generates_subjects": true,
       "help": {
         "file": "mark_primary"
@@ -18,18 +59,39 @@
       "tool_config" : {
         "displays_transcribe_button": false,
         "options": [
-          {"type": "rectangleTool", "label": "Headline", "color": "red", "generates_subject_type": "headline", "help": {"file": "m_headline"}},
-          {"type": "rectangleTool", "label": "Cartoon", "color": "blue", "generates_subject_type": "cartoon", "help": {"file": "m_cartoon"}},
-          {"type": "rectangleTool", "label": "Advertisement", "color": "darkorange", "generates_subject_type": "advertisement", "help": {"file": "m_advertisement"}}
+          {"type": "rectangleTool", "label": "Cartoon", "color": "blue", "generates_subject_type": "cartoon", "help": {"file": "m_cartoon"}}
+        ]
+      },
+      "next_task": "advertisement_present"
+    },
+
+    "advertisement_present": {
+      "tool": "pickOne",
+      "instruction": "Are there any *unmarked* advertisements present?",
+      "tool_config": {
+        "options": [
+          {"value": "yes", "label": "Yes", "next_task": "mark_advertisement" },
+          {"value": "no", "label": "No"}
         ]
       },
       "next_task": null
     },
 
-    "completion_assessment_task": {
-      "tool_config": {
-        "displays_transcribe_button": false
-      }
+    "mark_advertisement": {
+      "tool": "pickOneMarkOne",
+      "instruction": "Draw a rectangle around each *unmarked* advertisement",
+      "generates_subjects": true,
+      "help": {
+        "file": "mark_primary"
+      },
+      "tool_config" : {
+        "displays_transcribe_button": false,
+        "options": [
+          {"type": "rectangleTool", "label": "Advertisement", "color": "darkorange", "generates_subject_type": "advertisement", "help": {"file": "m_advertisement"}}
+        ]
+      },
+      "next_task": null
     }
+
   }
 }

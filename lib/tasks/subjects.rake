@@ -1,5 +1,6 @@
 require 'csv'
 require 'active_support'
+require 'ocr_alto'
 
 
 namespace :subjects do
@@ -140,9 +141,54 @@ namespace :subjects do
         })
         subject.activate!
         puts "Added subject: #{subject.location[:standard]}"
-      end
 
+        # pre-create secondary mark subjects
+        if !subj['alto'].nil?
+          alto_url = subj['alto']
+          puts "Parsing ALTO from #{alto_url} and create initial marks"
+          headlines_info = OcrAlto::predict_headlines_from_alto(alto_url, max_num_headlines:16)
+          page_width = headlines_info[:page_width]
+          page_height = headlines_info[:page_height]
+          headlines = headlines_info[:headlines]
+
+          headlines.each do |headline|
+            # create classification
+            tb_width = (headline[:right] - headline[:left]) / page_width * width
+            tb_height = (headline[:bottom] - headline[:top]) / page_height * height
+            tb_hpos = headline[:left] / page_width * width
+            tb_hpos = 0 if tb_hpos < 0
+            tb_vpos = headline[:top] / page_height * height
+            tb_vpos = 0 if tb_vpos < 0
+            annotation = {
+              "belongsToUser" => "true",
+              "toolName" => "rectangleTool",
+              "userCreated" => "false",
+              "subToolIndex" => "0", # hardcoded one, assuming it is the first subtool
+              "color" => "red",
+              "isTranscribable" => "true",
+              "x" => tb_hpos.to_s,
+              "y" => tb_vpos.to_s,
+              "width" => tb_width.to_s,
+              "height" => tb_height.to_s,
+              "_key" => Random.rand.to_s,
+              "status" => "mark",
+              "isUncommitted" => "true"
+            }
+
+            Classification.create(
+              workflow: mark_workflow,
+              subject: subject,
+              location: nil,
+              annotation: annotation,
+              started_at: Time.now,
+              finished_at: Time.now,
+              user_agent: "Server",
+              task_key: "mark_headline",  # TODO remove hardcoded task_key
+              user: User.new() # User.id is required during subject creation
+            )
+          end
+        end
+      end
     end
   end
-
 end

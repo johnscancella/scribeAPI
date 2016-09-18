@@ -38,6 +38,8 @@ gem 'puma', '~> 2.14.0'
 
 gem 'logstasher', '~> 0.6'
 
+gem 'nokogiri'
+
 group :development do
   gem 'dotenv-rails'
 end

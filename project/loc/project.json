@@ -1,7 +1,7 @@
 {
-  "title": "Crowdsourcing POC",
-  "short_title": "LoC",
-  "summary": "Join us in transcribing whatever from the Library of Congress.",
+  "title": "Proof of concept",
+  "short_title": "poc",
+  "summary": "Join us in rediscovering historic newspapers.",
   "background": "/images/background.jpg",
   "admin_email": "twan@loc.gov",
   "logo": "/images/logo.png",
@@ -25,10 +25,10 @@
   ],
   "organizations": [
     {
-      "title": "LC",
-      "description": "The largest library in the world.",
-      "url":"https://www.loc.gov",
-      "logo": "https://www.loc.gov/static/images/library-of-congress-logo.png"
+      "title": "Acme",
+      "description": "Acme Corporation",
+      "url":"https://put.url.here/",
+      "logo": "https://put.logo.url.here/"
     }
   ],
 

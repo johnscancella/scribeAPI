@@ -55,7 +55,6 @@ CompositeTool = React.createClass
   # If there are more inputs, move focus to next input
   # Otherwise commit annotation (which is default behavior when there's only one input
   handleCompletedField: ->
-
     field_keys = (c.value for c in @props.task.tool_config.options)
     next_field_key = field_keys[ field_keys.indexOf(@state.active_field_key) + 1 ]
 

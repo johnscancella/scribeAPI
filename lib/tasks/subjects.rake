@@ -146,7 +146,7 @@ namespace :subjects do
         if !subj['alto'].nil?
           alto_url = subj['alto']
           puts "Parsing ALTO from #{alto_url} and create initial marks"
-          headlines_info = OcrAlto::predict_headlines_from_alto(alto_url, max_num_headlines:16)
+          headlines_info = OcrAlto::detect_headlines_from_alto(alto_url, max_num_headlines:16)
           page_width = headlines_info[:page_width]
           page_height = headlines_info[:page_height]
           headlines = headlines_info[:headlines]

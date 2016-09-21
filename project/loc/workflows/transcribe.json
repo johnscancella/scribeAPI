@@ -20,7 +20,7 @@
             "label": "Headline"
           },
           "ar_subhead": {
-            "tool": "textTool",
+            "tool": "textAreaTool",
             "examples": ["Great Swell Wrecks Vessel in San Domingo Harbor"],
             "label": "Subheads"
           }
@@ -76,7 +76,7 @@
             "label": "Product"
           },
           "ad_text": {
-            "tool": "textTool",
+            "tool": "textAreaTool",
             "examples": ["This is no ordinary drink-it-just-to-be-drinkging-something beverage."],
             "label": "Text"
           }

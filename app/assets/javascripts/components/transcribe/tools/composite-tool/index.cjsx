@@ -130,6 +130,12 @@ CompositeTool = React.createClass
           annotation_key = sub_tool.value
           focus = annotation_key is @state.active_field_key
 
+          initValue = 
+            if @props.subject.data.initValue
+              @props.subject.data.initValue[index]
+            else
+              ""
+
           <ToolComponent
             key={index}
             task={@props.task}
@@ -146,6 +152,7 @@ CompositeTool = React.createClass
             scale={@props.scale}
             annotation_key={annotation_key}
             annotation={@state.annotation}
+            initValue={initValue}
           />
       }
 

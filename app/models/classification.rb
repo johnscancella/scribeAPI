@@ -1,3 +1,5 @@
+require 'ocr_alto'
+
 class Classification
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -17,6 +19,7 @@ class Classification
   belongs_to    :child_subject, class_name: "Subject", inverse_of: :parent_classifications
 
   after_create  :increment_subject_classification_count #, :check_for_retirement_by_classification_count
+  after_create  :extract_text_from_alto
   after_create  :generate_new_subjects
   after_create  :generate_terms
   # removing this after create until we have a use case for the information
@@ -128,4 +131,22 @@ class Classification
       h
     end
   end
+
+  # extract text from OCR ALTO and save it in annotation as initText
+  def extract_text_from_alto
+    if !self.subject.meta_data.nil? && !!(alto_url = self.subject.meta_data['alto'])
+      box = { hpos: self.annotation["x"].to_f / self.subject["width"], 
+              vpos: self.annotation["y"].to_f / self.subject["height"], 
+              width: self.annotation["width"].to_f / self.subject["width"],  
+              height: self.annotation["height"].to_f / self.subject["height"],  }
+      # hard-coded task key
+      if self.task_key == 'mark_headline'
+        text = OcrAlto::extract_headline_from_alto(alto_url, box)
+      else
+        text = OcrAlto::extract_text_from_alto(alto_url, box)
+      end
+      self.annotation["initValue"] = text
+    end
+  end
+
 end

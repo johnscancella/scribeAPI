@@ -76,6 +76,9 @@ CompositeTool = React.createClass
     @setState annotation: {}, () =>
       @props.onComplete ann
 
+    # Also reset active field to the first field
+    @setState active_field_key: (c.value for c in @props.task.tool_config.options)[0]
+
     if @props.transcribeMode is 'page' or @props.transcribeMode is 'single'
       if @props.isLastSubject and not @props.task.next_task?
         @props.returnToMarking()

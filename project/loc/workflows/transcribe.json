@@ -15,7 +15,7 @@
       "tool_config": {
         "tools": {
           "ar_headline": {
-            "tool": "textTool",
+            "tool": "textAreaTool",
             "examples": ["U. S. CRUISER MEMPHIS LOST WITH 20 MEN"],
             "label": "Headline"
           },
@@ -65,20 +65,20 @@
       "tool": "compositeTool",
       "tool_config": {
         "tools": {
+          "ad_text": {
+            "tool": "textAreaTool",
+            "examples": ["This is no ordinary drink-it-just-to-be-drinkging-something beverage."],
+            "label": "Text of Advertisement"
+          },
           "ad_company": {
             "tool": "textTool",
             "examples": ["The COCA-COLA COMPANY"],
-            "label": "Company"
+            "label": "Company Name"
           },
           "ad_product": {
             "tool": "textTool",
             "examples": ["Coca-Cola"],
             "label": "Product"
-          },
-          "ad_text": {
-            "tool": "textAreaTool",
-            "examples": ["This is no ordinary drink-it-just-to-be-drinkging-something beverage."],
-            "label": "Text"
           }
         }
       },

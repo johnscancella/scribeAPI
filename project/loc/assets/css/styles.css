@@ -459,3 +459,10 @@ div.home-page {
   display: inline-block;
   padding: 10px 20px;
 }
+
+/* LOC */
+.transcribe-tool .modal-body .input-field textarea {
+  resize: both;
+  width: 400px;
+  height: 80px;
+}

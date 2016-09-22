@@ -144,13 +144,8 @@ TextTool = React.createClass
   handleKeyDown: (e) ->
     @handleChange(e) # updates any autocomplete values
 
-    if (! @state.autocompleting && [13].indexOf(e.keyCode) >= 0) && !e.shiftKey# ENTER
+    if (! @state.autocompleting && [13].indexOf(e.keyCode) >= 0) && @props.inputType == "text"
       @commitAnnotation()
-    else if e.keyCode == 13 && e.shiftKey
-      text_area =  $("textarea")
-      the_text = text_area.val()
-      the_text = the_text.concat("/n")
-      text_area.val(the_text)
 
   handleBadMark: ()->
     newAnnotation = []

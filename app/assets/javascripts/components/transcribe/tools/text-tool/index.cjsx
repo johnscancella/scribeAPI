@@ -160,7 +160,7 @@ TextTool = React.createClass
     return null if @props.loading # hide transcribe tool while loading image
 
     val = @state.annotation[@fieldKey()]
-    val = @props.initValue if ! val?
+    val = "" if ! val?
 
     unless @props.standalone
       label = @props.label ? ''

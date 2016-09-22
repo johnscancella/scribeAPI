@@ -14,14 +14,34 @@ CompositeTool = React.createClass
   mixins: [Navigation]
 
   getInitialState: ->
-    annotation: @props.annotation ? {}
-    viewerSize: @props.viewerSize
-    active_field_key: (c.value for c in @props.task.tool_config.options)[0]
+    initAnnotation = @props.annotation ? {}
+    if @props.subject.data.initValue
+        for initValue, index in @props.subject.data.initValue
+            annotation_key = @props.task.tool_config.options[index].value
+            if initValue
+              initAnnotation[annotation_key] = initValue
+
+    return {
+      annotation: initAnnotation,
+      viewerSize: @props.viewerSize,
+      active_field_key: (c.value for c in @props.task.tool_config.options)[0]
+    }
+
 
   getDefaultProps: ->
     annotation: {}
     task: null
     subject: null
+
+  componentWillReceiveProps: (new_props) ->
+    if new_props.subject.id != this.props.subject.id
+      # subject has changed
+      if new_props.subject.data.initValue
+        for initValue, index in new_props.subject.data.initValue
+            annotation_key = new_props.task.tool_config.options[index].value
+            newAnnotation = @state.annotation
+            if !newAnnotation[annotation_key] and initValue
+              newAnnotation[annotation_key] = initValue
 
   # this can go into a mixin? (common across all transcribe tools)
   getPosition: (data) ->
@@ -64,6 +84,7 @@ CompositeTool = React.createClass
           @forceUpdate()
     else
       @commitAnnotation()
+
 
   # User moved focus to an input:
   handleFieldFocus: (annotation_key) ->
@@ -133,12 +154,6 @@ CompositeTool = React.createClass
           annotation_key = sub_tool.value
           focus = annotation_key is @state.active_field_key
 
-          initValue = 
-            if @props.subject.data.initValue
-              @props.subject.data.initValue[index]
-            else
-              ""
-
           <ToolComponent
             key={index}
             task={@props.task}
@@ -155,7 +170,6 @@ CompositeTool = React.createClass
             scale={@props.scale}
             annotation_key={annotation_key}
             annotation={@state.annotation}
-            initValue={initValue}
           />
       }
 

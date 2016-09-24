@@ -1,11 +1,9 @@
 {
   "name": "transcribe",
   "label": "Transcribe Workflow",
-  "retire_limit": 3,
   "generates_subjects": true,
   "generates_subjects_for": "verify",
   "generates_subjects_after": 3,
-  "generates_subjects_max": 10,
   "generates_subjects_method": "collect-unique",
 
   "tasks": {
@@ -31,34 +29,6 @@
         "file": "t_headline"
       },
       "generates_subject_type": "transcribed_headline"
-    },
-
-    "cartoon": {
-      "tool": "compositeTool",
-      "tool_config": {
-        "tools": {
-          "ca_series": {
-            "tool": "textTool",
-            "examples": ["S'MATTER POP?"],
-            "label": "Cartoon Series"
-          },
-          "ca_title": {
-            "tool": "textTool",
-            "examples": ["Uncle Si Is a Sly One"],
-            "label": "Cartoon Title"
-          },
-          "ca_author": {
-            "tool": "textTool",
-            "examples": ["C. M. PAYNE"],
-            "label": "Cartoon Author(s)"
-          }
-        }
-      },
-      "instruction": "Enter the cartoon series, title and author",
-      "help": {
-        "file": "t_cartoon"
-      },
-      "generates_subject_type": "transcribed_cartoon"
     },
 
     "advertisement": {
@@ -87,6 +57,60 @@
         "file": "t_advertisement"
       },
       "generates_subject_type": "transcribed_advertisement"
+    },
+
+    "illustration": {
+      "tool": "compositeTool",
+      "tool_config": {
+        "tools": {
+          "il_type": {
+            "tool": "selectOneTool",
+            "tool_config": {
+                "options": [
+                  {
+                    "value": "Portrait",
+                    "label": "Portrait"
+                  },
+                  {
+                    "value": "Photograph",
+                    "label": "Photograph"
+                  },
+                  {
+                    "value": "Political or Panel Cartoon",
+                    "label": "Political or Panel Cartoon"
+                  },
+                  {
+                    "value": "Comis Strip",
+                    "label": "Comis Strip"
+                  },
+                  {
+                    "value": "Illustration",
+                    "label": "Illustration"
+                  }
+                ]
+            },
+            "label": "Type"
+          },
+          "il_caption": {
+            "tool": "textTool",
+            "label": "Caption"
+          },
+          "il_author": {
+            "tool": "textTool",
+            "label": "Author(s)"
+          },
+          "ca_series": {
+            "tool": "textTool",
+            "examples": ["S'MATTER POP?"],
+            "label": "Cartoon Series"
+          }
+        }
+      },
+      "instruction": "Select the best type that characterizes this photograph or illustration. Enter caption, authors and cartoon series",
+      "help": {
+        "file": "t_illustration"
+      },
+      "generates_subject_type": "transcribed_illustration"
     }
 
   }

@@ -206,6 +206,14 @@ TextTool = React.createClass
           else if @props.inputType == "date"
             <input type="date" value={val} {...atts} />
 
+          else if @props.inputType == "select-one"
+            <select {...atts}>
+              {
+                @props.tool_config.options.map (option, i) =>
+                  <option key={i} value={option.value}>{option.label}</option>
+              }
+            </select>
+
           else console.warn "Invalid inputType specified: #{@props.inputType}"
 
         }

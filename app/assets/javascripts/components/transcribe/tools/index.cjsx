@@ -7,4 +7,5 @@ module.exports =
   dateTool:      require './date-tool'
   numberTool:    require './number-tool'
   textAreaTool:  require './text-area-tool'
+  selectOneTool: require './select-one-tool'
   

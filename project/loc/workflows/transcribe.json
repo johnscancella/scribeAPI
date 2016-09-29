@@ -24,7 +24,7 @@
           }
         }
       },
-      "instruction": "Enter the headline and subhead(s)",
+      "instruction": "Enter or correct the article's headline and it's subheads if presented",
       "help": {
         "file": "t_headline"
       },
@@ -37,22 +37,75 @@
         "tools": {
           "ad_text": {
             "tool": "textAreaTool",
-            "examples": ["This is no ordinary drink-it-just-to-be-drinkging-something beverage."],
-            "label": "Text of Advertisement"
+            "label": "Text of This Advertisement"
           },
           "ad_company": {
             "tool": "textTool",
-            "examples": ["The COCA-COLA COMPANY"],
             "label": "Company Name"
           },
           "ad_product": {
-            "tool": "textTool",
-            "examples": ["Coca-Cola"],
-            "label": "Product"
+            "tool": "selectOneTool",
+            "tool_config": {
+                "options": [
+                  {
+                    "value": "Arts & Entertainment",
+                    "label": "Arts & Entertainment"
+                  },
+                  {
+                    "value": "Business & Industrial",
+                    "label": "Business & Industrial"
+                  },
+                  {
+                    "value": "Clothing & Jewelry",
+                    "label": "Clothing & Jewelry"
+                  },
+                  {
+                    "value": "Food, Beverages & Tobacco",
+                    "label": "Food, Beverages & Tobacco"
+                  },
+                  {
+                    "value": "Health & Beauty",
+                    "label": "Health & Beauty"
+                  },
+                  {
+                    "value": "Home & Garden",
+                    "label": "Home & Garden"
+                  },
+                  {
+                    "value": "Media",
+                    "label": "Media"
+                  },
+                  {
+                    "value": "Real Estate",
+                    "label": "Real Estate"
+                  },
+                  {
+                    "value": "Religious",
+                    "label": "Religious"
+                  },
+                  {
+                    "value": "Sports & Outdoors",
+                    "label": "Sports & Outdoors"
+                  },
+                  {
+                    "value": "Toys & Games",
+                    "label": "Toys & Games"
+                  },
+                  {
+                    "value": "Transportation",
+                    "label": "Transportation"
+                  },
+                  {
+                    "value": "Other",
+                    "label": "Other"
+                  }
+                ]
+            },
+            "label": "Type of Product"
           }
         }
       },
-      "instruction": "Enter the advertising company, product and text",
+      "instruction": "Enter or correct text of the advertisement, company name and product type",
       "help": {
         "file": "t_advertisement"
       },
@@ -89,7 +142,7 @@
                   }
                 ]
             },
-            "label": "Type"
+            "label": "Type of This Illustration or Photo"
           },
           "il_caption": {
             "tool": "textTool",
@@ -106,7 +159,7 @@
           }
         }
       },
-      "instruction": "Select the best type that characterizes this photograph or illustration. Enter caption, authors and cartoon series",
+      "instruction": "Select the best type that characterizes this photograph or illustration. Enter caption, authors and optional cartoon series",
       "help": {
         "file": "t_illustration"
       },

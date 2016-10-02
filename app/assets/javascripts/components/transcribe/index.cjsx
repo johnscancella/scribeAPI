@@ -3,6 +3,8 @@
 React                   = require 'react'
 {Navigation}            = require 'react-router'
 SubjectViewer           = require '../subject-viewer'
+ZoomPanListenerMethods  = require 'lib/zoom-pan-listener-methods'
+ZoomToolbar             = require '../zoom-toolbar'
 JSONAPIClient           = require 'json-api-client' # use to manage data?
 FetchSubjectsMixin      = require 'lib/fetch-subjects-mixin'
 ForumSubjectWidget      = require '../forum-subject-widget'
@@ -25,7 +27,7 @@ GenericButton           = require 'components/buttons/generic-button'
 
 module.exports = React.createClass # rename to Classifier
   displayName: 'Transcribe'
-  mixins: [FetchSubjectsMixin, BaseWorkflowMethods, Navigation] # load subjects and set state variables: subjects,  classification
+  mixins: [FetchSubjectsMixin, BaseWorkflowMethods, Navigation, ZoomPanListenerMethods] # load subjects and set state variables: subjects,  classification
 
   getInitialState: ->
     taskKey:                      null
@@ -35,6 +37,7 @@ module.exports = React.createClass # rename to Classifier
     helping:                      false
     last_mark_task_key:           @props.query.mark_key
     showingTutorial:              false
+    toolbar_expanded:             false
 
   getDefaultProps: ->
     workflowName: 'transcribe'
@@ -100,6 +103,12 @@ module.exports = React.createClass # rename to Classifier
 
       page: @props.query.page
 
+  onToolbarExpand: ->
+    @setState toolbar_expanded: true
+
+  onToolbarHide: ->
+    @setState toolbar_expanded: false
+
   render: ->
     if @props.params.workflow_id? and @props.params.parent_subject_id?
       transcribeMode = 'page'
@@ -138,42 +147,51 @@ module.exports = React.createClass # rename to Classifier
 
 
           else if @getCurrentSubject()? and @getCurrentTask()?
-
-            <SubjectViewer
-              onLoad={@handleViewerLoad}
-              task={@getCurrentTask()}
-              subject={@getCurrentSubject()}
-              active=true
-              workflow={@getActiveWorkflow()}
-              classification={@props.classification}
-              annotation={currentAnnotation}
-            >
-              <TranscribeComponent
-                viewerSize={@state.viewerSize}
-                annotation_key={"#{@state.taskKey}.#{@getCurrentSubject().id}"}
-                key={@getCurrentTask().key}
-                task={@getCurrentTask()}
-                annotation={currentAnnotation}
+            <div className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>
+              <ZoomToolbar
                 subject={@getCurrentSubject()}
-                onChange={@handleDataFromTool}
-                subjectCurrentPage={@props.query.page}
-                onComplete={@handleTaskComplete}
-                onBack={@makeBackHandler()}
-                workflow={@getActiveWorkflow()}
-                viewerSize={@state.viewerSize}
-                transcribeTools={transcribeTools}
-                onShowHelp={@toggleHelp if @getCurrentTask().help?}
-                badSubject={@state.badSubject}
-                onBadSubject={@toggleBadSubject}
-                illegibleSubject={@state.illegibleSubject}
-                onIllegibleSubject={@toggleIllegibleSubject}
-                returnToMarking={@returnToMarking}
-                transcribeMode={transcribeMode}
-                isLastSubject={isLastSubject}
-                project={@props.project}
+                onZoomChange={@handleZoomPanViewBoxChange}
+                onExpand={@onToolbarExpand}
+                onHide={@onToolbarHide}
+                viewBox={@state.zoomPanViewBox}
               />
+              <SubjectViewer
+                onLoad={@handleViewerLoad}
+                task={@getCurrentTask()}
+                subject={@getCurrentSubject()}
+                active=true
+                workflow={@getActiveWorkflow()}
+                viewBox={@state.zoomPanViewBox}
+                classification={@props.classification}
+                annotation={currentAnnotation}
+              >
+                <TranscribeComponent
+                  viewerSize={@state.viewerSize}
+                  annotation_key={"#{@state.taskKey}.#{@getCurrentSubject().id}"}
+                  key={@getCurrentTask().key}
+                  task={@getCurrentTask()}
+                  annotation={currentAnnotation}
+                  subject={@getCurrentSubject()}
+                  onChange={@handleDataFromTool}
+                  subjectCurrentPage={@props.query.page}
+                  onComplete={@handleTaskComplete}
+                  onBack={@makeBackHandler()}
+                  workflow={@getActiveWorkflow()}
+                  viewerSize={@state.viewerSize}
+                  transcribeTools={transcribeTools}
+                  onShowHelp={@toggleHelp if @getCurrentTask().help?}
+                  badSubject={@state.badSubject}
+                  onBadSubject={@toggleBadSubject}
+                  illegibleSubject={@state.illegibleSubject}
+                  onIllegibleSubject={@toggleIllegibleSubject}
+                  returnToMarking={@returnToMarking}
+                  transcribeMode={transcribeMode}
+                  isLastSubject={isLastSubject}
+                  project={@props.project}
+                />
 
-            </SubjectViewer>
+              </SubjectViewer>
+            </div>
         }
       </div>
 

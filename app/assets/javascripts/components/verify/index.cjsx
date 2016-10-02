@@ -2,6 +2,8 @@
 React              = require 'react'
 {Navigation}       = require 'react-router'
 SubjectViewer      = require '../subject-viewer'
+ZoomPanListenerMethods  = require 'lib/zoom-pan-listener-methods'
+ZoomToolbar             = require '../zoom-toolbar'
 JSONAPIClient      = require 'json-api-client' # use to manage data?
 FetchSubjectsMixin = require 'lib/fetch-subjects-mixin'
 ForumSubjectWidget = require '../forum-subject-widget'
@@ -23,7 +25,7 @@ API                = require '../../lib/api'
 
 module.exports = React.createClass # rename to Classifier
   displayName: 'Verify'
-  mixins: [FetchSubjectsMixin, BaseWorkflowMethods, Navigation] # load subjects and set state variables: subjects,  classification
+  mixins: [FetchSubjectsMixin, BaseWorkflowMethods, Navigation, ZoomPanListenerMethods] # load subjects and set state variables: subjects,  classification
 
   getDefaultProps: ->
     workflowName: 'verify'
@@ -35,6 +37,7 @@ module.exports = React.createClass # rename to Classifier
     subject_index:                0
     showingTutorial:              false
     helping:                      false
+    toolbar_expanded:             false
 
   componentWillMount: ->
     @beginClassification()
@@ -65,6 +68,12 @@ module.exports = React.createClass # rename to Classifier
   toggleHelp: ->
     @setState helping: not @state.helping
 
+  onToolbarExpand: ->
+    @setState toolbar_expanded: true
+
+  onToolbarHide: ->
+    @setState toolbar_expanded: false
+
   render: ->
     currentAnnotation = @getCurrentClassification().annotation
 
@@ -82,24 +91,40 @@ module.exports = React.createClass # rename to Classifier
             </DraggableModal>
 
           else if @getCurrentSubject()?
-            <SubjectViewer onLoad={@handleViewerLoad} subject={@getCurrentSubject()} active=true workflow={@getActiveWorkflow()} classification={@props.classification} annotation={currentAnnotation}>
-              { if ( VerifyComponent = @getCurrentTool() )?
-
-                <VerifyComponent
-                  viewerSize={@state.viewerSize}
-                  task={@getCurrentTask()}
-                  annotation={@getCurrentClassification().annotation}
-                  onShowHelp={@toggleHelp if @getCurrentTask().help?}
-                  badSubject={@state.badSubject}
-                  onBadSubject={@toggleBadSubject}
-                  subject={@getCurrentSubject()}
-                  onChange={@handleTaskComponentChange}
-                  onComplete={@handleTaskComplete}
-                  workflow={@getActiveWorkflow()}
-                  project={@props.project}
-                />
-              }
-            </SubjectViewer>
+            <div className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>
+              <ZoomToolbar
+                subject={@getCurrentSubject()}
+                onZoomChange={@handleZoomPanViewBoxChange}
+                onExpand={@onToolbarExpand}
+                onHide={@onToolbarHide}
+                viewBox={@state.zoomPanViewBox}
+              />
+              <SubjectViewer 
+                onLoad={@handleViewerLoad} 
+                subject={@getCurrentSubject()} 
+                active=true 
+                workflow={@getActiveWorkflow()}
+                viewBox={@state.zoomPanViewBox} 
+                classification={@props.classification} 
+                annotation={currentAnnotation}>
+                
+                { if ( VerifyComponent = @getCurrentTool() )?
+                  <VerifyComponent
+                    viewerSize={@state.viewerSize}
+                    task={@getCurrentTask()}
+                    annotation={@getCurrentClassification().annotation}
+                    onShowHelp={@toggleHelp if @getCurrentTask().help?}
+                    badSubject={@state.badSubject}
+                    onBadSubject={@toggleBadSubject}
+                    subject={@getCurrentSubject()}
+                    onChange={@handleTaskComponentChange}
+                    onComplete={@handleTaskComplete}
+                    workflow={@getActiveWorkflow()}
+                    project={@props.project}
+                  />
+                }
+              </SubjectViewer>
+            </div>
         }
       </div>
 

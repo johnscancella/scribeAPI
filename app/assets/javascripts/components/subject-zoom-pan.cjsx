@@ -102,13 +102,15 @@ module.exports = React.createClass
 
   # Handle keydowns for zoom (WASD) and zoom (-+)
   _handleZoomKeys: (e) ->
-    @pan 'up' if e.which == 87 # w
-    @pan 'down' if e.which == 83 # s
-    @pan 'left' if e.which == 65 # a
-    @pan 'right' if e.which == 68 # d
+    # if user isn't inputting something (transcribing)
+    if e.target.type isnt 'textarea' and e.target.type isnt 'text' and e.target.type isnt 'select-one'
+      @pan 'up' if e.which == 87 # w
+      @pan 'down' if e.which == 83 # s
+      @pan 'left' if e.which == 65 # a
+      @pan 'right' if e.which == 68 # d
 
-    @zoom 1 if e.which == 187 # 61 # +
-    @zoom -1 if e.which == 189 # 173 # -
+      @zoom 1 if e.which == 187 # 61 # +
+      @zoom -1 if e.which == 189 # 173 # -
 
   render: ->
     <div className="subject-zoom-pan">

@@ -143,7 +143,7 @@ class Classification
       if self.task_key == 'mark_headline'
         text = OcrAlto::extract_headline_from_alto(alto_url, box)
       else
-        text = OcrAlto::extract_text_from_alto(alto_url, box)
+        text = [OcrAlto::extract_text_from_alto(alto_url, box)]
       end
       self.annotation["initValue"] = text
     end

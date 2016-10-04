@@ -146,11 +146,11 @@
           },
           "il_caption": {
             "tool": "textTool",
-            "label": "Caption"
+            "label": "Caption/Title"
           },
-          "il_author": {
+          "il_credit": {
             "tool": "textTool",
-            "label": "Author(s)"
+            "label": "Illustrator/Photographer"
           },
           "ca_series": {
             "tool": "textTool",

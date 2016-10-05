@@ -57,7 +57,7 @@ module.exports = React.createClass
   scrollToSubject: ->
     # scroll to mark when transcribing
     if (@props.workflow.name is 'transcribe' or @props.workflow.name is 'verify') and @state.scroll
-      yPos = (@props.subject.region.y + (@props.subject.region.height ? 0)) * @state.scale.vertical - 100
+      yPos = (@props.subject.region.y + (@props.subject.region.height ? 0)) * @state.scale.vertical - 200
       $('html, body').stop().animate({scrollTop: yPos}, 500)
       @setState scroll: false
 

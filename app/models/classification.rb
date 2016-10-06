@@ -139,12 +139,7 @@ class Classification
               vpos: self.annotation["y"].to_f / self.subject["height"], 
               width: self.annotation["width"].to_f / self.subject["width"],  
               height: self.annotation["height"].to_f / self.subject["height"],  }
-      # hard-coded task key
-      if self.task_key == 'mark_headline'
-        text = OcrAlto::extract_headline_from_alto(alto_url, box)
-      else
-        text = [OcrAlto::extract_text_from_alto(alto_url, box)]
-      end
+      text = [OcrAlto::extract_text_from_alto(alto_url, box)]
       self.annotation["initValue"] = text
     end
   end

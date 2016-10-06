@@ -8,27 +8,41 @@
 
   "tasks": {
 
-    "headline": {
+    "illustration": {
       "tool": "compositeTool",
       "tool_config": {
         "tools": {
-          "ar_headline": {
-            "tool": "textAreaTool",
-            "examples": ["U. S. CRUISER MEMPHIS LOST WITH 20 MEN"],
-            "label": "Headline"
+          "il_type": {
+            "tool": "selectOneTool",
+            "tool_config": {
+                "options": [
+                  {
+                    "value": "Illustration",
+                    "label": "Illustration"
+                  },
+                  {
+                    "value": "Photograph",
+                    "label": "Photograph"
+                  }
+                ]
+            },
+            "label": "Illustration or Photo"
           },
-          "ar_subhead": {
-            "tool": "textAreaTool",
-            "examples": ["Great Swell Wrecks Vessel in San Domingo Harbor"],
-            "label": "Subheads"
+          "il_caption": {
+            "tool": "textTool",
+            "label": "Caption/Title"
+          },
+          "il_credit": {
+            "tool": "textTool",
+            "label": "Illustrator/Photographer"
           }
         }
       },
-      "instruction": "Enter or correct the article's headline and it's subheads if presented",
+      "instruction": "Determine whether this is an illustration or photograph. Enter optional caption, illustrator or photographer",
       "help": {
-        "file": "t_headline"
+        "file": "t_illustration"
       },
-      "generates_subject_type": "transcribed_headline"
+      "generates_subject_type": "transcribed_illustration"
     },
 
     "advertisement": {
@@ -110,60 +124,6 @@
         "file": "t_advertisement"
       },
       "generates_subject_type": "transcribed_advertisement"
-    },
-
-    "illustration": {
-      "tool": "compositeTool",
-      "tool_config": {
-        "tools": {
-          "il_type": {
-            "tool": "selectOneTool",
-            "tool_config": {
-                "options": [
-                  {
-                    "value": "Portrait",
-                    "label": "Portrait"
-                  },
-                  {
-                    "value": "Photograph",
-                    "label": "Photograph"
-                  },
-                  {
-                    "value": "Political or Panel Cartoon",
-                    "label": "Political or Panel Cartoon"
-                  },
-                  {
-                    "value": "Comis Strip",
-                    "label": "Comis Strip"
-                  },
-                  {
-                    "value": "Illustration",
-                    "label": "Illustration"
-                  }
-                ]
-            },
-            "label": "Type of This Illustration or Photo"
-          },
-          "il_caption": {
-            "tool": "textTool",
-            "label": "Caption/Title"
-          },
-          "il_credit": {
-            "tool": "textTool",
-            "label": "Illustrator/Photographer"
-          },
-          "ca_series": {
-            "tool": "textTool",
-            "examples": ["S'MATTER POP?"],
-            "label": "Cartoon Series"
-          }
-        }
-      },
-      "instruction": "Select the best type that characterizes this photograph or illustration. Enter caption, authors and optional cartoon series",
-      "help": {
-        "file": "t_illustration"
-      },
-      "generates_subject_type": "transcribed_illustration"
     }
 
   }

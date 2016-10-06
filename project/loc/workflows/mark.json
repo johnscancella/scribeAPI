@@ -5,21 +5,21 @@
   "generates_subjects": true,
   "generates_subjects_for": "transcribe",
 
-  "first_task":"mark_headline",
+  "first_task":"mark_illustration",
 
   "tasks": {
 
-    "mark_headline": {
+    "mark_illustration": {
       "tool": "pickOneMarkOne",
-      "instruction": "Draw a rectangle around each article's unmarked **headline and subheads**. You may also remove mismarked headlines.",
+      "instruction": "Draw a rectangle around each unmarked **illustration** or **photograph**, excluding advertisement. Include caption and credits when possibble.",
       "generates_subjects": true,
       "help": {
-        "file": "mark_headline"
+        "file": "mark_primary"
       },
       "tool_config" : {
         "displays_transcribe_button": false,
         "options": [
-          {"type": "rectangleTool", "label": "Headline", "color": "red", "generates_subject_type": "headline", "help": {"file": "m_headline"}}
+          {"type": "rectangleTool", "label": "Illustration/Photo", "color": "purple", "generates_subject_type": "illustration", "help": {"file": "m_illustration"}}
         ]
       },
       "next_task": "mark_advertisement"
@@ -27,7 +27,7 @@
 
     "mark_advertisement": {
       "tool": "pickOneMarkOne",
-      "instruction": "Draw a rectangle around each unmarked **advertisement**.",
+      "instruction": "Draw a rectangle around each unmarked **advertisement**, excluding classifieds",
       "generates_subjects": true,
       "help": {
         "file": "mark_primary"
@@ -38,23 +38,8 @@
           {"type": "rectangleTool", "label": "Advertisement", "color": "darkorange", "generates_subject_type": "advertisement", "help": {"file": "m_advertisement"}}
         ]
       },
-      "next_task": "mark_illustration"
-    },
-
-    "mark_illustration": {
-      "tool": "pickOneMarkOne",
-      "instruction": "Draw a rectangle around each unmarked **photograph**, **cartoon** or other **illustration** excluding advertisement. Include caption and authors when possibble.",
-      "generates_subjects": true,
-      "help": {
-        "file": "mark_primary"
-      },
-      "tool_config" : {
-        "displays_transcribe_button": false,
-        "options": [
-          {"type": "rectangleTool", "label": "Illustration", "color": "purple", "generates_subject_type": "illustration", "help": {"file": "m_illustration"}}
-        ]
-      },
       "next_task": null
     }
+ 
   }
 }

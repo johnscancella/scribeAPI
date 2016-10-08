@@ -91,7 +91,7 @@ module.exports = React.createClass # rename to Classifier
             </DraggableModal>
 
           else if @getCurrentSubject()?
-            <div className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>
+            <div key="#{@getCurrentSubject().id}" className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>
               <ZoomToolbar
                 subject={@getCurrentSubject()}
                 onZoomChange={@handleZoomPanViewBoxChange}
@@ -110,7 +110,6 @@ module.exports = React.createClass # rename to Classifier
                 
                 { if ( VerifyComponent = @getCurrentTool() )?
                   <VerifyComponent
-                    key="#{@getCurrentSubject().id}" 
                     viewerSize={@state.viewerSize}
                     task={@getCurrentTask()}
                     annotation={@getCurrentClassification().annotation}

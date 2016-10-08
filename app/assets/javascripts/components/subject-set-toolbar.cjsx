@@ -25,6 +25,11 @@ module.exports = React.createClass
       @setState active_pane: name
       @props.onExpand()
 
+  componentWillMount: ->
+    # reset parent's state
+    @props.onZoomChange null
+    @props.onHide()
+
   render: ->
     # disable LightBox if work has begun
     disableLightBox = if @props.task.key isnt @props.workflow.first_task then true else false

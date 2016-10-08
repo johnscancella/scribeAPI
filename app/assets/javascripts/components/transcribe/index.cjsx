@@ -147,7 +147,7 @@ module.exports = React.createClass # rename to Classifier
 
 
           else if @getCurrentSubject()? and @getCurrentTask()?
-            <div className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>
+            <div key="#{@getCurrentSubject().id}" className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>
               <ZoomToolbar
                 subject={@getCurrentSubject()}
                 onZoomChange={@handleZoomPanViewBoxChange}
@@ -166,7 +166,6 @@ module.exports = React.createClass # rename to Classifier
                 annotation={currentAnnotation}
               >
                 <TranscribeComponent
-                  key="#{@getCurrentSubject().id}" 
                   viewerSize={@state.viewerSize}
                   annotation_key={"#{@state.taskKey}.#{@getCurrentSubject().id}"}
                   task={@getCurrentTask()}

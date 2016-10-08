@@ -19,6 +19,11 @@ module.exports = React.createClass
       @setState active_pane: name
       @props.onExpand()
 
+  componentWillMount: ->
+    # reset parent's state
+    @props.onZoomChange null
+    @props.onHide()
+
   render: ->
     <div className="subject-set-toolbar">
       <div className="subject-set-toolbar-panes">

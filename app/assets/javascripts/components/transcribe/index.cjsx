@@ -166,9 +166,9 @@ module.exports = React.createClass # rename to Classifier
                 annotation={currentAnnotation}
               >
                 <TranscribeComponent
+                  key="#{@getCurrentSubject().id}" 
                   viewerSize={@state.viewerSize}
                   annotation_key={"#{@state.taskKey}.#{@getCurrentSubject().id}"}
-                  key={@getCurrentTask().key}
                   task={@getCurrentTask()}
                   annotation={currentAnnotation}
                   subject={@getCurrentSubject()}

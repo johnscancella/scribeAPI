@@ -110,6 +110,7 @@ module.exports = React.createClass # rename to Classifier
                 
                 { if ( VerifyComponent = @getCurrentTool() )?
                   <VerifyComponent
+                    key="#{@getCurrentSubject().id}" 
                     viewerSize={@state.viewerSize}
                     task={@getCurrentTask()}
                     annotation={@getCurrentClassification().annotation}

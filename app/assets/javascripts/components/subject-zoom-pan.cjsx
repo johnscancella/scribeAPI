@@ -6,9 +6,9 @@ ZOOM_MIN    = 1
 
 PAN_STEP    = 0.10    # Amount to pan by
 PAN_MIN_X   = 0       #
-PAN_MAX_X   = 0.7     # Max allowed val for x
+PAN_MAX_X   = 0.9     # Max allowed val for x
 PAN_MIN_Y   = 0
-PAN_MAX_Y   = 0.7     # Max allowed val for y
+PAN_MAX_Y   = 0.9     # Max allowed val for y
 
 # Default interpretation of "pan up" is to effectively move the viewport, rather than move the image
 # The following inverts this, moving the image upward instead
@@ -109,14 +109,15 @@ module.exports = React.createClass
   # Handle keydowns for zoom (WASD) and zoom (-+)
   _handleZoomKeys: (e) ->
     # if user isn't inputting something (transcribing)
-    if e.target.type isnt 'textarea' and e.target.type isnt 'text' and e.target.type isnt 'select-one'
-      @pan 'up' if e.which == 87 # w
-      @pan 'down' if e.which == 83 # s
-      @pan 'left' if e.which == 65 # a
-      @pan 'right' if e.which == 68 # d
+    if e.ctrlKey and e.altKey
+      @pan 'up' if e.key == 'ArrowUp'
+      @pan 'down' if e.key == 'ArrowDown'
+      @pan 'left' if e.key == 'ArrowLeft'
+      @pan 'right' if e.key == 'ArrowRight'
 
-      @zoom 1 if e.which == 187 # 61 # +
-      @zoom -1 if e.which == 189 # 173 # -
+      @zoom 1 if e.which == 187 or e.which == 61 # alt ctrl +
+      @zoom -1 if e.which == 189 or e.which ==  173 # alt ctrl -
+      e.preventDefault()
 
   render: ->
     <div className="subject-zoom-pan">

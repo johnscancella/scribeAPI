@@ -33,16 +33,6 @@ CompositeTool = React.createClass
     task: null
     subject: null
 
-  componentWillReceiveProps: (new_props) ->
-    if new_props.subject.id != this.props.subject.id
-      # subject has changed
-      if new_props.subject.data.initValue
-        for initValue, index in new_props.subject.data.initValue
-            annotation_key = new_props.task.tool_config.options[index].value
-            newAnnotation = @state.annotation
-            if !newAnnotation[annotation_key] and initValue
-              newAnnotation[annotation_key] = initValue
-
   # this can go into a mixin? (common across all transcribe tools)
   getPosition: (data) ->
     return x: null, y: null if ! data.x?
@@ -92,13 +82,7 @@ CompositeTool = React.createClass
 
   # this can go into a mixin? (common across all transcribe tools)
   commitAnnotation: ->
-    # Clear current annotation so that it doesn't carry over into next task if next task uses same tool
-    ann = @state.annotation
-    @setState annotation: {}, () =>
-      @props.onComplete ann
-
-    # Also reset active field to the first field
-    @setState active_field_key: (c.value for c in @props.task.tool_config.options)[0]
+    @props.onComplete @state.annotation
 
     if @props.transcribeMode is 'page' or @props.transcribeMode is 'single'
       if @props.isLastSubject and not @props.task.next_task?

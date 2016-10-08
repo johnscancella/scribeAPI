@@ -46,9 +46,6 @@ module.exports = React.createClass
     @setState
       marks: @getMarksFromProps(new_props)
 
-    if new_props.subject.id != @props.subject.id
-      @setState scroll: true
-
   componentDidMount: ->
     @setView 0, 0, @props.subject.width, @props.subject.height
     @loadImage @props.subject.location.standard
@@ -56,10 +53,10 @@ module.exports = React.createClass
 
   scrollToSubject: ->
     # scroll to mark when transcribing
-    if (@props.workflow.name is 'transcribe' or @props.workflow.name is 'verify') and @state.scroll
-      yPos = (@props.subject.region.y + (@props.subject.region.height ? 0)) * @state.scale.vertical - 200
+    if (@props.workflow.name is 'transcribe' or @props.workflow.name is 'verify')
+      viewBoxTop = if @props.viewBox then @props.viewBox[1] else 0
+      yPos = (@props.subject.region.y + (@props.subject.region.height ? 0) - viewBoxTop) * @state.scale.vertical - 200
       $('html, body').stop().animate({scrollTop: yPos}, 500)
-      @setState scroll: false
 
 
   componentDidUpdate: ->
@@ -68,9 +65,8 @@ module.exports = React.createClass
     if changed
       @setState scale: scale, () =>
         @updateDimensions()
+        @scrollToSubject()
     
-    @scrollToSubject()
-
 
   componentWillUnmount: ->
     window.removeEventListener "resize", @updateDimensions
@@ -102,11 +98,11 @@ module.exports = React.createClass
       img.src = url
       img.onload = =>
         @setState
-          scroll: true
           url: url
           loading: false
           scale: @getScale(), () =>
             @updateDimensions()
+            @scrollToSubject()
 
   # VARIOUS EVENT HANDLERS
 

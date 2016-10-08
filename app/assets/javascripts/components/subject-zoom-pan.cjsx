@@ -32,6 +32,12 @@ module.exports = React.createClass
     zoom.level += ZOOM_STEP * dir
     zoom.level = Math.max ZOOM_MIN, zoom.level if dir < 0
     zoom.level = Math.min ZOOM_MAX, zoom.level if dir > 0
+
+    if @props.subject.region? and zoom.level > 1
+      # Adjust pan to high-light the region"
+      zoom.x = Math.max @props.subject.region.x / @props.subject.width - 0.05, 0
+      zoom.y = Math.max @props.subject.region.y / @props.subject.height  - 0.05, 0
+
     @_changed zoom
 
   # Pan in given direction

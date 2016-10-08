@@ -208,7 +208,7 @@ TextTool = React.createClass
 
           else if @props.inputType == "select-one"
             <select {...atts}>
-              <option value="" selected></option>
+              <option value=""></option>
               {
                 @props.tool_config.options.map (option, i) =>
                   <option key={i} value={option.value}>{option.label}</option>

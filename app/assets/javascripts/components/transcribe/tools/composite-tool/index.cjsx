@@ -15,11 +15,10 @@ CompositeTool = React.createClass
 
   getInitialState: ->
     initAnnotation = @props.annotation ? {}
-    if @props.subject.data.initValue
-      for initValue, index in @props.subject.data.initValue
-          annotation_key = @props.task.tool_config.options[index].value
-          if initValue
-            initAnnotation[annotation_key] = initValue
+    if @props.subject.data.ocrText
+      # first annotation
+      annotation_key = @props.task.tool_config.options[0].value
+      initAnnotation[annotation_key] = @props.subject.data.ocrText
 
     return {
       annotation: initAnnotation,

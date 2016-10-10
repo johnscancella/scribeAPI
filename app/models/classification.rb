@@ -139,8 +139,7 @@ class Classification
               vpos: self.annotation["y"].to_f / self.subject["height"], 
               width: self.annotation["width"].to_f / self.subject["width"],  
               height: self.annotation["height"].to_f / self.subject["height"],  }
-      text = [OcrAlto::extract_text_from_alto(alto_url, box)]
-      self.annotation["initValue"] = text
+      self.annotation["ocrText"] = OcrAlto::extract_text_from_alto(alto_url, box)
     end
   end
 

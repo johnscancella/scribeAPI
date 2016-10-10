@@ -465,4 +465,25 @@ div.home-page {
   resize: both;
   width: 400px;
   height: 120px;
+  border-radius: 4px;
+  box-shadow: inset 2px 3px 3px rgb(212, 209, 209);
+  border-width: 1px;
+  border-color: rgb(212, 209, 209);
+  border-style: inset;
+}
+
+.transcribe-tool .modal-body .input-field input {
+  border-radius: 4px;
+  box-shadow: inset 2px 3px 3px rgb(212, 209, 209);
+  border-width: 1px;
+  border-color: rgb(212, 209, 209);
+  border-style: inset;
+}
+
+.transcribe-tool .modal-body .input-field select {
+  border-radius: 4px;
+  box-shadow: inset 2px 3px 3px rgb(212, 209, 209);
+  border-width: 1px;
+  border-color: rgb(212, 209, 209);
+  border-style: inset;
 }

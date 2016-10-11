@@ -14,6 +14,8 @@ GroupBrowser                  = require './group-browser'
 
 Project                       = require 'models/project.coffee'
 
+UserPage                     = require './user-page'
+
 class AppRouter
   constructor: ->
     API.type('projects').get().then (result)=>
@@ -93,6 +95,11 @@ class AppRouter
           path='groups/:group_id'
           handler={GroupPage}
           name='group_show'
+        />
+        <Route
+          path='user'
+          handler={UserPage}
+          name='user_show'
         />
 
 

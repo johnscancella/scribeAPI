@@ -487,3 +487,18 @@ div.home-page {
   border-color: rgb(212, 209, 209);
   border-style: inset;
 }
+
+.login a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+}
+
+.login a:hover {
+  color: rgba(255,255,255,1);
+}
+
+.classification-count {
+  font-size: 24px;
+  color: #e0182d;
+  font-weight: bold;
+}

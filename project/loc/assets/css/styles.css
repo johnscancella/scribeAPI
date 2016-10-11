@@ -1,21 +1,7 @@
-/* Fonts */
-@font-face {
-  font-family: 'Kievit';
-  src: url('/fonts/KievitWeb-Book.eot'); /* IE9 Compat Modes */
-  src: url('/fonts/KievitWeb-Book.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/KievitWeb-Book.woff') format('woff'); /* Pretty Modern Browsers */
-}
-@font-face {
-  font-family: 'Kievit';
-  src: url('/fonts/KievitWeb-Medi.eot'); /* IE9 Compat Modes */
-  src: url('/fonts/KievitWeb-Medi.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/fonts/KievitWeb-Medi.woff') format('woff'); /* Pretty Modern Browsers */
-  font-weight: bold;
-}
 html, body,
 .home-page h1, .home-page p, .home-page li,
 .light-box-area #visibility-button {
-  font-family: 'Kievit', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 
@@ -94,74 +80,25 @@ html, body,
 }
 
 /* Pages */
-.page-content {
-  width: 960px;
-  margin: 20px auto;
-  box-sizing: border-box;
-}
-@media screen and (max-width: 999px) {
-  .page-content {
-    width: auto;
-    margin: 20px;
-  }
-}
-.page-content > div {
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-  background: rgba(255,255,255,0.85);
-  padding: 20px 40px;
-}
-.page-content.custom-page > div:nth-child(2) > *:first-child {
-  color: #fff;
-  background: #3f5765;
-  margin-top: -20px;
-  margin-left: -40px;
-  margin-right: -40px;
-  padding: 40px 0;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-}
-.page-content > div.updated-at {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 6px;
-}
-.page-content p,
-.page-content li {
-  font-size: 18px;
-  line-height: 2;
-  text-align: left;
-  max-width: none;
-}
-.page-content h2 {
-  font-size: 36px;
-  font-weight: 400;
-  text-align: center;
-}
 .page-content h3 {
-  font-size: 28px;
+  font-size: 20px;
   margin-top: 2em;
   border-left: 4px solid #bbb;
   border-bottom: 1px solid #bbb;
   padding: 10px 0 10px 10px;
   width: 60%;
 }
-.page-content hr {
-  display: block;
-  border: none;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  margin: 3em auto 0;
-  width: 80%;
+
+.page-content p,
+.page-content li {
+  font-size: 17px;
+  line-height: 2;
+  text-align: left;
+  max-width: none;
 }
-.page-content#Team img {
-  display: block;
-  width: 60%;
-  height: auto;
-  margin: 0 auto;
-}
-.page-content > h1 {
-  display: none;
+
+.page-content > div {
+  padding: 80px;
 }
 
 /* Homepage */
@@ -275,7 +212,7 @@ div.home-page {
   background: rgba(255,255,255,0.2);
 }
 .group .group-name {
-  font-family: 'Kievit', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 .group .button-container {
   height: auto;

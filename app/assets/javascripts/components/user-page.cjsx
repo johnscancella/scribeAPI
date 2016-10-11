@@ -33,12 +33,11 @@ UserPage = React.createClass
       </div>
     else
       <div className='page-content custom-page'>
-        <h1>Stats</h1>
+        <h1></h1>
         <div>
         <h2>Congratulations, {@state.user.name}!</h2>
         <p>You have made <span className='classification-count'>{@state.user.classification_count}</span> contributions to this project. Thank you!</p>
         </div>
-        <div className='updated-at'></div>
       </div>
 
 

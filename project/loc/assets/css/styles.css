@@ -83,9 +83,7 @@ html, body,
 .page-content h3 {
   font-size: 20px;
   margin-top: 2em;
-  border-left: 4px solid #bbb;
-  border-bottom: 1px solid #bbb;
-  padding: 10px 0 10px 10px;
+  padding: 10px 0 10px 0px;
   width: 60%;
 }
 
@@ -175,9 +173,6 @@ div.home-page {
 .home-page .logo a:hover {
   color: #c9eac9;
 }
-.home-page .group-area {
-  display: none;
-}
 @media screen and (max-width: 800px) {
   div.home-page {
     padding-top: 40px;
@@ -192,35 +187,6 @@ div.home-page {
   .home-page p {
     font-size: 20px;
   }
-}
-
-.group-area .groups {
-  text-align: center;
-}
-.group-area .groups .group {
-  display: inline-block;
-  height: 243px;
-  overflow: hidden;
-}
-.group-area .groups .group a {
-  background: none;
-  font-size: 30px;
-  padding: 0.5em 0.8em;
-  width: auto;
-}
-.group-area .groups .group a:hover {
-  background: rgba(255,255,255,0.2);
-}
-.group .group-name {
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-}
-.group .button-container {
-  height: auto;
-  padding: 10px;
-  box-sizing: border-box;
-}
-.groups-header {
-  text-align: center;
 }
 
 /* Rectangle Tool */
@@ -397,7 +363,22 @@ div.home-page {
   padding: 10px 20px;
 }
 
+
 /* LOC */
+
+/* groups on homepage */
+.group {
+  padding: 0px;
+  border: 1px solid #808080;
+}
+
+.group .button-container {
+  top: 0px;
+  left: 0px;
+  height: 200px;
+  width: 300px;
+}
+
 .transcribe-tool .modal-body .input-field textarea {
   resize: both;
   width: 400px;

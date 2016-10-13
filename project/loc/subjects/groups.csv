@@ -1,2 +1,3 @@
 key,name,description,cover_image_url,external_url,retire_count
-pages,Histroical Newspapers Front Pages,Histroical Newspapers Front Pages,http://chroniclingamerica.loc.gov/media/images/leftnav.9f4524e73167.jpg,http://chroniclingamerica.loc.gov,2
+test1,"Daily capital journal.","Daily capital journal., August 30, 1916","http://chroniclingamerica.loc.gov/lccn/sn99063957/1916-08-30/ed-1/seq-1/image_512x512_from_1000,0_to_3052,2052.jpg",http://chroniclingamerica.loc.gov/lccn/sn99063957/1916-08-30/ed-1/,2
+test2,"Other Tests","Other random test pages from Chronicling America",http://chroniclingamerica.loc.gov/media/images/leftnav.9f4524e73167.jpg,http://chroniclingamerica.loc.gov,2

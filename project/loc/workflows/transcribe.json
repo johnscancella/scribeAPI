@@ -5,6 +5,7 @@
   "generates_subjects_for": "verify",
   "generates_subjects_after": 3,
   "generates_subjects_method": "collect-unique",
+  "subject_fetch_limit": 10,
 
   "tasks": {
 
@@ -12,6 +13,14 @@
       "tool": "compositeTool",
       "tool_config": {
         "tools": {
+          "il_caption": {
+            "tool": "textAreaTool",
+            "label": "Caption/Title"
+          },
+          "il_credit": {
+            "tool": "textTool",
+            "label": "Illustrator/Photographer"
+          },
           "il_type": {
             "tool": "selectOneTool",
             "tool_config": {
@@ -26,15 +35,7 @@
                   }
                 ]
             },
-            "label": "Illustration or Photo"
-          },
-          "il_caption": {
-            "tool": "textTool",
-            "label": "Caption/Title"
-          },
-          "il_credit": {
-            "tool": "textTool",
-            "label": "Illustrator/Photographer"
+            "label": "Illustration or Photo?"
           }
         }
       },

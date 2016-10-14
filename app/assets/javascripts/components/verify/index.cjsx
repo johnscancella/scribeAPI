@@ -81,14 +81,11 @@ module.exports = React.createClass # rename to Classifier
 
     <div className="classifier">
       <div className="subject-area">
-        { if ! @getCurrentSubject()?
+        { if @state.noMoreSubjects
+            <NoMoreSubjectsModal header={ if @state.userClassifiedAll then "You verified them all!" else "Nothing to verify" } workflowName={@props.workflowName} project={@props.project} />
 
-            <DraggableModal
-              header          = { if @state.userClassifiedAll then "You verified them all!" else "Nothing to verify" }
-              buttons         = {<GenericButton label='Continue' href='/#/mark' />}
-            >
-              Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/mark">marking</a> instead!
-            </DraggableModal>
+          else if ! @state.subjects?
+            <LoadingIndicator />
 
           else if @getCurrentSubject()?
             <div key="#{@getCurrentSubject().id}" className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>

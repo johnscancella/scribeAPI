@@ -146,7 +146,13 @@ class Subject
   def bad!
     status! 'bad'
     subject_set.subject_deactivated_on_workflow(workflow) if ! workflow.nil?
-    # subject_set.inc_complete_secondary_subject 1 if type != 'root'
+
+    # Recurse badness downward!
+    child_subjects.each do |child|
+      if ['active','inactive'].include?(child.status)
+        child.bad!
+      end
+    end
   end
 
   def retire!
@@ -156,6 +162,10 @@ class Subject
     subject_set.subject_completed_on_workflow(workflow) if ! workflow.nil?
     
     # subject_set.inc_complete_secondary_subject 1 if type != 'root'
+  end
+
+  def complete!
+    status! 'complete'
   end
 
   def activate!

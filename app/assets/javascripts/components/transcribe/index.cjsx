@@ -23,6 +23,7 @@ API                     = require '../../lib/api'
 HelpModal               = require 'components/help-modal'
 Tutorial                = require 'components/tutorial'
 DraggableModal          = require 'components/draggable-modal'
+LoadingIndicator        = require('components/loading-indicator')
 GenericButton           = require 'components/buttons/generic-button'
 
 module.exports = React.createClass # rename to Classifier
@@ -129,12 +130,7 @@ module.exports = React.createClass # rename to Classifier
       <div className="subject-area">
         {
           unless @getCurrentSubject() || @state.noMoreSubjects
-            <DraggableModal
-              header          = { "Loading transcription subjects." }
-              buttons         = {<GenericButton label='Back to Marking' href='/#/mark' />}
-            >
-                We are currently looking for a subject for you to {@props.workflowName}.
-            </DraggableModal>
+            <LoadingIndicator />
         }
 
         { if @state.noMoreSubjects

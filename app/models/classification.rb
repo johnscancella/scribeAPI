@@ -38,7 +38,7 @@ class Classification
     end
   end
 
-  def check_for_retirement_by_classification_count(subject)
+  def check_for_subject_retirement(subject)
     if workflow.generates_subjects_method == "collect-unique"
       # Only after all all generated subjects have been activated should this mark be retired
       # (Note this means some marks will acquire mult redundant transcriptions if mult subjects are generated.)
@@ -104,7 +104,7 @@ class Classification
     subject_returned = Subject.where({id: subject_id}).find_and_modify({"$addToSet" => {classifying_user_ids: user_id.to_s}, "$inc" => {classification_count: 1}}, new: true)
     
     #Passing the returned subject as parameters so that we eval the correct classification_count
-    check_for_retirement_by_classification_count(subject_returned)
+    check_for_subject_retirement(subject_returned)
   end
 
   def to_s

@@ -14,7 +14,6 @@ DraggableModal          = require 'components/draggable-modal'
 GenericButton           = require 'components/buttons/generic-button'
 Tutorial                = require 'components/tutorial'
 HelpModal               = require 'components/help-modal'
-NoMoreSubjectsModal     = require 'components/no-more-subjects-modal'
 LoadingIndicator        = require('components/loading-indicator')
 
 # Hash of core tools:
@@ -84,7 +83,12 @@ module.exports = React.createClass # rename to Classifier
     <div className="classifier">
       <div className="subject-area">
         { if @state.noMoreSubjects
-            <NoMoreSubjectsModal header={ if @state.userClassifiedAll then "You verified them all!" else "Nothing to verify" } workflowName={@props.workflowName} project={@props.project} />
+            <DraggableModal
+              header          = { if @state.userClassifiedAll then "You verified them all!" else "Nothing to verify" }
+              buttons         = {<GenericButton label='Continue' href='/#/mark' />}
+            >
+              Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/mark">marking</a> or <a href="/#/transcribe">transcribing</a> instead!
+            </DraggableModal>
 
           else if ! @state.subjects?
             <LoadingIndicator />

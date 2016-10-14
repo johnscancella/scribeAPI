@@ -14,6 +14,8 @@ DraggableModal          = require 'components/draggable-modal'
 GenericButton           = require 'components/buttons/generic-button'
 Tutorial                = require 'components/tutorial'
 HelpModal               = require 'components/help-modal'
+NoMoreSubjectsModal     = require 'components/no-more-subjects-modal'
+LoadingIndicator        = require('components/loading-indicator')
 
 # Hash of core tools:
 coreTools          = require 'components/core-tools'

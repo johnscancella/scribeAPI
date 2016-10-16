@@ -307,14 +307,14 @@ module.exports =
     tool_config: {
       "options": [
         {
-          "label": "Yes",
-          "next_task": null,
-          "value": "incomplete_subject"
-        }
-        {
-          "label": "No",
+          "label": "Nothing left to #{@props.workflowName}",
           "next_task": null,
           "value": "complete_subject"
+        },
+        {
+          "label": "There's more to #{@props.workflowName}",
+          "next_task": null,
+          "value": "incomplete_subject"
         }
       ]
     }

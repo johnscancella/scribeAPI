@@ -13,6 +13,7 @@ HelpButton              = require 'components/buttons/help-button'
 BadSubjectButton        = require 'components/buttons/bad-subject-button'
 HideOtherMarksButton    = require 'components/buttons/hide-other-marks-button'
 DraggableModal          = require 'components/draggable-modal'
+GenericButton           = require 'components/buttons/generic-button'
 Draggable               = require 'lib/draggable'
 {Link}                  = require 'react-router'
 
@@ -175,29 +176,31 @@ module.exports = React.createClass # rename to Classifier
       activeSubjectHelper: null
 
   render: ->
-    return null unless @getCurrentSubjectSet()? && @getActiveWorkflow()?
+    if @getCurrentSubjectSet()? && @getActiveWorkflow()?
+      currentTask = @getCurrentTask()
+      TaskComponent = @getCurrentTool()
+      activeWorkflow = @getActiveWorkflow()
+      firstTask = activeWorkflow.first_task
+      onFirstAnnotation = @state.taskKey == firstTask
+      currentSubtool = if @state.currentSubtool then @state.currentSubtool else @getTasks()[firstTask]?.tool_config.tools?[0]
 
-    currentTask = @getCurrentTask()
-    TaskComponent = @getCurrentTool()
-    activeWorkflow = @getActiveWorkflow()
-    firstTask = activeWorkflow.first_task
-    onFirstAnnotation = @state.taskKey == firstTask
-    currentSubtool = if @state.currentSubtool then @state.currentSubtool else @getTasks()[firstTask]?.tool_config.tools?[0]
+      # direct link to this page
+      pageURL = "#{location.origin}/#/mark?subject_set_id=#{@getCurrentSubjectSet().id}&selected_subject_id=#{@getCurrentSubject()?.id}"
 
-    # direct link to this page
-    pageURL = "#{location.origin}/#/mark?subject_set_id=#{@getCurrentSubjectSet().id}&selected_subject_id=#{@getCurrentSubject()?.id}"
-
-
-    if currentTask?.tool is 'pick_one'
-      currentAnswer = (a for a in currentTask.tool_config.options when a.value == currentAnnotation.value)[0]
-      waitingForAnswer = not currentAnswer
+      if currentTask?.tool is 'pick_one'
+        currentAnswer = (a for a in currentTask.tool_config.options when a.value == currentAnnotation.value)[0]
+        waitingForAnswer = not currentAnswer
 
     <div className="classifier">
 
       <div className="subject-area">
         { if @state.noMoreSubjectSets
-            style = marginTop: "50px"
-            <p style={style}>There is nothing left to do. Thanks for your work and please check back soon!</p>
+            <DraggableModal
+              header          = { "Nothing to mark" }
+              buttons         = {<GenericButton label='Continue' href='/#/transcribe' />}
+            >
+              Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/transcribe">transcribing</a> or <a href="/#/verify">verifying</a> instead!
+            </DraggableModal>
 
           else if @state.notice
             <DraggableModal header={@state.notice.header} onDone={@state.notice.onClick}>{@state.notice.message}</DraggableModal>

@@ -44,7 +44,7 @@ Login = React.createClass
       { if @props.user.avatar
           <img src="#{@props.user.avatar}" />
       }
-      <a className="label" href="#/user">Hello, {@props.user.name} </a><a className="logout" onClick={@signOut} >Logout</a>
+      <a className="label" href="#/user">{@props.user.name} </a>  <a className="logout" onClick={@signOut} >Logout</a>
     </span>
 
 

@@ -28,8 +28,10 @@ UserPage = React.createClass
 
   render: ->
     if ! @state.user?
-      <div className='page-content custom-page'>
-        <p><LoadingIndicator /></p>
+      <div className="classifier">
+        <div className="subject-area">
+          <p><LoadingIndicator /></p>
+        </div>
       </div>
     else
       <div className='page-content custom-page'>

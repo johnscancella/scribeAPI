@@ -19,17 +19,6 @@
       },
       "help": { "file": "v_illustration" },
       "generates_subject_type": "consensus_illustration"
-    },
-
-    "transcribed_advertisement": {
-      "instruction": "Choose the best transcription or enter your own!",
-      "tool": "verifyTool",
-      "tool_config": {
-        "displays_transcribe_button": true
-      },
-      "help": { "file": "v_advertisement" },
-      "generates_subject_type": "consensus_advertisement"
     }
-  
   }
 }

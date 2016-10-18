@@ -19,23 +19,7 @@
       "tool_config" : {
         "displays_transcribe_button": false,
         "options": [
-          {"type": "rectangleTool", "label": "Illustration/Photo", "color": "purple", "generates_subject_type": "illustration", "help": {"file": "m_illustration"}}
-        ]
-      },
-      "next_task": "mark_advertisement"
-    },
-
-    "mark_advertisement": {
-      "tool": "pickOneMarkOne",
-      "instruction": "Draw a rectangle around each unmarked **advertisement**, excluding classifieds",
-      "generates_subjects": true,
-      "help": {
-        "file": "mark_primary"
-      },
-      "tool_config" : {
-        "displays_transcribe_button": false,
-        "options": [
-          {"type": "rectangleTool", "label": "Advertisement", "color": "darkorange", "generates_subject_type": "advertisement", "help": {"file": "m_advertisement"}}
+          {"type": "rectangleTool", "label": "Illustration/Photo", "color": "#fe0000", "generates_subject_type": "illustration", "help": {"file": "m_illustration"}}
         ]
       },
       "next_task": null

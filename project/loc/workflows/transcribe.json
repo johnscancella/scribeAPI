@@ -19,7 +19,7 @@
           },
           "il_credit": {
             "tool": "textTool",
-            "label": "Illustrator/Photographer"
+            "label": "Creator"
           },
           "il_type": {
             "tool": "selectOneTool",
@@ -32,10 +32,14 @@
                   {
                     "value": "Photograph",
                     "label": "Photograph"
+                  },
+                  {
+                    "value": "Map",
+                    "label": "Map"
                   }
                 ]
             },
-            "label": "Illustration or Photo?"
+            "label": "Image Type"
           }
         }
       },
@@ -44,88 +48,6 @@
         "file": "t_illustration"
       },
       "generates_subject_type": "transcribed_illustration"
-    },
-
-    "advertisement": {
-      "tool": "compositeTool",
-      "tool_config": {
-        "tools": {
-          "ad_text": {
-            "tool": "textAreaTool",
-            "label": "Text of This Advertisement"
-          },
-          "ad_company": {
-            "tool": "textTool",
-            "label": "Company Name"
-          },
-          "ad_product": {
-            "tool": "selectOneTool",
-            "tool_config": {
-                "options": [
-                  {
-                    "value": "Arts & Entertainment",
-                    "label": "Arts & Entertainment"
-                  },
-                  {
-                    "value": "Business & Industrial",
-                    "label": "Business & Industrial"
-                  },
-                  {
-                    "value": "Clothing & Jewelry",
-                    "label": "Clothing & Jewelry"
-                  },
-                  {
-                    "value": "Food, Beverages & Tobacco",
-                    "label": "Food, Beverages & Tobacco"
-                  },
-                  {
-                    "value": "Health & Beauty",
-                    "label": "Health & Beauty"
-                  },
-                  {
-                    "value": "Home & Garden",
-                    "label": "Home & Garden"
-                  },
-                  {
-                    "value": "Media",
-                    "label": "Media"
-                  },
-                  {
-                    "value": "Real Estate",
-                    "label": "Real Estate"
-                  },
-                  {
-                    "value": "Religious",
-                    "label": "Religious"
-                  },
-                  {
-                    "value": "Sports & Outdoors",
-                    "label": "Sports & Outdoors"
-                  },
-                  {
-                    "value": "Toys & Games",
-                    "label": "Toys & Games"
-                  },
-                  {
-                    "value": "Transportation",
-                    "label": "Transportation"
-                  },
-                  {
-                    "value": "Other",
-                    "label": "Other"
-                  }
-                ]
-            },
-            "label": "Type of Product"
-          }
-        }
-      },
-      "instruction": "Enter or correct text of the advertisement, company name and product type",
-      "help": {
-        "file": "t_advertisement"
-      },
-      "generates_subject_type": "transcribed_advertisement"
     }
-
   }
 }

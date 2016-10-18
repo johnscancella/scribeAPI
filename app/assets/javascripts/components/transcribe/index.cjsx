@@ -209,6 +209,15 @@ module.exports = React.createClass # rename to Classifier
                     </p>
                 }
 
+                {
+                  if @getCurrentSubject()?.meta_data?.subject_url?
+                    <p>
+                      <a className="view-original-link" href="#{@getCurrentSubject().meta_data.subject_url}" target="_blank">
+                        View the original {@props.project.term('subject')}
+                      </a>
+                    </p>
+                }
+
                 <div className="forum-holder">
                   <ForumSubjectWidget subject=@getCurrentSubject() project={@props.project} />
                 </div>

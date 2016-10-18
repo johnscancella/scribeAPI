@@ -291,9 +291,18 @@ module.exports = React.createClass # rename to Classifier
             }
 
             {
+              if @getCurrentSubject()?.meta_data?.subject_url?
+                <p>
+                  <a className="view-original-link" href="#{@getCurrentSubject().meta_data.subject_url}" target="_blank">
+                    View the original {@props.project.term('subject')}
+                  </a>
+                </p>
+            }
+
+            {
               if @getActiveWorkflow()? and @state.groups?.length > 1
                 <p>
-                  <Link to="/groups/#{@getCurrentSubjectSet().group_id}" className="about-link">About this {@props.project.term('group')}.</Link>
+                  <Link to="/groups/#{@getCurrentSubjectSet().group_id}" className="about-link">About this {@props.project.term('group')}</Link>
                 </p>
             }
 

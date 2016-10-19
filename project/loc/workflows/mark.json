@@ -13,9 +13,6 @@
       "tool": "pickOneMarkOne",
       "instruction": "Draw a rectangle around each unmarked **illustration** or **photograph**, excluding advertisement. Include caption and credits when possibble.",
       "generates_subjects": true,
-      "help": {
-        "file": "mark_primary"
-      },
       "tool_config" : {
         "displays_transcribe_button": false,
         "options": [

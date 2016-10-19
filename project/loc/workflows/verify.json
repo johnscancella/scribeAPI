@@ -17,7 +17,7 @@
       "tool_config": {
         "displays_transcribe_button": true
       },
-      "help": { "file": "v_illustration" },
+      "help": { "file": "v_text" },
       "generates_subject_type": "consensus_illustration"
     }
   }

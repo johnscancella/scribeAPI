@@ -13,15 +13,15 @@
       "tool": "compositeTool",
       "tool_config": {
         "tools": {
-          "il_caption": {
+          "caption": {
             "tool": "textAreaTool",
-            "label": "Caption/Title"
+            "label": "Caption"
           },
-          "il_credit": {
+          "creator": {
             "tool": "textTool",
             "label": "Creator"
           },
-          "il_type": {
+          "category": {
             "tool": "selectOneTool",
             "tool_config": {
                 "options": [
@@ -39,11 +39,11 @@
                   }
                 ]
             },
-            "label": "Image Type"
+            "label": "Category"
           }
         }
       },
-      "instruction": "Determine whether this is an illustration or photograph. Enter optional caption, illustrator or photographer",
+      "instruction": "Enter caption (or article title if caption is absent), creator and category.",
       "help": {
         "file": "t_illustration"
       },

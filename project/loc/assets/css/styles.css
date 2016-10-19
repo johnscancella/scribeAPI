@@ -394,41 +394,19 @@ h3.groups-header {
 }
 
 /* Color themem */
+
 /* button style */
-.standard-button,
-.major-button,
-.minor-button,
-.small-button {
+.standard-button:not(.ghost),
+.major-button:not(.ghost),
+.minor-button:not(.ghost),
+.small-button:not(.ghost) {
   background: rgba(242,116,144,0.8);
 }
 
-.major-button {
-  background: rgba(242,116,144,0.8);
-}
-
-.major-button:hover {
+.major-button:not(.ghost):hover,
+.minor-button:not(.ghost):hover,
+.small-button:not(.ghost):hover {
   background: rgba(242,116,144,1);
-}
-
-.minor-button,
-.small-button {
-  color: #fff;
-  background: rgba(242,116,144,0.8);
-}
-
-.minor-button:hover,
-.small-button:hover {
-  background: rgba(242,116,144,1);
-}
-
-.minor-button.ghost,
-.small-button.ghost {
-  color: #3f5765;
-}
-
-.minor-button.ghost:hover,
-.small-button.ghost:hover {
-  background: rgba(242,116,144,0);
 }
 
 

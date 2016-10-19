@@ -5,7 +5,7 @@ module.exports = React.createClass
   displayName: 'HelpButton'
 
   getDefaultProps: ->
-    label: 'Need some help?' 
+    label: 'Need help?' 
     key: 'help-button'
  
   render: ->

@@ -120,6 +120,14 @@ TextTool = React.createClass
       if @props.isLastSubject and not @props.task.next_task?
         @props.returnToMarking()
 
+  skipToNext: ->
+    @clearAnnotation()
+    @commitAnnotation()
+
+  clearAnnotation: ->
+    @state.annotation = {}
+    @props.clearAnnotation()
+
   # Get key to use in annotations hash (i.e. typically 'value', unless included in composite tool)
   fieldKey: ->
     if @props.standalone
@@ -227,6 +235,8 @@ TextTool = React.createClass
       if @props.onShowHelp?
         buttons.push <HelpButton key="help-button" onClick={@props.onShowHelp}/>
 
+      buttons.push <SmallButton label='Skip' key="skip-button" className="ghost" onClick={@skipToNext} />
+
       if @props.onBadSubject?
         buttons.push <BadSubjectButton key="bad-subject-button" label={"Bad #{@props.project.term('mark')}"} active={@props.badSubject} onClick={@props.onBadSubject} />
 
@@ -239,7 +249,7 @@ TextTool = React.createClass
         else
           if @props.isLastSubject and ( @props.transcribeMode is 'page' or @props.transcribeMode is 'single' )
             'Return to Marking'
-          else 'Next Entry'
+          else 'Save'
 
       buttons.push <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />
 

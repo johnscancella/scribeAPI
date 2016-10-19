@@ -66,6 +66,15 @@ module.exports = React.createClass # rename to Classifier
       classifications: classifications,
         => @forceUpdate()
 
+  # Clear annotation. Used by skip to next subject action
+  clearCurrentAnnotation: ->
+    classifications = @state.classifications
+    currentClassification = classifications[@state.classificationIndex]
+    currentClassification.annotation = {}
+
+    @setState
+      classifications: classifications
+
   handleTaskComplete: (d) ->
     @handleDataFromTool(d)
     @commitClassificationAndContinue d
@@ -168,6 +177,7 @@ module.exports = React.createClass # rename to Classifier
                   annotation={currentAnnotation}
                   subject={@getCurrentSubject()}
                   onChange={@handleDataFromTool}
+                  clearAnnotation={@clearCurrentAnnotation}
                   subjectCurrentPage={@props.query.page}
                   onComplete={@handleTaskComplete}
                   onBack={@makeBackHandler()}

@@ -87,6 +87,14 @@ CompositeTool = React.createClass
       if @props.isLastSubject and not @props.task.next_task?
         @props.returnToMarking()
 
+  skipToNext: ->
+    @clearAnnotation()
+    @commitAnnotation()
+
+  clearAnnotation: ->
+    @state.annotation = {}
+    @props.clearAnnotation()
+
   # this can go into a mixin? (common across all transcribe tools)
   returnToMarking: ->
     @commitAnnotation()
@@ -104,6 +112,8 @@ CompositeTool = React.createClass
     if @props.onShowHelp?
       buttons.push <HelpButton onClick={@props.onShowHelp} key="help-button"/>
 
+    buttons.push <SmallButton label='Skip' key="skip-button" className="ghost" onClick={@skipToNext} />
+
     if @props.onBadSubject?
       buttons.push <BadSubjectButton key="bad-subject-button" label={"Bad #{@props.project.term('mark')}"} active={@props.badSubject} onClick={@props.onBadSubject} />
 
@@ -116,7 +126,7 @@ CompositeTool = React.createClass
       else
         if @props.isLastSubject and ( @props.transcribeMode is 'page' or @props.transcribeMode is 'single' )
           'Return to Marking'
-        else 'Next Entry'
+        else 'Save'
 
     buttons.push <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />
 

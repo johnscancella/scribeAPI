@@ -7,11 +7,12 @@ PrevButton        = require './prev-button'
 HelpButton        = require 'components/buttons/help-button'
 BadSubjectButton  = require 'components/buttons/bad-subject-button'
 IllegibleSubjectButton = require 'components/buttons/illegible-subject-button'
+SkippableToolMixin     = require 'lib/skippable-tool-mixin'
 
 
 CompositeTool = React.createClass
   displayName: 'CompositeTool'
-  mixins: [Navigation]
+  mixins: [Navigation, SkippableToolMixin]
 
   getInitialState: ->
     initAnnotation = @props.annotation ? {}
@@ -87,14 +88,6 @@ CompositeTool = React.createClass
       if @props.isLastSubject and not @props.task.next_task?
         @props.returnToMarking()
 
-  skipToNext: ->
-    @clearAnnotation()
-    @commitAnnotation()
-
-  clearAnnotation: ->
-    @state.annotation = {}
-    @props.clearAnnotation()
-
   # this can go into a mixin? (common across all transcribe tools)
   returnToMarking: ->
     @commitAnnotation()
@@ -112,7 +105,7 @@ CompositeTool = React.createClass
     if @props.onShowHelp?
       buttons.push <HelpButton onClick={@props.onShowHelp} key="help-button"/>
 
-    buttons.push <SmallButton label='Skip' key="skip-button" className="ghost" onClick={@skipToNext} />
+    buttons.push <SmallButton label='Skip' key="skip-button" className="ghost floated-left" onClick={@skipToNext} />
 
     if @props.onBadSubject?
       buttons.push <BadSubjectButton key="bad-subject-button" label={"Bad #{@props.project.term('mark')}"} active={@props.badSubject} onClick={@props.onBadSubject} />

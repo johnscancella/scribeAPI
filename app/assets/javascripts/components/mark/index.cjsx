@@ -95,34 +95,6 @@ module.exports = React.createClass # rename to Classifier
     @createAndCommitClassification(annotation)
 
 
-  # Handle user selecting a pick/drawing tool:
-  handleDataFromTool: (d) ->
-    # Kind of a hack: We receive annotation data from two places:
-    #  1. tool selection widget in right-col
-    #  2. the actual draggable marking tools
-    # We want to remember the subToolIndex so that the right-col menu highlights
-    # the correct tool after committing a mark. If incoming data has subToolIndex
-    # but no mark location information, we know this callback was called by the
-    # right-col. So only in that case, record currentSubToolIndex, which we use
-    # to initialize marks going forward
-    if d.subToolIndex? && ! d.x? && ! d.y?
-      @setState currentSubToolIndex: d.subToolIndex
-      @setState currentSubtool: d.tool if d.tool?
-
-    else
-      classifications = @state.classifications
-      classifications[@state.classificationIndex].annotation[k] = v for k, v of d
-
-      # PB: Saving STI's notes here in case we decide tools should fully
-      #   replace annotation hash rather than selectively update by key as above:
-      # not clear whether we should replace annotations, or append to it --STI
-      # classifications[@state.classificationIndex].annotation = d #[k] = v for k, v of d
-
-      @setState
-        classifications: classifications
-          , =>
-            @forceUpdate()
-
   handleMarkDelete: (m) ->
     @flagSubjectAsUserDeleted m.subject_id
 

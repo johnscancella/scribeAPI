@@ -4,9 +4,11 @@ SmallButton            = require 'components/buttons/small-button'
 HelpButton             = require 'components/buttons/help-button'
 BadSubjectButton       = require 'components/buttons/bad-subject-button'
 IllegibleSubjectButton = require 'components/buttons/illegible-subject-button'
+SkippableToolMixin     = require 'lib/skippable-tool-mixin'
 
 TextTool = React.createClass
   displayName: 'TextTool'
+  mixins: [SkippableToolMixin]
 
   getInitialState: ->
     annotation: @props.annotation ? {}
@@ -120,14 +122,6 @@ TextTool = React.createClass
       if @props.isLastSubject and not @props.task.next_task?
         @props.returnToMarking()
 
-  skipToNext: ->
-    @clearAnnotation()
-    @commitAnnotation()
-
-  clearAnnotation: ->
-    @state.annotation = {}
-    @props.clearAnnotation()
-
   # Get key to use in annotations hash (i.e. typically 'value', unless included in composite tool)
   fieldKey: ->
     if @props.standalone
@@ -235,7 +229,7 @@ TextTool = React.createClass
       if @props.onShowHelp?
         buttons.push <HelpButton key="help-button" onClick={@props.onShowHelp}/>
 
-      buttons.push <SmallButton label='Skip' key="skip-button" className="ghost" onClick={@skipToNext} />
+      buttons.push <SmallButton label='Skip' key="skip-button" className="ghost floated-left" onClick={@skipToNext} />
 
       if @props.onBadSubject?
         buttons.push <BadSubjectButton key="bad-subject-button" label={"Bad #{@props.project.term('mark')}"} active={@props.badSubject} onClick={@props.onBadSubject} />

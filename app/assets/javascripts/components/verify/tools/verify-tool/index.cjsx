@@ -5,9 +5,11 @@ DoneButton              = require 'components/buttons/done-button'
 HelpButton              = require 'components/buttons/help-button'
 BadSubjectButton        = require 'components/buttons/bad-subject-button'
 SmallButton             = require 'components/buttons/small-button'
+SkippableToolMixin      = require 'lib/skippable-tool-mixin'
 
 VerifyTool = React.createClass
   displayName: 'VerifyTool'
+  mixins: [SkippableToolMixin]
 
   getInitialState: ->
     annotation:
@@ -76,18 +78,19 @@ VerifyTool = React.createClass
       label = @props.label ? ''
 
     buttons = []
-    console.info "Verifying subject id #{@props.subject.id}"
 
     if @props.onShowHelp?
       buttons.push <HelpButton onClick={@props.onShowHelp} key="help-button"/>
 
+    buttons.push <SmallButton label='Skip' key="skip-button" className="ghost floated-left" onClick={@skipToNext} />
+
     if @props.task?.tool_config.displays_transcribe_button? and @props.subject?
       transcribe_url = "/#/transcribe/#{@props.subject.parent_subject_id}?scrollX=#{window.scrollX}&scrollY=#{window.scrollY}&page=#{@props.subject._meta?.current_page}"
-      buttons.push <GenericButton key="transcribe-button" label={@props.transcribeButtonLabel} href={transcribe_url} className="ghost small-button help-button" />
+      buttons.push <GenericButton key="transcribe-button" label={@props.transcribeButtonLabel} href={transcribe_url} className="ghost small-button" />
       # buttons.push <DoneButton label={@props.doneButtonLabel} onClick={@commitAnnotation} />
 
     if @props.onBadSubject?
-      buttons.push <BadSubjectButton key="bad-subject-button" label={"Bad #{@props.project.term('mark')}"} className="floated-left" active={@props.badSubject} onClick={@props.onBadSubject} />
+      buttons.push <BadSubjectButton key="bad-subject-button" label={"Bad #{@props.project.term('mark')}"} active={@props.badSubject} onClick={@props.onBadSubject} />
       if @props.badSubject
         buttons.push <SmallButton label='Next' key="done-button" onClick={@commitAnnotation} />
 

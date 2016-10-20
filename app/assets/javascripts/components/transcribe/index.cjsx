@@ -54,31 +54,6 @@ module.exports = React.createClass # rename to Classifier
     if taskOption.next_task?
       @advanceToTask taskOption.next_task
 
-  # Handle user selecting a pick/drawing tool:
-  handleDataFromTool: (d) ->
-    classifications = @state.classifications
-    currentClassification = classifications[@state.classificationIndex]
-
-    # this is a source of conflict. do we copy key/value pairs, or replace the entire annotation? --STI
-    currentClassification.annotation[k] = v for k, v of d
-
-    @setState
-      classifications: classifications,
-        => @forceUpdate()
-
-  # Clear annotation. Used by skip to next subject action
-  clearCurrentAnnotation: ->
-    classifications = @state.classifications
-    currentClassification = classifications[@state.classificationIndex]
-    currentClassification.annotation = {}
-
-    @setState
-      classifications: classifications
-
-  handleTaskComplete: (d) ->
-    @handleDataFromTool(d)
-    @commitClassificationAndContinue d
-
   handleViewerLoad: (props) ->
     @setState
       viewerSize: props.size

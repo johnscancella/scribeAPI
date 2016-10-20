@@ -46,20 +46,6 @@ module.exports = React.createClass # rename to Classifier
   fetchSubjectsCallback: ->
     @setState taskKey: @getCurrentSubject().type if @getCurrentSubject()?
 
-  # Handle user selecting a pick/drawing tool:
-  handleDataFromTool: (d) ->
-    classifications = @state.classifications
-    currentClassification = classifications[@state.classificationIndex]
-
-    currentClassification.annotation[k] = v for k, v of d
-
-    @forceUpdate()
-    @setState classifications: classifications, => @forceUpdate()
-
-  handleTaskComplete: (d) ->
-    @handleDataFromTool(d)
-    @commitClassificationAndContinue d
-
   toggleTutorial: ->
     @setState showingTutorial: not @state.showingTutorial
 
@@ -121,6 +107,7 @@ module.exports = React.createClass # rename to Classifier
                     onBadSubject={@toggleBadSubject}
                     subject={@getCurrentSubject()}
                     onChange={@handleTaskComponentChange}
+                    clearAnnotation={@clearCurrentAnnotation}
                     onComplete={@handleTaskComplete}
                     workflow={@getActiveWorkflow()}
                     project={@props.project}

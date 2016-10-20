@@ -2,6 +2,8 @@ require 'nokogiri'
 
 module OcrAlto
 
+  MARGIN = 50
+
   # box1 overlaps box2
   def self.overlap(box1, box2)
   	! (box1[:hpos] + box1[:width] < box2[:hpos] ||
@@ -12,10 +14,10 @@ module OcrAlto
 
   # box1 encloses box2
   def self.enclose(box1, box2)
-  	box1[:hpos] <= box2[:hpos] &&
-  	box1[:hpos] + box1[:width] >= box2[:hpos] + box2[:width] &&
-  	box1[:vpos] <= box2[:vpos] &&
-  	box1[:vpos] + box1[:height] >= box2[:vpos] + box2[:height]
+  	box1[:hpos] - MARGIN  <= box2[:hpos] &&
+  	box1[:hpos] + box1[:width] + MARGIN >= box2[:hpos] + box2[:width] &&
+  	box1[:vpos] - MARGIN <= box2[:vpos] &&
+  	box1[:vpos] + box1[:height] + MARGIN >= box2[:vpos] + box2[:height]
   end
 
   # extract ORC text inside of box from the ALTO file

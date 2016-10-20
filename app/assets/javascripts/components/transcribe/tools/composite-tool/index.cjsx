@@ -87,6 +87,8 @@ CompositeTool = React.createClass
     if @props.transcribeMode is 'page' or @props.transcribeMode is 'single'
       if @props.isLastSubject and not @props.task.next_task?
         @props.returnToMarking()
+    else if @props.transcribeMode == 'verify'
+      @transitionTo 'verify'
 
   # this can go into a mixin? (common across all transcribe tools)
   returnToMarking: ->
@@ -118,7 +120,9 @@ CompositeTool = React.createClass
        'Continue'
       else
         if @props.isLastSubject and ( @props.transcribeMode is 'page' or @props.transcribeMode is 'single' )
-          'Return to Marking'
+          'Save and Return to Marking'
+        else if @props.transcribeMode is 'verify'
+          'Save and Return to Verify'
         else 'Save'
 
     buttons.push <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />

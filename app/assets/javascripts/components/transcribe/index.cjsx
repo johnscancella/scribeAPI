@@ -95,7 +95,9 @@ module.exports = React.createClass # rename to Classifier
     @setState toolbar_expanded: false
 
   render: ->
-    if @props.params.workflow_id? and @props.params.parent_subject_id?
+    if @props.query.from == 'verify'
+      transcribeMode = 'verify'
+    else if @props.params.workflow_id? and @props.params.parent_subject_id?
       transcribeMode = 'page'
     else if @props.params.subject_id
       transcribeMode = 'single'

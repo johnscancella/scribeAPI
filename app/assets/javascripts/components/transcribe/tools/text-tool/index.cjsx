@@ -1,4 +1,5 @@
 React                  = require 'react'
+{Navigation}           = require 'react-router'
 DraggableModal         = require 'components/draggable-modal'
 SmallButton            = require 'components/buttons/small-button'
 HelpButton             = require 'components/buttons/help-button'
@@ -8,7 +9,7 @@ SkippableToolMixin     = require 'lib/skippable-tool-mixin'
 
 TextTool = React.createClass
   displayName: 'TextTool'
-  mixins: [SkippableToolMixin]
+  mixins: [Navigation, SkippableToolMixin]
 
   getInitialState: ->
     annotation: @props.annotation ? {}
@@ -121,6 +122,8 @@ TextTool = React.createClass
     if @props.transcribeMode is 'page' or @props.transcribeMode is 'single'
       if @props.isLastSubject and not @props.task.next_task?
         @props.returnToMarking()
+    else if @props.transcribeMode == 'verify'
+      @transitionTo 'verify'
 
   # Get key to use in annotations hash (i.e. typically 'value', unless included in composite tool)
   fieldKey: ->
@@ -242,7 +245,9 @@ TextTool = React.createClass
          'Continue'
         else
           if @props.isLastSubject and ( @props.transcribeMode is 'page' or @props.transcribeMode is 'single' )
-            'Return to Marking'
+            'Save and Return to Marking'
+          else if @props.transcribeMode is 'verify'
+            'Save and Return to Verify'
           else 'Save'
 
       buttons.push <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />

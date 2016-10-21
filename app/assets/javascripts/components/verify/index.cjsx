@@ -71,7 +71,7 @@ module.exports = React.createClass # rename to Classifier
         { if @state.noMoreSubjects
             <DraggableModal
               header          = { if @state.userClassifiedAll then "You verified them all!" else "Nothing to verify" }
-              buttons         = {<GenericButton label='Continue' href='/#/mark' />}
+              buttons         = {<GenericButton label='Continue' href='/#' />}
             >
               Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/mark">marking</a> or <a href="/#/transcribe">transcribing</a> instead!
             </DraggableModal>

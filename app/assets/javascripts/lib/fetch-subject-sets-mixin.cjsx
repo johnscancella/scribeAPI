@@ -82,8 +82,12 @@ module.exports =
       if sets.length is 0
         @setState noMoreSubjectSets: true
       else
-        @setState subjectSets: sets, () =>
-          @fetchSubjectsForCurrentSubjectSet 1, null, callback
+        @setState 
+          subjectSets: sets
+          subject_set_index: 0  # this is a new page, reset index to 0
+          subject_sets_current_page:      sets[0].getMeta('current_page')
+          subject_sets_total_pages:       sets[0].getMeta('total_pages'), () =>
+            @fetchSubjectsForCurrentSubjectSet 1, null, callback
 
   # PB: Setting default limit to 120 because it's a multiple of 3 mandated by thumb browser
   fetchSubjectsForCurrentSubjectSet: (page=1, limit=120, callback) ->

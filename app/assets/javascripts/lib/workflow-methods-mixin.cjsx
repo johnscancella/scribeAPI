@@ -361,7 +361,11 @@ module.exports =
     # If we've exhausted all subject sets, collapse in shame
     if new_subject_set_index >= @state.subjectSets.length
       if @state.subject_sets_current_page < @state.subject_sets_total_pages
-        @fetchSubjectSets page: @state.subject_sets_current_page + 1
+        # Gather filters by which to query subject-sets
+        params =
+          group_id:         @props.query.group_id ? null
+          page:             @state.subject_sets_current_page + 1          
+        @fetchSubjectSets params
       else
         @setState
           taskKey: null

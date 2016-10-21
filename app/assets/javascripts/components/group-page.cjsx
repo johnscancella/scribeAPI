@@ -14,10 +14,6 @@ GroupPage = React.createClass
       @setState
         group: group
 
-    API.type("subject_sets").get(group_id: @props.params.group_id).then (sets) =>
-      @setState
-        subject_sets: sets
-
   render: ->
     if ! @state.group?
       <div className="group-page">
@@ -73,18 +69,10 @@ GroupPage = React.createClass
                 </div>
             }
 
-            <div className='subject_sets'>
-              { for set, i in @state.subject_sets ? []
-                  <div key={i} className="subject_set">
-                    <div className="mark-transcribe-buttons">
-                      { for workflow in @props.project.workflows
-                          if (set.counts[workflow.id]?.active_subjects ? 0) > 0
-                            <GenericButton key={workflow.id} label={workflow.name} href={"#/#{workflow.name}?subject_set_id=#{set.id}"} />
-                      }
-                    </div>
-                  </div>
-              }
-            </div>
+            { for workflow in @props.project.workflows
+                if (@state.group.stats.workflow_counts?[workflow.id]?.active_subjects ? 0) > 0
+                  <GenericButton key={workflow.id} label={workflow.name} href={"#/#{workflow.name}?group_id=#{@state.group.id}"} />
+            }
 
           </div>
 

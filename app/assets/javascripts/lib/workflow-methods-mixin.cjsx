@@ -400,12 +400,9 @@ module.exports =
 
   # Clear annotation. Used by skip to next subject action
   clearCurrentAnnotation: ->
-    classifications = @state.classifications
-    currentClassification = classifications[@state.classificationIndex]
+    currentClassification = @getCurrentClassification()
     currentClassification.annotation = {}
 
-    @setState
-      classifications: classifications
 
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->

@@ -169,7 +169,7 @@ module.exports = React.createClass # rename to Classifier
         { if @state.noMoreSubjectSets
             <DraggableModal
               header          = { "Nothing to mark" }
-              buttons         = {<GenericButton label='Continue' href='/#/transcribe' />}
+              buttons         = {<GenericButton label='Continue' href='/#' />}
             >
               Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/transcribe">transcribing</a> or <a href="/#/verify">verifying</a> instead!
             </DraggableModal>
@@ -272,7 +272,7 @@ module.exports = React.createClass # rename to Classifier
             }
 
             {
-              if @getActiveWorkflow()? and @state.groups?.length > 1
+              if @getActiveWorkflow()? and @state.groups?.length > 1 and @getCurrentSubjectSet()?
                 <p>
                   <Link to="/groups/#{@getCurrentSubjectSet().group_id}" className="about-link">About this {@props.project.term('group')}</Link>
                 </p>

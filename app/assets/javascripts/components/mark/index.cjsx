@@ -92,7 +92,7 @@ module.exports = React.createClass # rename to Classifier
   # User somehow indicated current task is complete; commit current classification
   handleToolComplete: (annotation) ->
     @handleDataFromTool(annotation)
-    @createAndCommitClassification(annotation)
+    @commitCurrentClassification()
 
 
   handleMarkDelete: (m) ->

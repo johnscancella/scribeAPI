@@ -93,7 +93,6 @@ module.exports =
         # We found it, move on:
         break
 
-  # used to commit task-level classifications, i.e. not from marking tools
   commitCurrentClassification: () ->
     classification = @getCurrentClassification()
     classification.subject_id = @getCurrentSubject()?.id
@@ -113,40 +112,6 @@ module.exports =
     @commitClassification(classification)
     @beginClassification()
 
-  # used for committing marking tools (by passing annotation)
-  createAndCommitClassification: (annotation) ->
-    classifications = @state.classifications
-    classification = new Classification()
-    classification.annotation = annotation ? annotation : {} # initialize annotation
-    classification.subject_id = @getCurrentSubject()?.id
-    classification.subject_set_id = @getCurrentSubjectSet().id if @getCurrentSubjectSet()?
-    classification.workflow_id = @getActiveWorkflow().id
-
-    # If user activated 'Bad Subject' button, override task:
-    if @state.badSubject
-      classification.task_key = 'flag_bad_subject_task'
-
-    else if @state.illegibleSubject
-      classification.task_key = 'flag_illegible_subject_task'
-
-    # Otherwise, classification is for active task:
-    else
-      classification.task_key = @state.taskKey
-      return if Object.keys(classification.annotation).length == 0
-
-    classifications = @state.classifications
-
-    classifications.push classification
-
-    @setState
-      classifications: classifications
-      classificationIndex: classifications.length-1
-        , =>
-          @forceUpdate()
-          window.classifications = @state.classifications # make accessible to console
-          callback() if callback?
-    
-    @commitClassification(classification)
 
   toggleBadSubject: (e, callback) ->
     @setState badSubject: not @state.badSubject, =>

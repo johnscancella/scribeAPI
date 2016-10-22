@@ -191,11 +191,11 @@ module.exports = React.createClass
       for key, value of initReleaseValues
         mark[key] = value
     if MarkComponent.initValid? and not MarkComponent.initValid mark
-      @destroyMark @props.annotation, mark
-
-    mark.isUncommitted = true
-    mark.belongsToUser = true
-    @setUncommittedMark mark
+      @destroyMark mark
+    else
+      mark.isUncommitted = true
+      mark.belongsToUser = true
+      @setUncommittedMark mark
 
   setUncommittedMark: (mark) ->
     @setState
@@ -258,6 +258,7 @@ module.exports = React.createClass
         marks: marks
 
     else if mark is @state.uncommittedMark
+      @setUncommittedMark null
       @props.destroyCurrentClassification()
 
   handleChange: (mark) ->

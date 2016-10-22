@@ -1,9 +1,5 @@
-# Making Your Mark
+# Existing Marks
 
-To mark a field, click and drag the mark around the desired area. Be sure to draw the mark around the entire field. Once you have the mark around the area you want, select the "Done" check-box. Once you've clicked on "Done," your mark is saved. You can close your browser window or move on to a new task and all your work will be saved. 
+You may see existing marks on the page. If this is the case, someone has already marked the pictures and there's no need to mark them twice. Sometimes, you might see that others have left bad marks, ex. marks around the wrong area. Ignore any bad marks you see. They will be weeded out in the Transcribe task.  
 
-If you'd like to remove one of your marks, click on it and then on the red x button in the upper-right corner of the mark.  
-
-<div class="video-wrapper">
-  <video width="445" height="138.7" loop autoplay src="/images/mark_task.mp4"></video>
-</div>
+You can manipulate the digitized pages with tools on the left side of the screen. Here you'll find the zoom tool and a mark toggle. The mark toggle allows you to hide other people's marks from the page.

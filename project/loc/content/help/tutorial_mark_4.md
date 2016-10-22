@@ -1,6 +1,7 @@
-# Existing Marks
+# When Done Marking 
 
-You may see existing marks on the page. If this is the case, someone has already marked the field and there's no need to mark an area twice. Sometimes, you might see that others have left bad marks, ex. marks around the wrong field or around an empty part of the page. Ignore any bad marks you see. They will be weeded out in the Transcribe task.  
+You do not have to mark every pictures at one fell swoop. But it will help us a lot if you tell us whether there is anything left to mark.
 
-You can manipulate the digitized pages with tools on the left side of the screen. Here you'll find the zoom tool and a mark toggle. The mark toggle allows you to hide other people's marks from the page.  
-The marks created in this task identify the fields to be transcribed in the next task phase.  
+<div class="video-wrapper">
+  <video width="230" height="184" loop autoplay src="/images/mark_task_complete.mp4"></video>
+</div>

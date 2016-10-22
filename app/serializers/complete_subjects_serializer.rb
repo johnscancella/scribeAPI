@@ -1,5 +1,5 @@
 class CompleteSubjectsSerializer < ActiveModel::MongoidSerializer
-  attributes :data, :links, :meta
+  attributes :data
 
   root false
 
@@ -8,12 +8,4 @@ class CompleteSubjectsSerializer < ActiveModel::MongoidSerializer
     object.map { |s| CompleteSubjectSerializer.new(s, root: false) }
   end
 
-  def meta
-    { 
-    }
-  end
-
-  def links
-    {}
-  end
 end

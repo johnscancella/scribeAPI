@@ -1,7 +1,7 @@
 class CompleteSubjectSerializer < ActiveModel::MongoidSerializer
 
   attributes :id, :location, :region, :width, :height, :meta_data
-  attributes :data, :task
+  attributes :data
 
   def task
     task = object.parent_workflow_task

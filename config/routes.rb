@@ -31,7 +31,9 @@ API::Application.routes.draw do
   
   # Classifications
   get '/classifications/terms/:workflow_id/:annotation_key',  to: 'classifications#terms'
-  post '/classifications',                                    to: 'classifications#create'  
+  post '/classifications',                                    to: 'classifications#create' 
+
+  get '/data',                                                to: 'data#download',        defaults: { format: 'json' }
 
   resources :groups, only: [:show, :index], :defaults => { :format => 'json' }
 

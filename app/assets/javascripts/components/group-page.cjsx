@@ -1,7 +1,8 @@
-React         = require("react")
-GroupBrowser  = require('./group-browser')
-GenericButton   = require('components/buttons/generic-button')
-API           = require('../lib/api')
+React               = require("react")
+GroupBrowser        = require('./group-browser')
+GenericButton       = require('components/buttons/generic-button')
+API                 = require('../lib/api')
+LoadingIndicator    = require './loading-indicator'
 
 GroupPage = React.createClass
   displayName: "GroupPage"
@@ -17,7 +18,7 @@ GroupPage = React.createClass
   render: ->
     if ! @state.group?
       <div className="group-page">
-        <h2>Loading...</h2>
+        <LoadingIndicator />
       </div>
 
     else
@@ -69,10 +70,12 @@ GroupPage = React.createClass
                 </div>
             }
 
-            { for workflow in @props.project.workflows
-                if (@state.group.stats.workflow_counts?[workflow.id]?.active_subjects ? 0) > 0
-                  <GenericButton key={workflow.id} label={workflow.name} href={"#/#{workflow.name}?group_id=#{@state.group.id}"} />
-            }
+            <div className="mark-transcribe-buttons">
+              { for workflow in @props.project.workflows
+                  if (@state.group.stats.workflow_counts?[workflow.id]?.active_subjects ? 0) > 0
+                    <GenericButton key={workflow.id} label={workflow.name} href={"#/#{workflow.name}?group_id=#{@state.group.id}"} />
+              }
+            </div>
 
           </div>
 

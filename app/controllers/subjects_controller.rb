@@ -13,13 +13,14 @@ class SubjectsController < ApplicationController
     limit                 = get_int :limit, 10
     page                  = get_int :page, 1
     type                  = params[:type]
-    # `status` filter must be one of: 'active', 'any'
-    status                = ['active','any'].include?(params[:status]) ? params[:status] : 'active'
+    # `status` filter must be one of: 'active', 'complete', any'
+    status                = ['active','complete','any'].include?(params[:status]) ? params[:status] : 'active'
 
     @subjects = Subject.page(page).per(limit)
 
     # Only active subjects?
     @subjects = @subjects.active if status == 'active'
+    @subjects = @subjects.complete if status == 'complete'
 
     # Filter by subject type (e.g. 'root')
     @subjects = @subjects.by_type(type) if type
@@ -46,7 +47,7 @@ class SubjectsController < ApplicationController
       @subjects = @subjects.user_has_not_classified user.id.to_s if ! user.nil?
 
       # Should we filter out subjects that the user herself created?
-      if ! user.nil? && ! (workflow = Workflow.find(workflow_id)).nil? && ! workflow.subjects_classifiable_by_creator
+      if ! user.nil? && workflow_id && ! (workflow = Workflow.find(workflow_id)).nil? && ! workflow.subjects_classifiable_by_creator
         # Note: creating_user_ids are stored as ObjectIds, so no need to filter on user.id.to_s:
         @subjects = @subjects.user_did_not_create user.id if ! user.nil?
       end

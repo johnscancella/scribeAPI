@@ -40,6 +40,7 @@
     "main": [
       {"label": "Intro", "page": "intro"},
       {"label": "Data", "page": "data"},
+      {"label": "Gallery", "page": "gallery"},
       {"label": "About", "page": "about"}
     ],
     "footer": []

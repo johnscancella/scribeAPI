@@ -15,6 +15,7 @@ class SubjectSerializer < ActiveModel::MongoidSerializer
       child_data[:id] = data.id
       child_data[:location_standard] = data[:location][:standard]
       child_data[:data] = data["data"]
+      child_data[:meta_data] = data[:meta_data]
       child_data[:region] = data[:region]
       child_data[:tool_type] = data[:region]['toolName']
       data = child_data
@@ -75,17 +76,6 @@ class SubjectSerializer < ActiveModel::MongoidSerializer
     unless user == nil
       return object.created_by_user_id == user.id.to_s
     end
-  end
-
-  def meta_data
-    meta_data = object[:meta_data]
-    if meta_data == nil && !object.parent_subject.nil?
-      meta_data = object.parent_subject.meta_data
-      if meta_data == nil && !object.parent_subject.parent_subject.nil?
-        meta_data = object.parent_subject.parent_subject.meta_data
-      end
-    end
-    meta_data
   end
 
 end

@@ -13,7 +13,7 @@ class Subject
   scope :inactive, -> { where(status: 'inactive') }
   scope :not_bad, -> { where(:status.ne => 'bad').asc(:order)  }
   scope :visible_marks, -> { where(:status.ne => 'bad', :region.ne => nil).asc(:order)  }
-  scope :complete, -> { where(status: 'complete').asc(:order)  }
+  scope :complete, -> { where(status: 'complete').desc(:updated_at)  }  # last completed comes first, used by gallery
   scope :by_workflow, -> (workflow_id) { where(workflow_id: workflow_id)  }
   scope :by_subject_set, -> (subject_set_id) { where(subject_set_id: subject_set_id).asc(:order)  }
   scope :by_parent_subject, -> (parent_subject_id) { where(parent_subject_id: parent_subject_id) }

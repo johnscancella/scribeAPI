@@ -684,7 +684,7 @@ div.home-page div .usa-section-dark {
 
 /* browser */
 .browse .browse-group .column {
-  padding: 20px 0 10px;
+  padding: 40px 0 40px 0;
   background: #ccc;
   text-align: center;
   margin: 30px 0px;
@@ -696,6 +696,10 @@ div.home-page div .usa-section-dark {
   border-style: solid;
   border-color: #ffffff;
   border-width: 15px;
+}
+
+.browse .browse-group .column .item-description {
+  margin: 20px 20px;
 }
 
 .browse .browse-group .column img.landscape {
@@ -710,6 +714,10 @@ div.home-page div .usa-section-dark {
   width: 40%;
 }
 
+.browse .browse-group .column img.large {
+  width: 80%;
+}
+
 
 .browse .browse-group .column .caption {
   font-size: 18px;
@@ -721,7 +729,28 @@ div.home-page div .usa-section-dark {
 }
 
 .browse .browse-group .column a:hover {
-  color: rgb(242,116,144);
+  color: black;
+}
+
+.browse .browse-group .column .social-media-container {
+  margin: 10px 0 -10px;
+  padding-top: 8px;
+  padding-bottom: 4px;
+  font-size: 26px;
+  text-align: center;
+  transition: color 0.2s;
+  line-height: 1;
+  width: 100%;
+}
+
+.browse .browse-group .column .social-media-container i {
+  color: #9c9c9c;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.browse .browse-group .column .social-media-container i:hover {
+  color: #939393;
 }
 
 

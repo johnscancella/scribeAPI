@@ -13,6 +13,21 @@ import lxml.etree
 from StringIO import StringIO
 
 CHRONAM_URL = 'http://chroniclingamerica.loc.gov'
+RESIZE_FACTOR = 0.25
+
+MONTH_NAMES = {'01': "January",
+          '02': "February",
+          '03': "March",
+          '04': "April",
+          '05': "May",
+          '06': "June",
+          '07': "July",
+          '08': "August",
+          '09': "September",
+          '10': "October",
+          '11': "November",
+          '12': "December"
+          }
 
 
 def _titles():
@@ -33,22 +48,23 @@ def create_subject_files(from_date, to_date):
             with open(group_filename, 'a') as f:
                 if not file_exist:
                     group_file_count[group_filename] = 0
-                    f.write('order,subject_url,file_path,thumbnail,width,height,alto\n')
-                    _write_group_file(title['state'], from_date, to_date, title_pages[0])
+                    f.write('order,subject_url,subject_description,resize,file_path,thumbnail,width,height,alto\n')
+                    _write_group_file(title['state'], from_date, to_date, title_pages[0]['url'])
                 for page in title_pages:
                     try:
                         group_file_count[group_filename] += 1
-                        page_base_url = page[0:-5] # remove trailing ".json"
+                        page_base_url = page['url'][0:-5] # remove trailing ".json"
                         width, height = _page_dimensions(page_base_url)
                         image_url = "%s/image_%dx%d.jpg" % (page_base_url, width, height)
                         thumbnail_url = "%s/thumbnail.jpg" % page_base_url
                         alto_url = "%s/ocr.xml" % page_base_url
-                        f.write("%d,%s,%s,%s,%d,%d,%s\n"
-                                % (group_file_count[group_filename], page_base_url + "/", image_url, thumbnail_url,
+                        description = "%s %s. Page %d" % (title['title'], _issue_date_to_string(page['date_issued']), page['sequence'])
+                        f.write('%d,"%s","%s",%f,"%s","%s",%d,%d,"%s"\n'
+                                % (group_file_count[group_filename], page_base_url + "/", description, RESIZE_FACTOR, image_url, thumbnail_url,
                                     width, height, alto_url))
                     except:
                         e = sys.exc_info()[1]
-                        print "failed to process page %s, reason %s", page, e
+                        print "failed to process page %s, reason %s", page['url'], e
 
 
 def _write_group_file(state, from_date, to_date, first_page):
@@ -70,14 +86,14 @@ def _write_group_file(state, from_date, to_date, first_page):
                 % (group_key, name, description, cover_image_url,
                     external_url))
 
-def _convert_date(date):
+def _issue_date_to_string(date):
     '''
-    convert from YYYY-MM-DD to MM/DD/YYYY
+    convert from YYYY-MM-DD to Month day, Year
     '''
     year = date[0:4]
     month = date[5:7]
     day = date[8:10]
-    return "%s/%s/%s" % (month, day, year)
+    return "%s %s, %s" % (MONTH_NAMES[month], day, year)
 
 
 def _cleanse_state_name(state):
@@ -106,13 +122,12 @@ def _title_pages(title_url, from_date, to_date):
 def _issue_pages(issue_url):
     r = requests.get(issue_url)
     issue = r.json()
-    return [page['url'] for page in issue['pages']]
+    return [{'url': page['url'], 'date_issued': issue['date_issued'], 'sequence': page['sequence']} for page in issue['pages']]
 
 
 def _page_dimensions(page_base_url):
     # the original image in full resolution is too large
     # need to resize it
-    RESIZE_FACTOR = 0.25
     rdf_url = "%s.rdf" % page_base_url
     r = requests.get(rdf_url)
     parser = lxml.etree.XMLParser(load_dtd=False,

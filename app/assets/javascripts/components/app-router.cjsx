@@ -17,6 +17,7 @@ Project                       = require 'models/project.coffee'
 UserPage                     = require './user-page'
 
 Browse                       = require './browse'
+View                         = require './view'
 
 class AppRouter
   constructor: ->
@@ -113,6 +114,11 @@ class AppRouter
           name="gallery-index">
           <Redirect from="/gallery" to="/gallery/1" />
         </Route>
+        <Route 
+          path="/view/:subject_id"
+          handler={View}
+          name="view_subject"  
+        />
 
         <DefaultRoute name="home-default" handler={HomePage} />
       </Route>

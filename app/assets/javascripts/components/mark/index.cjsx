@@ -16,6 +16,7 @@ DraggableModal          = require 'components/draggable-modal'
 GenericButton           = require 'components/buttons/generic-button'
 Draggable               = require 'lib/draggable'
 {Link}                  = require 'react-router'
+SocialShare             = require 'components/social-share'
 
 module.exports = React.createClass # rename to Classifier
   displayName: 'Mark'
@@ -282,17 +283,7 @@ module.exports = React.createClass # rename to Classifier
               <ForumSubjectWidget subject={@getCurrentSubject()} subject_set={@getCurrentSubjectSet()} project={@props.project} />
             </div>
 
-            <div className="social-media-container">
-              <a href="https://www.facebook.com/sharer.php?u=#{encodeURIComponent pageURL}" target="_blank">
-                <i className="fa fa-facebook-square"/>
-              </a>
-              <a href="https://twitter.com/home?status=#{encodeURIComponent pageURL}%0A" target="_blank">
-                <i className="fa fa-twitter-square"/>
-              </a>
-              <a href="https://plus.google.com/share?url=#{encodeURIComponent pageURL}" target="_blank">
-                <i className="fa fa-google-plus-square"/>
-              </a>
-            </div>
+            <SocialShare url="#{pageURL}"/>
           </div>
 
         </div>

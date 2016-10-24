@@ -1,15 +1,13 @@
 React = require 'react'
-{Navigation} = require 'react-router'
 {Link} = require 'react-router'
 API = require 'lib/api'
+SocialShare   = require 'components/social-share'
 
-GenericButton = require 'components/buttons/generic-button'
 Pagination = require 'components/core-tools/pagination'
 
 
 module.exports = React.createClass
   displayName: "BrowsePanel"
-  mixins: [Navigation]
 
   getDefaultProps: ->
     page: 1
@@ -28,7 +26,7 @@ module.exports = React.createClass
   getInitialState: ->
     subjects: []
 
-  fetchSubjects: (params, callback) ->
+  fetchSubjects: (params) ->
     API.type('subjects').get(params).then (subjects) =>
       if subjects.length is 0
         @setState noMoreSubjects: true
@@ -42,10 +40,6 @@ module.exports = React.createClass
           subjects_current_page: subjects[0].getMeta("current_page")
           subjects_total_pages: subjects[0].getMeta("total_pages")
           subjects: subjects
-
-      # Does including instance have a defined callback to call when new subjects received?
-      if @fetchSubjectsCallback?
-        @fetchSubjectsCallback()
 
   render: ->
     if @props.show_pagination
@@ -62,9 +56,10 @@ module.exports = React.createClass
     <div className="browse">
       { pagination }
       <div className="browse-group columns">
-         <div className="row small-up-2 medium-up-4 large-up-5 align-center">
+         <div className="row small-up-2 medium-up-4 large-up-5">
             {
              for subj, index in @state.subjects
+                viewURL = "#{location.origin}/#/view/#{subj.id}"
                 resize_factor = if subj.meta_data.resize? then subj.meta_data.resize else 1
                 x1 = Math.round(subj.region.x / resize_factor)
                 y1 = Math.round(subj.region.y / resize_factor)
@@ -80,34 +75,38 @@ module.exports = React.createClass
                 if subj.region.height / subj.region.width > 1.3
                   orientation = "portrait"
                 <div className="column" key={index}>
-                  <a href="#{subj.meta_data.subject_url}image_#{full_width}x#{full_height}_from_#{x1},#{y1}_to_#{x2},#{y2}.jpg">
+                  <Link to="/view/#{subj.id}">
                     <img src="#{subj.meta_data.subject_url}image_#{width}x#{height}_from_#{x1},#{y1}_to_#{x2},#{y2}.jpg" className="#{orientation}"/>
-                  </a>
-                  {
-                    if subj.data.caption
-                      <div className="caption">
-                        {subj.data.caption}
-                      </div>
-                  }
-                  {
-                    if subj.data.creator
-                      <div className="creator">
-                        By {subj.data.creator}
-                      </div>
-                  }
-                  {
-                    if subj.data.category
-                      <div className="category">
-                        {subj.data.category}
-                      </div>
-                  }
-                  {
-                    if subj.meta_data.subject_description
-                      <div className="citation">
-                        Appeared in <a href="#{subj.meta_data.subject_url}" target="_blank">{subj.meta_data.subject_description}</a>
-                      </div>
-                  }
+                  </Link>
                   
+                  <div className="item-description">
+                    {
+                      if subj.data.caption
+                        <div className="caption">
+                          {subj.data.caption}
+                        </div>
+                    }
+                    {
+                      if subj.data.creator
+                        <div className="creator">
+                          By {subj.data.creator}
+                        </div>
+                    }
+                    {
+                      if subj.data.category
+                        <div className="category">
+                          {subj.data.category}
+                        </div>
+                    }
+                    {
+                      if subj.meta_data.subject_description
+                        <div className="citation">
+                          Appeared in <a href="#{subj.meta_data.subject_url}" target="_blank">{subj.meta_data.subject_description}</a>
+                        </div>
+                    }
+                  </div>
+
+                  <SocialShare url="#{location.origin}/#/view/#{subj.id}"/>
                </div>
             }
           </div>

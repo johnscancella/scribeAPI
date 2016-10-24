@@ -136,11 +136,12 @@ class Classification
 
   # extract text from OCR ALTO and save it in annotation as initText
   def extract_text_from_alto
-    if !self.subject.meta_data.nil? && !!(alto_url = self.subject.meta_data['alto'])
-      box = { hpos: self.annotation["x"].to_f / self.subject["width"], 
-              vpos: self.annotation["y"].to_f / self.subject["height"], 
-              width: self.annotation["width"].to_f / self.subject["width"],  
-              height: self.annotation["height"].to_f / self.subject["height"],  }
+    workflow_name = workflow.nil? ? '[Orphaned] ' : workflow.name.capitalize
+    if workflow_name == 'Mark' && !subject.meta_data.nil? && !!(alto_url = subject.meta_data['alto'])
+      box = { hpos: annotation["x"].to_f / subject["width"], 
+              vpos: annotation["y"].to_f / subject["height"], 
+              width: annotation["width"].to_f / subject["width"],  
+              height: annotation["height"].to_f / subject["height"],  }
       self.annotation["ocrText"] = OcrAlto::extract_text_from_alto(alto_url, box)
     end
   end

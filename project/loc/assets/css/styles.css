@@ -138,7 +138,6 @@ html, body,
   width: 80%;
 }
 
-
 /* Homepage */
 
 div.home-page {
@@ -714,6 +713,15 @@ div.home-page div .usa-section-dark {
 
 .browse .browse-group .column .caption {
   font-size: 18px;
+}
+
+.browse .browse-group .column a {
+  color: #2b3a42;
+  text-decoration: none;
+}
+
+.browse .browse-group .column a:hover {
+  color: rgb(242,116,144);
 }
 
 

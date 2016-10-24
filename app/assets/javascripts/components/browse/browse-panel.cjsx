@@ -65,12 +65,13 @@ module.exports = React.createClass
          <div className="row small-up-2 medium-up-4 large-up-5 align-center">
             {
              for subj, index in @state.subjects
-                x1 = Math.round(subj.region.x / 0.25)
-                y1 = Math.round(subj.region.y / 0.25)
-                x2 = Math.round((subj.region.x + subj.region.width) / 0.25)
-                y2 = Math.round((subj.region.y + subj.region.height) / 0.25)
-                full_width = Math.round(subj.region.width / 0.25)
-                full_height = Math.round(subj.region.height / 0.25)
+                resize_factor = if subj.meta_data.resize? then subj.meta_data.resize else 1
+                x1 = Math.round(subj.region.x / resize_factor)
+                y1 = Math.round(subj.region.y / resize_factor)
+                x2 = Math.round((subj.region.x + subj.region.width) / resize_factor)
+                y2 = Math.round((subj.region.y + subj.region.height) / resize_factor)
+                full_width = Math.round(subj.region.width / resize_factor)
+                full_height = Math.round(subj.region.height / resize_factor)
                 width = 1000
                 height = Math.round(subj.region.height / subj.region.width * width)
                 orientation = "square"
@@ -100,9 +101,12 @@ module.exports = React.createClass
                         {subj.data.category}
                       </div>
                   }
-                  <div className="citation">
-                    Appeared on ...
-                  </div>
+                  {
+                    if subj.meta_data.subject_description
+                      <div className="citation">
+                        Appeared in <a href="#{subj.meta_data.subject_url}" target="_blank">{subj.meta_data.subject_description}</a>
+                      </div>
+                  }
                   
                </div>
             }

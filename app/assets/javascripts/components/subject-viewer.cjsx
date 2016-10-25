@@ -51,6 +51,9 @@ module.exports = React.createClass
     @loadImage @props.subject.location.standard
     window.addEventListener "resize", this.updateDimensions
 
+    if @props.workflow.name is 'mark'
+      $('html, body').stop().animate({scrollTop: 0}, 500)
+
   scrollToSubject: ->
     # scroll to mark when transcribing
     if (@props.workflow.name is 'transcribe' or @props.workflow.name is 'verify')
@@ -100,9 +103,16 @@ module.exports = React.createClass
         @setState
           url: url
           loading: false
+          loading_error: false
           scale: @getScale(), () =>
             @updateDimensions()
             @scrollToSubject()
+      img.onerror = =>
+        @setState
+          url: url
+          loading: false
+          loading_error: true
+
 
   # VARIOUS EVENT HANDLERS
 
@@ -356,14 +366,12 @@ module.exports = React.createClass
 
     {transcribableMarks, otherMarks} = @separateTranscribableMarks(marks)
 
-    actionButton =
-      if @state.loading
-        <NextButton onClick={@nextSubject} disabled=true label="Loading..." />
-      else
-        <NextButton onClick={@nextSubject} label="Next Page" />
-
     if @state.loading
       markingSurfaceContent = <LoadingIndicator />
+    else if @state.loading_error
+      markingSurfaceContent = <span className="loading-indicator">
+        Sorry, fail to load image. Please check back later.
+      </span>
     else
       markingSurfaceContent =
         <svg

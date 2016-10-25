@@ -110,13 +110,17 @@ module.exports = React.createClass
   _handleZoomKeys: (e) ->
     # if user isn't inputting something (transcribing)
     if e.ctrlKey and e.altKey
-      @pan 'up' if e.key == 'ArrowUp'
-      @pan 'down' if e.key == 'ArrowDown'
-      @pan 'left' if e.key == 'ArrowLeft'
-      @pan 'right' if e.key == 'ArrowRight'
+      # in some settings arrow keys are overloaded with other functions
+      # so support WASD as alternative
+      @pan 'up' if e.key == 'ArrowUp' or e.which == 38 or e.which == 87 # W
+      @pan 'down' if e.key == 'ArrowDown' or e.which == 40 or e.which == 83 # S
+      @pan 'left' if e.key == 'ArrowLeft' or e.which == 37 or e.which == 65 # A
+      @pan 'right' if e.key == 'ArrowRight' or e.which == 39 or e.which == 68 # D
 
-      @zoom 1 if e.which == 187 or e.which == 61 # alt ctrl +
-      @zoom -1 if e.which == 189 or e.which ==  173 # alt ctrl -
+      # firefox uses 61 and 173 for +/-
+      # Safari and Chrome use 187 and 189 for +/-
+      @zoom 1 if e.which == 187 or e.which == 61 # +
+      @zoom -1 if e.which == 189 or e.which ==  173 # -
       e.preventDefault()
 
   render: ->

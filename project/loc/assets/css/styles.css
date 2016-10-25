@@ -684,8 +684,8 @@ div.home-page div .usa-section-dark {
 
 /* browser */
 .browse .browse-group .column {
-  padding: 40px 0 40px 0;
-  background: #ccc;
+  padding: 30px 0 30px 0;
+  background: #e0e0e0;
   text-align: center;
   margin: 30px 0px;
 }
@@ -699,7 +699,7 @@ div.home-page div .usa-section-dark {
 }
 
 .browse .browse-group .column .item-description {
-  margin: 20px 20px;
+  margin: 20px 0px auto 0px;
 }
 
 .browse .browse-group .column img.landscape {

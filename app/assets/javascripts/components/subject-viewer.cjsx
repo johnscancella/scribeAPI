@@ -98,7 +98,6 @@ module.exports = React.createClass
   loadImage: (url) ->
     @setState loading: true, =>
       img = new Image()
-      img.src = url
       img.onload = =>
         @setState
           url: url
@@ -112,6 +111,9 @@ module.exports = React.createClass
           url: url
           loading: false
           loading_error: true
+      # It is import to set src after set onload and onerror
+      # otherwise they may not get called
+      img.src = url
 
 
   # VARIOUS EVENT HANDLERS

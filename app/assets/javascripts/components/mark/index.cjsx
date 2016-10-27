@@ -307,7 +307,7 @@ module.exports = React.createClass # rename to Classifier
         if @getCurrentTask()?
           for tool, i in @getCurrentTask().tool_config.options
             if tool.help && tool.generates_subject_type && @state.activeSubjectHelper == tool.generates_subject_type
-              <HelpModal help={tool.help} onDone={@hideSubjectHelp} />
+              <HelpModal key={i} help={tool.help} onDone={@hideSubjectHelp} />
       }
 
     </div>

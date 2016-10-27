@@ -396,8 +396,25 @@ module.exports =
           , =>
             @forceUpdate()
 
+  cleanAnnotation: (annotation) ->
+    # remove extra white spaces in strings as they are not important 
+    # and only cause confusion during verifying
+    for k,v of annotation
+      if typeof v is 'string'
+        v = v.trim()
+        # replace multiple spaces and tabs with single space
+        v = v.replace(/[ \t]+/g, " ")
+        # replace multiple new lines with a single new line
+        v = v.replace(/\n+/g, "\n")
+        # remove spaces around new line
+        v = v.replace(/ ?\n ?/g, "\n")
+        annotation[k] = v
+
+
   handleTaskComplete: (d) ->
     @handleDataFromTool(d)
+    # clean the classification's annotation before submit
+    @cleanAnnotation @getCurrentClassification().annotation
     @commitClassificationAndContinue d
 
 

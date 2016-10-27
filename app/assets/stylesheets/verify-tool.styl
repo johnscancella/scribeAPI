@@ -1,9 +1,6 @@
 
 .verify-tool-choices
 
-  label
-    margin 1em
-
   ul
     padding-left 0
     list-style none
@@ -14,7 +11,8 @@
         color black
         text-decoration none
 
-        ul.choice
+        table.choice
+          width 100%
           margin 1em 0
           padding 0.5em
 
@@ -23,12 +21,17 @@
 
           opacity 0.7
 
-          span
+          td
             font-weight bold
 
             &.label
               padding-right 10px
               font-weight normal
+              margin 1em
+              width 30px
+
+            &.value
+              white-space pre-wrap
 
           &:hover
             opacity 1

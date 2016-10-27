@@ -721,6 +721,7 @@ div.home-page div .usa-section-dark {
 
 .browse .browse-group .column .caption {
   font-size: 18px;
+  white-space: pre-wrap;
 }
 
 .browse .browse-group .column a {

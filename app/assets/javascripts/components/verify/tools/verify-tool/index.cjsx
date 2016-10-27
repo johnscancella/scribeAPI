@@ -111,16 +111,17 @@ VerifyTool = React.createClass
         { for data,i in @props.subject.data['values']
             <li key={i}>
               <a href="javascript:void(0);" onClick={@chooseOption} data-value_index={i}>
-                <ul className="choice clickable" >
+                <table className="choice clickable" >
                 { for k,v of data
                     # Label should be the key in the data hash unless it's a single-value hash with key 'value':
                     label = if k != 'value' or (_k for _k,_v of data).length > 1 then k else ''
                     # TODO: hack to approximate a friendly label in emigrant; should pull from original label:
                     label = label.replace(/em_/,'')
                     label = label.replace(/_/g, ' ')
-                    <li key={k}><span className="label">{label}</span> {v}</li>
+                    label = label.charAt(0).toUpperCase() + label.slice(1);
+                    <tr key={k}><td className="label">{label}</td><td className="value">{v}</td></tr>
                 }
-                </ul>
+                </table>
               </a>
             </li>
         }

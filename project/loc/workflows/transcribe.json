@@ -26,6 +26,14 @@
             "tool_config": {
                 "options": [
                   {
+                    "value": "Editorial Cartoon",
+                    "label": "Editorial Cartoon"
+                  },
+                  {
+                    "value": "Comics/Cartoon",
+                    "label": "Comics/Cartoon"
+                  },
+                  {
                     "value": "Illustration",
                     "label": "Illustration"
                   },

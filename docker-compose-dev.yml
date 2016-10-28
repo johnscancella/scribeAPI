@@ -1,0 +1,21 @@
+mongodb:
+  image: mongo:2.4
+  volumes:
+    - /Users/twan/data/db:/data/db
+
+scribe:
+  build: .
+  links:
+    - mongodb:mongodb
+  ports:
+    - 80:80
+  environment:
+    - DEVISE_SECRET_TOKEN
+    - SECRET_KEY_BASE_TOKEN
+    - GOOGLE_ID
+    - GOOGLE_SECRET
+  volumes:
+    - /Users/twan/loc-scribeAPI/project:/src/project
+    - /Users/twan/loc-scribeAPI/lib:/src/lib
+    - /Users/twan/loc-scribeAPI/app:/src/app
+    - /Users/twan/loc-scribeAPI/config:/src/config

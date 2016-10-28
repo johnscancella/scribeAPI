@@ -1,7 +1,7 @@
 mongodb:
   image: mongo:2.4
   volumes:
-    - /home/ec2-user/data/db:/data/db
+    - /mnt/data/db:/data/db
   command: mongod --auth
 
 scribe:

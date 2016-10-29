@@ -1,5 +1,7 @@
-# Additional Help  
+# When Done Marking 
 
-If you have any questions, select "View A Tutorial" to return to this tutorial at any time or peruse the forum.
+You do not have to mark every pictures at one fell swoop. But it will help us a lot if you tell us whether there is anything left to mark.
 
-Have fun and thanks for your help!  
+<div class="video-wrapper">
+  <video width="230" height="184" loop autoplay src="/images/mark_task_complete.mp4"></video>
+</div>

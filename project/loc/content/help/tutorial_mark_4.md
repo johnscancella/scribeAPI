@@ -1,7 +1,5 @@
-# When Done Marking 
+# Existing Marks
 
-You do not have to mark every pictures at one fell swoop. But it will help us a lot if you tell us whether there is anything left to mark.
+You may see existing marks on the page. If this is the case, someone has already marked the pictures and there's no need to mark them twice. Sometimes, you might see that others have left bad marks, ex. marks around the wrong area. Ignore any bad marks you see. They will be weeded out in the Transcribe task.  
 
-<div class="video-wrapper">
-  <video width="230" height="184" loop autoplay src="/images/mark_task_complete.mp4"></video>
-</div>
+The mark toggle on the left side of the screen allows you to hide other people's marks from the page.

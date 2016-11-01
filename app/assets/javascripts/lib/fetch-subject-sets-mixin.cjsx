@@ -71,7 +71,7 @@ module.exports =
 
     # Apply defaults to unset params:
     _params = $.extend({
-      limit: 10
+      limit: 50
       workflow_id: @getActiveWorkflow().id
       random: true
     }, params)

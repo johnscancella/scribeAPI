@@ -51,7 +51,7 @@
           }
         }
       },
-      "instruction": "Enter caption (or article title if caption is absent), creator and category.",
+      "instruction": "Enter picture's caption, illustrator or photographer and category.",
       "help": {
         "file": "t_illustration"
       },

@@ -348,10 +348,18 @@ h3.groups-header {
   text-align: center;
 } 
 
+.transcribe-tool {
+  max-width: 2000px;
+}
+
+.transcribe-tool .modal-body .input-field label {
+  font-size: 14px;
+}
+
 .transcribe-tool .modal-body .input-field textarea {
   resize: both;
-  width: 400px;
-  height: 120px;
+  width: 800px;
+  height: 92px;
   border-radius: 4px;
   box-shadow: inset 2px 3px 3px rgb(212, 209, 209);
   border-width: 1px;
@@ -495,6 +503,14 @@ h3.groups-header {
     background: rgb(242,116,144);
     color: #0a0a0a;
     cursor: default; 
+}
+
+.ui-state-default.ui-state-active {
+  border-color: rgba(242,116,144,1);
+}
+
+.ui-state-default.ui-state-hover {
+  border-color: rgba(242,116,144,0.8);
 }
 
 

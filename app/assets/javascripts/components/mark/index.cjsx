@@ -233,11 +233,11 @@ module.exports = React.createClass # rename to Classifier
 
                 <nav className="task-nav">
                   { if not @getActiveWorkflow()?.show_completion_assessment_task
-                      <GenericButton className="secondary continue" label={"more left to mark"} onClick={@completeSubjectSetWithMoreToMark} />
+                      <GenericButton className="secondary continue small-button" label={"Done for now, more left to mark"} onClick={@completeSubjectSetWithMoreToMark} />
                   }
                 </nav>
                 <nav className="task-nav">
-                  <GenericButton className="secondary continue" label={"Skip this " + @props.project.term('subject')} onClick={@advanceToNextSubject} />
+                  <GenericButton className="secondary continue small-button" label={"Skip this " + @props.project.term('subject')} onClick={@advanceToNextSubject} />
                 </nav>
 
                 <div className="help-bad-subject-holder">

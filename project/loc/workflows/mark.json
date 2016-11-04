@@ -13,7 +13,7 @@
 
     "mark_illustration": {
       "tool": "pickOneMarkOne",
-      "instruction": "Draw a rectangle around each unmarked **illustration** or **photograph** excluding advertisement. Enclose caption, any text describing the picture and illustrator or photographer.",
+      "instruction": "Draw a rectangle around each unmarked **illustration** or **photograph** excluding those in advertisements. Enclose any caption or text describing the picture and the illustrator or photographer.",
       "generates_subjects": true,
       "tool_config" : {
         "displays_transcribe_button": false,

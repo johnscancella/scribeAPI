@@ -100,13 +100,23 @@ module.exports =
     classification.workflow_id = @getActiveWorkflow().id
 
     # If user activated 'Bad Subject' button, override task:
-    if @state.badSubject
+    if @state.moreSubject
+      classification.task_key = 'completion_assessment_task'
+      classification.annotation['value'] = 'incomplete_subject'
+      @toggleMoreSubject()
+    else if @state.badSubject
       classification.task_key = 'flag_bad_subject_task'
     else if @state.illegibleSubject
       classification.task_key = 'flag_illegible_subject_task'
     # Otherwise, classification is for active task:
     else
       classification.task_key = @state.taskKey
+      if Object.keys(classification.annotation).length == 0
+        if @getActiveWorkflow().name is "mark" and not @getActiveWorkflow()?.show_completion_assessment_task
+          # user clicking "Done", which implies complete_subject for completion_assessment_task
+          classification.task_key = 'completion_assessment_task'
+          classification.annotation['value'] = 'complete_subject'
+
       return if Object.keys(classification.annotation).length == 0
 
     @commitClassification(classification)
@@ -115,6 +125,10 @@ module.exports =
 
   toggleBadSubject: (e, callback) ->
     @setState badSubject: not @state.badSubject, =>
+      callback?()
+
+  toggleMoreSubject: (e, callback) ->
+    @setState moreSubject: not @state.moreSubject, =>
       callback?()
 
   toggleIllegibleSubject: (e, callback) ->
@@ -175,18 +189,11 @@ module.exports =
 
   getTasks: ->
     # Add completion_assessment_task to list of tasks dynamically:
-# <<<<<<< HEAD
     tasks = @getActiveWorkflow().tasks
     completion_assessment_task = @getCompletionAssessmentTask()
     # Merge keys recursively if it exists in config
     completion_assessment_task = $.extend true, tasks['completion_assessment_task'], completion_assessment_task if tasks['completion_assessment_task']?
     $.extend tasks, completion_assessment_task: completion_assessment_task
-# =======
-#     tasks = @getActiveWorkflow().tasks
-#     if @props.workflowName == 'mark'
-#       tasks = $.extend tasks, completion_assessment_task: @getCompletionAssessmentTask()
-#     tasks
-# >>>>>>> master
 
   # Get instance of current tool:
   getCurrentTool: ->

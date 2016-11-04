@@ -4,6 +4,8 @@
   "retire_limit": 0.75,
   "generates_subjects": true,
   "generates_subjects_for": "transcribe",
+  "show_completion_assessment_task": false,
+  "show_bad_subject_button": false,
 
   "first_task":"mark_illustration",
 

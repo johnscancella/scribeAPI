@@ -1,5 +1,7 @@
-# Existing Marks
+# Zoom and Pan
 
-You may see existing marks on the page. If this is the case, someone has already marked the pictures and there's no need to mark them twice. Sometimes, you might see that others have left bad marks, ex. marks around the wrong area. Ignore any bad marks you see. They will be weeded out in the Transcribe task.  
+On the left side of the screen you'll find the zoom and pan tool. In addition to the tool, you can also use the following shortcut keys.
 
-The mark toggle on the left side of the screen allows you to hide other people's marks from the page.
+To zoom: <kbd>Control</kbd> <kbd>Alt</kbd> <kbd>+</kbd><kbd>-</kbd> 
+
+To pan: <kbd>Control</kbd> <kbd>Alt</kbd> <kbd>&uarr;</kbd><kbd>&larr;</kbd><kbd>&darr;</kbd><kbd>&rarr;</kbd> or <kbd>Control</kbd> <kbd>Alt</kbd> <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>

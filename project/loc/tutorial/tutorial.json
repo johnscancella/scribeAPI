@@ -24,21 +24,9 @@
               }
           },
           "tutorial_mark_4": {
-              "next_task": "tutorial_mark_5",
-              "help": {
-                  "file": "tutorial_mark_4"
-              }
-          },
-          "tutorial_mark_5": {
-              "next_task": "tutorial_mark_6",
-              "help": {
-                  "file": "tutorial_mark_5"
-              }
-          },
-          "tutorial_mark_6": {
               "next_task": null,
               "help": {
-                  "file": "tutorial_mark_6"
+                  "file": "tutorial_mark_4"
               }
           }
         }

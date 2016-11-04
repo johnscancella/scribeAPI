@@ -11,6 +11,7 @@ HelpModal               = require 'components/help-modal'
 Tutorial                = require 'components/tutorial'
 HelpButton              = require 'components/buttons/help-button'
 BadSubjectButton        = require 'components/buttons/bad-subject-button'
+MoreSubjectButton        = require 'components/buttons/more-subject-button'
 HideOtherMarksButton    = require 'components/buttons/hide-other-marks-button'
 DraggableModal          = require 'components/draggable-modal'
 GenericButton           = require 'components/buttons/generic-button'
@@ -57,7 +58,6 @@ module.exports = React.createClass # rename to Classifier
     show
 
   componentDidMount: ->
-    @getCompletionAssessmentTask()
     @fetchSubjectSetsBasedOnProps()
     @fetchGroups()
 
@@ -89,6 +89,7 @@ module.exports = React.createClass # rename to Classifier
   handleViewSubject: (index) ->
     @setState subject_index: index, => @forceUpdate()
     @toggleBadSubject() if @state.badSubject
+    @toggleMoreSubject() if @state.moreSubject
 
   # User somehow indicated current task is complete; commit current classification
   handleToolComplete: (annotation) ->
@@ -117,11 +118,12 @@ module.exports = React.createClass # rename to Classifier
     @commitCurrentClassification()
     @beginClassification()
 
-    # TODO: Should maybe make this workflow-configurable?
-    show_subject_assessment = true
+    show_subject_assessment = @getActiveWorkflow()?.show_completion_assessment_task ? true
     if show_subject_assessment
       @setState
         taskKey: "completion_assessment_task"
+    else
+      @advanceToNextSubject()
 
   completeSubjectAssessment: ->
     @commitCurrentClassification()
@@ -237,7 +239,13 @@ module.exports = React.createClass # rename to Classifier
                   { if @getCurrentTask().help?
                     <HelpButton onClick={@toggleHelp} label="" className="task-help-button" />
                   }
-                  { if onFirstAnnotation
+                  { if not @getActiveWorkflow()?.show_completion_assessment_task
+                    <MoreSubjectButton class="more-subject-button" label={"More " + @props.project.term('mark') + " to mark"} active={@state.moreSubject} onClick={@toggleMoreSubject} />
+                  }
+                  { if @state.moreSubject
+                    <p>You&#39;ve indicated that there is more {@props.project.term('mark')} to mark in this {@props.project.term('subject')} . <strong>Press DONE to continue.</strong></p>
+                  }
+                  { if onFirstAnnotation and @getActiveWorkflow()?.show_bad_subject_button
                     <BadSubjectButton class="bad-subject-button" label={"Bad " + @props.project.term('subject')} active={@state.badSubject} onClick={@toggleBadSubject} />
                   }
                   { if @state.badSubject

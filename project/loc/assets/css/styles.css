@@ -32,10 +32,8 @@ html, body,
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 
-
-/* Components */
-.small-button {
-  padding: 0.3em 1em 0;
+.classifier .small-button.ghost {
+  margin-right: 10px;
 }
 
 /* Background */
@@ -399,6 +397,10 @@ h3.groups-header {
   font-size: 24px;
   color: #e0182d;
   font-weight: bold;
+}
+
+.illegible-button {
+  display: none;
 }
 
 /* Color themem */

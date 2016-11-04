@@ -11,7 +11,6 @@ HelpModal               = require 'components/help-modal'
 Tutorial                = require 'components/tutorial'
 HelpButton              = require 'components/buttons/help-button'
 BadSubjectButton        = require 'components/buttons/bad-subject-button'
-MoreSubjectButton        = require 'components/buttons/more-subject-button'
 HideOtherMarksButton    = require 'components/buttons/hide-other-marks-button'
 DraggableModal          = require 'components/draggable-modal'
 GenericButton           = require 'components/buttons/generic-button'
@@ -89,7 +88,6 @@ module.exports = React.createClass # rename to Classifier
   handleViewSubject: (index) ->
     @setState subject_index: index, => @forceUpdate()
     @toggleBadSubject() if @state.badSubject
-    @toggleMoreSubject() if @state.moreSubject
 
   # User somehow indicated current task is complete; commit current classification
   handleToolComplete: (annotation) ->
@@ -110,9 +108,10 @@ module.exports = React.createClass # rename to Classifier
     # There should always be an empty classification ready to receive data:
     @beginClassification()
 
-  destroyCurrentAnnotation: ->
-    # TODO: implement mechanism for going backwards to previous classification, potentially deleting later classifications from stack:
-    # @props.classification.annotations.pop()
+  completeSubjectSetWithMoreToMark: ->
+    @setMoreSubject()
+    @completeSubjectSet()
+    @resetMoreSubject()
 
   completeSubjectSet: ->
     @commitCurrentClassification()
@@ -219,9 +218,6 @@ module.exports = React.createClass # rename to Classifier
                 />
 
                 <nav className="task-nav">
-                  { if false
-                    <button type="button" className="back minor-button" disabled={onFirstAnnotation} onClick={@destroyCurrentAnnotation}>Back</button>
-                  }
                   { if @getNextTask() and not @state.badSubject?
                       <button type="button" className="continue major-button" disabled={waitingForAnswer} onClick={@advanceToNextTask}>Next</button>
                     else
@@ -235,18 +231,21 @@ module.exports = React.createClass # rename to Classifier
                   }
                 </nav>
 
+                <nav className="task-nav">
+                  { if not @getActiveWorkflow()?.show_completion_assessment_task
+                      <GenericButton className="secondary continue" label={"more left to mark"} onClick={@completeSubjectSetWithMoreToMark} />
+                  }
+                </nav>
+                <nav className="task-nav">
+                  <GenericButton className="secondary continue" label={"Skip this " + @props.project.term('subject')} onClick={@advanceToNextSubject} />
+                </nav>
+
                 <div className="help-bad-subject-holder">
                   { if @getCurrentTask().help?
                     <HelpButton onClick={@toggleHelp} label="" className="task-help-button" />
                   }
-                  { if not @getActiveWorkflow()?.show_completion_assessment_task
-                    <MoreSubjectButton class="more-subject-button" label={"More " + @props.project.term('mark') + " to mark"} active={@state.moreSubject} onClick={@toggleMoreSubject} />
-                  }
-                  { if @state.moreSubject
-                    <p>You&#39;ve indicated that there is more {@props.project.term('mark')} to mark in this {@props.project.term('subject')} . <strong>Press DONE to continue.</strong></p>
-                  }
                   { if onFirstAnnotation and @getActiveWorkflow()?.show_bad_subject_button
-                    <BadSubjectButton class="bad-subject-button" label={"Bad " + @props.project.term('subject')} active={@state.badSubject} onClick={@toggleBadSubject} />
+                    <BadSubjectButton className="bad-subject-button" label={"Bad " + @props.project.term('subject')} active={@state.badSubject} onClick={@toggleBadSubject} />
                   }
                   { if @state.badSubject
                     <p>You&#39;ve marked this {@props.project.term('subject')} as BAD. Thanks for flagging the issue! <strong>Press DONE to continue.</strong></p>

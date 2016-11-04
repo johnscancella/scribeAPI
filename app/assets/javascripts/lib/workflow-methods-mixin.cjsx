@@ -103,7 +103,6 @@ module.exports =
     if @state.moreSubject
       classification.task_key = 'completion_assessment_task'
       classification.annotation['value'] = 'incomplete_subject'
-      @toggleMoreSubject()
     else if @state.badSubject
       classification.task_key = 'flag_bad_subject_task'
     else if @state.illegibleSubject
@@ -127,9 +126,11 @@ module.exports =
     @setState badSubject: not @state.badSubject, =>
       callback?()
 
-  toggleMoreSubject: (e, callback) ->
-    @setState moreSubject: not @state.moreSubject, =>
-      callback?()
+  setMoreSubject: ->
+    @state.moreSubject = true
+
+  resetMoreSubject: ->
+    @state.moreSubject = false
 
   toggleIllegibleSubject: (e, callback) ->
     @setState illegibleSubject: not @state.illegibleSubject, =>

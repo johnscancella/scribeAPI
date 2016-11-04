@@ -403,17 +403,30 @@ h3.groups-header {
 
 /* Color themem */
 
+.small-button.secondary,
+.minor-button.secondary {
+  border: solid rgb(242,116,144) 2px;
+  border-radius: 3px;
+  background: transparent;
+  color: #3f5765;
+}
+
+.small-button.secondary:hover ,
+.minor-button.secondary:hover {
+  background: transparent;
+}
+
 /* button style */
-.standard-button:not(.ghost),
-.major-button:not(.ghost),
-.minor-button:not(.ghost),
-.small-button:not(.ghost) {
+.standard-button:not(.ghost):not(.secondary),
+.major-button:not(.ghost):not(.secondary),
+.minor-button:not(.ghost):not(.secondary),
+.small-button:not(.ghost):not(.secondary) {
   background: rgba(242,116,144,0.8);
 }
 
-.major-button:not(.ghost):hover,
-.minor-button:not(.ghost):hover,
-.small-button:not(.ghost):hover {
+.major-button:not(.ghost):not(.secondary):hover,
+.minor-button:not(.ghost):not(.secondary):hover,
+.small-button:not(.ghost):not(.secondary):hover {
   background: rgba(242,116,144,1);
 }
 

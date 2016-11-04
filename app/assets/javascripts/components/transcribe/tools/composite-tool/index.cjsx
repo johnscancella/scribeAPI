@@ -107,7 +107,7 @@ CompositeTool = React.createClass
     if @props.onShowHelp?
       buttons.push <HelpButton onClick={@props.onShowHelp} key="help-button"/>
 
-    buttons.push <SmallButton label='Skip' key="skip-button" className="ghost floated-left" onClick={@skipToNext} />
+    buttons.push <SmallButton label='Skip' key="skip-button" className="secondary floated-left" onClick={@skipToNext} />
 
     if @props.onBadSubject?
       buttons.push <BadSubjectButton key="bad-subject-button" label={"Bad #{@props.project.term('mark')}"} active={@props.badSubject} onClick={@props.onBadSubject} />

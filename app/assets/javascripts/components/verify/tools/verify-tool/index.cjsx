@@ -82,7 +82,7 @@ VerifyTool = React.createClass
     if @props.onShowHelp?
       buttons.push <HelpButton onClick={@props.onShowHelp} key="help-button"/>
 
-    buttons.push <SmallButton label='Skip' key="skip-button" className="ghost floated-left" onClick={@skipToNext} />
+    buttons.push <SmallButton label='Skip' key="skip-button" className="secondary floated-left" onClick={@skipToNext} />
 
     if @props.task?.tool_config.displays_transcribe_button? and @props.subject?
       transcribe_url = "/#/transcribe/#{@props.subject.parent_subject_id}?scrollX=#{window.scrollX}&scrollY=#{window.scrollY}&page=#{@props.subject._meta?.current_page}&from=verify"

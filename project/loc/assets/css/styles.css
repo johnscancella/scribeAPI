@@ -403,6 +403,10 @@ h3.groups-header {
   display: none;
 }
 
+.classifier .right-column .task-area .task-container {
+  padding-bottom: 0%;
+}
+
 /* Color themem */
 
 .small-button.secondary,

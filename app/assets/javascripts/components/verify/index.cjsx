@@ -110,6 +110,7 @@ module.exports = React.createClass # rename to Classifier
                     clearAnnotation={@clearCurrentAnnotation}
                     onComplete={@handleTaskComplete}
                     workflow={@getActiveWorkflow()}
+                    transcribeWorkflow={@getWorkflowByName('transcribe')}
                     project={@props.project}
                   />
                 }

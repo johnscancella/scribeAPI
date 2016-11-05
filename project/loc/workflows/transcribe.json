@@ -19,7 +19,7 @@
           },
           "creator": {
             "tool": "textTool",
-            "label": "Creator"
+            "label": "Artist"
           },
           "category": {
             "tool": "selectOneTool",

@@ -66,6 +66,16 @@ VerifyTool = React.createClass
         y = data.y + yPad
     return {x,y}
 
+  getLabelFromValueKey: (key) ->
+    # get the label for the field of name
+    currentTask = @props.task.key
+    for task_key, task of @props.transcribeWorkflow.tasks
+      if task.generates_subject_type == currentTask
+        for option, i in task.tool_config.options ? []
+          if option.value == key
+            return option.label
+    null
+
   render: ->
     # return null unless @props.viewerSize? && @props.subject?
     # return null if ! @props.scale? || ! @props.scale.horizontal?
@@ -114,11 +124,18 @@ VerifyTool = React.createClass
                 <table className="choice clickable" >
                 { for k,v of data
                     # Label should be the key in the data hash unless it's a single-value hash with key 'value':
-                    label = if k != 'value' or (_k for _k,_v of data).length > 1 then k else ''
-                    # TODO: hack to approximate a friendly label in emigrant; should pull from original label:
-                    label = label.replace(/em_/,'')
-                    label = label.replace(/_/g, ' ')
-                    label = label.charAt(0).toUpperCase() + label.slice(1);
+                    k = if k != 'value' or (_k for _k,_v of data).length > 1 then k else ''
+                    if k != ''
+                      label = @getLabelFromValueKey(k)
+                    else
+                      label = ''
+                    if label is null
+                      # No label defined in transcribe workflow
+                      # approximate a friendly label from key 
+                      label = k
+                      label = label.replace(/em_/,'')  # emigrant hack
+                      label = label.replace(/_/g, ' ')
+                      label = label.charAt(0).toUpperCase() + label.slice(1);
                     <tr key={k}><td className="label">{label}</td><td className="value">{v}</td></tr>
                 }
                 </table>

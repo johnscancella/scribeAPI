@@ -308,6 +308,15 @@ div.home-page {
   padding: 0px;
 }
 
+.scribe-footer .scribe-footer-content .scribe-footer-heading {
+  font-size: 12px;
+}
+
+#footer .scribe-logo-container img {
+  min-width: 0px;
+}
+
+
 .loc-footer-links {
   background: rgba(22,23,11,0.8);
   padding: 0px 0 30px;

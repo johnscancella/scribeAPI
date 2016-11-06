@@ -372,6 +372,17 @@ namespace :project do
 
   end
 
+  desc "Rebuilds LC indexes."
+  task :create_lc_indexes, [] => :environment do |task, args|
+    Rake::Task['project:create_indexes'].invoke
+
+    puts "Rebuilding LC indexes"
+
+    Subject.index({"data.caption" => "text", "data.creator" => "text", "data.category" => "text"}, {background: true})
+    Subject.create_indexes
+  end
+
+
   desc "Drop a project by key"
   task :drop, [:project_key] => :environment do |task, args|
     project = Project.find_by key: args[:project_key]

@@ -1,8 +1,8 @@
 mongodb:
-  image: mongo:2.4
+  image: mongo:2.6
   volumes:
     - /mnt/data/db:/data/db
-  command: mongod --auth
+  command: mongod --auth --setParameter textSearchEnabled=true
 
 scribe:
   image: tongwang/scribeapi_loc:latest

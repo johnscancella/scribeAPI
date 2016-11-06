@@ -1,5 +1,6 @@
 mongodb:
-  image: mongo:2.4
+  image: mongo:2.6
+  command: mongod --setParameter textSearchEnabled=true
 
 scribe:
   build: .

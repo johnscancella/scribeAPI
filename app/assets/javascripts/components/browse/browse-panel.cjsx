@@ -28,7 +28,7 @@ module.exports = React.createClass
       status: 'complete'
 
     if @state.selected_category != ""
-      params = $.extend(params, { "category": @state.selected_category });
+      params = $.extend(params, { "data.category": @state.selected_category });
 
     if @state.entered_keyword.trim() != ""
       params = $.extend(params, { "text": @state.entered_keyword });

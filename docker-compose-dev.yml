@@ -1,7 +1,8 @@
 mongodb:
-  image: mongo:2.4
+  image: mongo:2.6
   volumes:
     - /Users/twan/data/db:/data/db
+  command: mongod --setParameter textSearchEnabled=true
 
 scribe:
   build: .

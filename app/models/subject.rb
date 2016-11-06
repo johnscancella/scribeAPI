@@ -21,9 +21,13 @@ class Subject
   scope :user_has_not_classified, -> (user_id) { where(:classifying_user_ids.ne => user_id)  }
   scope :user_did_not_create, -> (user_id) { where(:creating_user_ids.ne => user_id)  }
 
-  scope :by_data_field, -> (name, value, exact) do
+  scope :by_data, -> (data_name, value, exact) do
     where({
-      "data.#{name}" => exact ? value : { "$regex" => /#{value}/i } })
+      "#{data_name}" => exact ? value : { "$regex" => /#{value}/i } })
+  end
+
+  scope :by_text, -> (keywords) do
+    text_search(keywords)
   end
 
   # This is a hash with one entry per deriv; `standard', 'thumbnail', etc
@@ -81,7 +85,6 @@ class Subject
   # Index for fetching child subjects for a parent subject, optionally filtering by region NOT NULL
   index({parent_subject_id: 1, status: 1, region: 1})
   
-
   def thumbnail
     location['thumbnail'].nil? ? location['standard'] : location['thumbnail']
   end

@@ -16,6 +16,8 @@ class SubjectsController < ApplicationController
     # `status` filter must be one of: 'active', 'complete', any'
     status                = ['active','complete','any'].include?(params[:status]) ? params[:status] : 'active'
 
+    category              = params[:category]
+
     @subjects = Subject.page(page).per(limit)
 
     # Only active subjects?
@@ -36,6 +38,9 @@ class SubjectsController < ApplicationController
 
     # Filter by subject set?
     @subjects = @subjects.by_subject_set(subject_set_id) if subject_set_id
+
+    # Filter by category
+    @subjects = @subjects.by_data_field("category", category, true) if ! category.nil?
 
     if ! subject_set_id
       # Randomize?

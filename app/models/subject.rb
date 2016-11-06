@@ -21,6 +21,11 @@ class Subject
   scope :user_has_not_classified, -> (user_id) { where(:classifying_user_ids.ne => user_id)  }
   scope :user_did_not_create, -> (user_id) { where(:creating_user_ids.ne => user_id)  }
 
+  scope :by_data_field, -> (name, value, exact) do
+    where({
+      "data.#{name}" => exact ? value : { "$regex" => /#{value}/i } })
+  end
+
   # This is a hash with one entry per deriv; `standard', 'thumbnail', etc
   field :location,                    type: Hash
   field :type,                        type: String,  default: "root" #options: "root", "secondary"

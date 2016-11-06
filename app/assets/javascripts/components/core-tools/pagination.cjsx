@@ -5,14 +5,17 @@ Page = React.createClass
   displayName: 'Page'
 
   getDefaultProps: ->
-    href: null
     pagenum: null
     hide: false
 
+  clicked: (pageNumber) ->
+    @props.onClick pageNumber
+
   render: ->
     <li key={@props.pagenum} className="#{'hide' if @props.hide}">
-      <Link to="#{@props.href}" ariaLabel="Page #{@props.pagenum}">{@props.pagenum}</Link>
+      <a onClick={@clicked.bind(this, @props.pagenum)} ariaLabel="Page #{@props.pagenum}">{@props.pagenum}</a>
     </li>
+
 
 
 module.exports = React.createClass
@@ -25,8 +28,10 @@ module.exports = React.createClass
     previousPage: null
     leftsidePages: 2  # How many items to show in the left side of the pagination list: 1, 2, [3]
     rightsidePages: 2 # How many items to show in the left side of the pagination list: [50] 50, 51 ... 100
-    urlBase: null
 
+  clicked: (pageNumber) ->
+    @props.onClick pageNumber
+    
   render: ->
     lefts = []
     rights = []
@@ -40,24 +45,24 @@ module.exports = React.createClass
 
     if @props.previousPage
       lefts = for x in [smallestPage ... @props.currentPage]
-        <Page pagenum={x} key={x} href="#{@props.urlBase}/#{x}" />
+        <Page pagenum={x} key={x} onClick={@props.onClick} />
 
     if @props.nextPage
       rights = for x in [(@props.currentPage + 1) .. largestPage]
-        <Page pagenum={x} key={x} href="#{@props.urlBase}/#{x}" />
+        <Page pagenum={x} key={x} onClick={@props.onClick} />
 
 
     <ul className="pagination text-center column" role="navigation" ariaLabel="Pagination">
       <li className="pagination-previous #{'disabled' unless @props.previousPage} ">
         {
          if @props.previousPage
-           <Link to="#{@props.urlBase}/#{@props.previousPage}" ariaLabel="Previous page">Previous <span className="show-for-sr">page</span></Link>
+           <a onClick={@clicked.bind(this, @props.previousPage)} ariaLabel="Previous page">Previous <span className="show-for-sr">page</span></a>
          else
            <span>Previous <span className="show-for-sr">page</span></span>
         }
       </li>
 
-      <Page pagenum="1" href="#{@props.urlBase}/1" hide={hideStartNav} />
+      <Page pagenum="1" onClick={@props.onClick} hide={hideStartNav} />
 
       <li className="ellipsis #{'hide' if hideStartNav }" ariaHidden="true"></li>
 
@@ -71,12 +76,12 @@ module.exports = React.createClass
 
       <li className="ellipsis #{'hide' if hideFinalNav }" ariaHidden="true"></li>
 
-      <Page pagenum={lastPage} href="#{@props.urlBase}/#{lastPage}" hide={hideFinalNav} />
+      <Page pagenum={lastPage} onClick={@props.onClick} hide={hideFinalNav} />
 
       <li className="pagination-next #{'disabled' unless @props.nextPage}">
         {
          if @props.nextPage
-           <Link to="#{@props.urlBase}/#{@props.nextPage}" ariaLabel="Next page">Next<span className="show-for-sr">page</span></Link>
+           <a onClick={@clicked.bind(this, @props.nextPage)} ariaLabel="Next page">Next <span className="show-for-sr">page</span></a>
          else
            <span>Next <span className="show-for-sr">page</span></span>
         }

@@ -105,15 +105,10 @@ class AppRouter
           name='user_show'
         />
         <Route 
-          path="/gallery/:page"
+          path="/gallery"
           handler={Browse}
           name="gallery"  
         />
-        <Route 
-          path="/gallery" 
-          name="gallery-index">
-          <Redirect from="/gallery" to="/gallery/1" />
-        </Route>
         <Route 
           path="/view/:subject_id"
           handler={View}

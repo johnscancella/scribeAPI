@@ -77,7 +77,7 @@ class SubjectsController < ApplicationController
     # text search
     keyword = params[:text]
     @subjects = @subjects.where({"$text" => {"$search" => keyword} } ).include_text_search_score.
-          sort_by_text_search_score.only(:region, :meta_data, :data) if keyword
+          sort_by_text_search_score.only(:region, :meta_data, :data, :classifying_user_ids, :created_by_user_id, :deleting_user_ids) if keyword
 
     # gallery specific logic
     @subjects = @subjects.complete if status == 'complete'

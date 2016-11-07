@@ -5,6 +5,7 @@ SocialShare   = require 'components/social-share'
 
 Pagination = require 'components/core-tools/pagination'
 LoadingIndicator   = require 'components/loading-indicator'
+GenericButton       = require('components/buttons/generic-button')
 
 
 module.exports = React.createClass
@@ -54,7 +55,7 @@ module.exports = React.createClass
   handleKeyPress: (e) ->
     if @isMounted()
       if [13].indexOf(e.keyCode) >= 0 # ENTER:
-        @fetchSubjects
+        @fetchSubjects()
 
   handleKeywordChange: (e) ->
     @setState entered_keyword: e.target.value
@@ -68,20 +69,18 @@ module.exports = React.createClass
 
   render: ->
     <div className="browse">
-      <form>
-        <div className="search-field">
-          <select ref="search_category" value={@state.selected_category} onChange={@handleCategorySelect}>
-            <option value="">All</option>
-            { for option, i in @props.categoryOptions
-                <option key={i} value={option.value}>{option.label}</option>
-            }
-          </select>
-        </div>
-        <div className="search-field">
-          <input id="data-search" type="text" placeholder="Enter keywords" ref="search_input" value={@state.entered_keyword} onChange={@handleKeywordChange} onKeyDown={@handleKeyPress} />
-          <button className="standard-button" onClick={@fetchSubjects}>Search</button>
-        </div>
-      </form>
+      <div className="search-field">
+        <select ref="search_category" value={@state.selected_category} onChange={@handleCategorySelect}>
+          <option value="">All</option>
+          { for option, i in @props.categoryOptions
+              <option key={i} value={option.value}>{option.label}</option>
+          }
+        </select>
+      </div>
+      <div className="search-field">
+        <input id="data-search" type="text" placeholder="Enter keywords" ref="search_input" value={@state.entered_keyword} onChange={@handleKeywordChange} onKeyDown={@handleKeyPress} />
+        <GenericButton label="Search" onClick={@fetchSubjects} major=true className="standard-button"/>
+      </div>
 
       { if @state.loading
           <div className="classifier">

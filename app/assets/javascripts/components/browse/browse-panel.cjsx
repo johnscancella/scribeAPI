@@ -158,7 +158,7 @@ module.exports = React.createClass
               <Pagination currentPage={@state.subjects_current_page}
                 nextPage={@state.subjects_next_page}
                 previousPage={@state.subjects_prev_page}
-                onClick="@gotoPage"
+                onClick={@gotoPage}
                 totalPages={@state.subjects_total_pages}/>
             </div>
           </div>

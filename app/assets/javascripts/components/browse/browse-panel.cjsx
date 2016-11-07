@@ -78,7 +78,7 @@ module.exports = React.createClass
           </select>
         </div>
         <div className="search-field">
-          <input id="data-search" type="text" placeholder="Enter keyword" ref="search_input" value={@state.entered_keyword} onChange={@handleKeywordChange} onKeyDown={@handleKeyPress} />
+          <input id="data-search" type="text" placeholder="Enter keywords" ref="search_input" value={@state.entered_keyword} onChange={@handleKeywordChange} onKeyDown={@handleKeyPress} />
           <button className="standard-button" onClick={@fetchSubjects}>Search</button>
         </div>
       </form>

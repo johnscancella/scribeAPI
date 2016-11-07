@@ -1,3 +1,32 @@
+# a monkey patch solution for sorting on text search scores
+# https://github.com/mongoid/moped/issues/358#issuecomment-81156032
+module Origin
+  module Optional
+    def with_fields(fields_def = {})
+      fields_def ||= {}
+      fields_def.merge!({_id: 1})
+      option(fields_def) do |options|
+        options.store(:fields,
+          fields_def.inject(options[:fields] || {}) do |sub, field_def|
+            key, val = field_def
+            sub.tap { sub[key] = val }
+          end
+        )
+      end
+    end
+
+    def include_text_search_score
+      with_fields({score: {"$meta" => "textScore"}})
+    end
+
+    def sort_by_text_search_score
+      option({}) do |options, query|
+        add_sort_option(options, :score, {"$meta" => "textScore"})
+      end
+    end
+  end
+end
+
 class SubjectsController < ApplicationController
   respond_to :json
 
@@ -20,7 +49,6 @@ class SubjectsController < ApplicationController
 
     # Only active subjects?
     @subjects = @subjects.active if status == 'active'
-    @subjects = @subjects.complete if status == 'complete'
 
     # Filter by subject type (e.g. 'root')
     @subjects = @subjects.by_type(type) if type
@@ -37,6 +65,7 @@ class SubjectsController < ApplicationController
     # Filter by subject set?
     @subjects = @subjects.by_subject_set(subject_set_id) if subject_set_id
 
+    # gallery specific logic
     # Filter by data
     params.each do |key, value|
       if key.start_with?("data.")
@@ -44,9 +73,14 @@ class SubjectsController < ApplicationController
       end
     end
 
+    # gallery specific logic
     # text search
     keyword = params[:text]
-    @subjects = @subjects.where({"$text" => {"$search" => keyword} } ) if keyword
+    @subjects = @subjects.where({"$text" => {"$search" => keyword} } ).include_text_search_score.
+          sort_by_text_search_score.only(:region, :meta_data, :data) if keyword
+
+    # gallery specific logic
+    @subjects = @subjects.complete if status == 'complete'
 
     if ! subject_set_id
       # Randomize?

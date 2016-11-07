@@ -26,10 +26,6 @@ class Subject
       "#{data_name}" => exact ? value : { "$regex" => /#{value}/i } })
   end
 
-  scope :by_text, -> (keywords) do
-    text_search(keywords)
-  end
-
   # This is a hash with one entry per deriv; `standard', 'thumbnail', etc
   field :location,                    type: Hash
   field :type,                        type: String,  default: "root" #options: "root", "secondary"

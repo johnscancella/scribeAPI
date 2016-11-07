@@ -377,8 +377,10 @@ namespace :project do
     Rake::Task['project:create_indexes'].invoke
 
     puts "Rebuilding LC indexes"
-
+    # full text search index
     Subject.index({"data.caption" => "text", "data.creator" => "text", "data.category" => "text"}, {background: true})
+    # index on category
+    Subject.index({"data.category" => 1}, {background: true})
     Subject.create_indexes
   end
 

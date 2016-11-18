@@ -9,10 +9,6 @@ module.exports = React.createClass
     classes: ''
     doneButtonLabel: 'Done'
 
-  componentDidMount: ->
-    # Prevent dragging from (presumably) accidentally selecting modal text on-drag
-    $(React.findDOMNode(@)).disableSelection()
-
   closeModal: ->
     if @props.onClose
       @props.onClose()

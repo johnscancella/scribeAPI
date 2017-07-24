@@ -1,5 +1,8 @@
 mongodb:
   image: mongo:2.6
+  ulimits:
+    nproc: 64000
+    nofile: 64000
   volumes:
     - /mnt/data/db:/data/db
   command: mongod --auth --setParameter textSearchEnabled=true

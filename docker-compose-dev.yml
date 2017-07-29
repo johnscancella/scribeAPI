@@ -1,22 +1,26 @@
-mongodb:
-  image: mongo:2.6
-  volumes:
-    - /Users/twan/data/db:/data/db
-  command: mongod --setParameter textSearchEnabled=true
+version: "2"
+services:
+  mongodb:
+    image: mongo:2.6
+    command: mongod --setParameter textSearchEnabled=true
+    volumes:
+      - /Users/twan/data/db:/data/db
 
-scribe:
-  build: .
-  links:
-    - mongodb:mongodb
-  ports:
-    - 80:80
-  environment:
-    - DEVISE_SECRET_TOKEN
-    - SECRET_KEY_BASE_TOKEN
-    - GOOGLE_ID
-    - GOOGLE_SECRET
-  volumes:
-    - /Users/twan/loc-scribeAPI/project:/src/project
-    - /Users/twan/loc-scribeAPI/lib:/src/lib
-    - /Users/twan/loc-scribeAPI/app:/src/app
-    - /Users/twan/loc-scribeAPI/config:/src/config
+  scribe:
+    build: .
+    depends_on:
+      - mongodb
+    links:
+      - mongodb:mongodb
+    ports:
+      - 80:80
+    environment:
+      - DEVISE_SECRET_TOKEN
+      - SECRET_KEY_BASE_TOKEN
+      - GOOGLE_ID
+      - GOOGLE_SECRET
+    volumes:
+      - /Users/twan/scribeAPI/project:/src/project
+      - /Users/twan/scribeAPI/lib:/src/lib
+      - /Users/twan/scribeAPI/app:/src/app
+      - /Users/twan/scribeAPI/config:/src/config

@@ -1,22 +1,26 @@
-mongodb:
-  image: mongo:2.6
-  ulimits:
-    nproc: 64000
-    nofile: 64000
-  volumes:
-    - /mnt/data/db:/data/db
-  command: mongod --auth --setParameter textSearchEnabled=true
+version: "2"
+services:
+  mongodb:
+    image: mongo:2.6
+    ulimits:
+      nproc: 64000
+      nofile: 64000
+    volumes:
+      - /mnt/data/db:/data/db
+    command: mongod --auth --setParameter textSearchEnabled=true
 
-scribe:
-  image: tongwang/scribeapi_loc:latest
-  links:
-    - mongodb:mongodb
-  ports:
-    - 80:80
-  environment:
-    - RAILS_ENV
-    - MONGOLAB_URI
-    - DEVISE_SECRET_TOKEN
-    - SECRET_KEY_BASE_TOKEN
-    - GOOGLE_ID
-    - GOOGLE_SECRET
+  scribe:
+    image: tongwang/scribeapi_loc:latest
+    depends_on:
+      - mongodb
+    links:
+      - mongodb:mongodb
+    ports:
+      - 80:80
+    environment:
+      - RAILS_ENV
+      - MONGOLAB_URI
+      - DEVISE_SECRET_TOKEN
+      - SECRET_KEY_BASE_TOKEN
+      - GOOGLE_ID
+      - GOOGLE_SECRET

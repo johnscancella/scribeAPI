@@ -1,15 +1,20 @@
-mongodb:
-  image: mongo:2.6
-  command: mongod --setParameter textSearchEnabled=true
+version: "2"
+services:
+  mongodb:
+    image: mongo:2.6
+    command: mongod --setParameter textSearchEnabled=true
 
-scribe:
-  build: .
-  links:
-    - mongodb:mongodb
-  ports:
-    - 80:80
-  environment:
-    - DEVISE_SECRET_TOKEN
-    - SECRET_KEY_BASE_TOKEN
-    - GOOGLE_ID
-    - GOOGLE_SECRET
+  scribe:
+    build: .
+    depends_on:
+      - mongodb
+    links:
+      - mongodb:mongodb
+    ports:
+      - 80:80
+    environment:
+      - DEVISE_SECRET_TOKEN
+      - SECRET_KEY_BASE_TOKEN
+      - GOOGLE_ID
+      - GOOGLE_SECRET
+

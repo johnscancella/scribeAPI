@@ -14,12 +14,12 @@ gem 'omniauth-facebook'
 gem "omniauth-google-oauth2"
 gem 'omniauth-zooniverse', '~> 0.0.3'
 
-gem 'mongoid', '~> 4.0.2'
+gem 'mongoid', '4.0.2'
 gem 'active_model_serializers'
 gem 'mongoid-serializer'
 gem 'rack-cors', :require => 'rack/cors'
-gem "bson"
-gem "moped"
+gem 'bson', '3.2.4'
+gem 'moped', '2.0.7'
 gem 'sprockets-coffee-react'
 gem 'stylus', '~> 1.0.1'
 gem 'browserify-rails', '~> 0.9.1'

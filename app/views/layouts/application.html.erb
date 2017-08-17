@@ -66,5 +66,21 @@
 </script>
 <% end %>
 
+<% if Rails.env.production? %>
+<script src="https://cdn.loc.gov/js/global/metrics/sc/s_code.js"></script>
+<% else %>
+<script src='https://cdn.loc.gov/js/global/metrics/sc/v27.5/s_code_dev.js'></script>
+<% end %>
+
+<%# Since the actual UI is rendered client-side we will record page-views each type the hash changes: %>
+
+<script>
+  if ("onhashchange" in window) {
+    window.addEventListener('hashchange', function () {
+      s.t({pageURL: document.URL});
+    });
+  }
+</script>
+
 </body>
 </html>

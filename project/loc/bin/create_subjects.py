@@ -1,6 +1,8 @@
 '''
 This script query Chronam with a date range and create group file for each
 State. It also create groups.csv
+
+Example python create_subjects.py -f 1917-04-06 -t 1918-11-11
 '''
 
 import sys
@@ -13,7 +15,8 @@ import lxml.etree
 from StringIO import StringIO
 
 CHRONAM_URL = 'http://chroniclingamerica.loc.gov'
-RESIZE_FACTOR = 0.25
+# RESIZE_FACTOR = 0.25
+RESIZE_FACTOR = 1
 
 MONTH_NAMES = {'01': "January",
           '02': "February",
@@ -40,7 +43,7 @@ def create_subject_files(from_date, to_date):
     group_file_count = {}
     titles = _titles()
     for title in titles:
-        print "Process title %s" % title['title']
+        print "Processing title %s" % title['title']
         title_pages = _title_pages(title['url'], from_date, to_date)
         if len(title_pages) > 0:
             group_filename = _group_filename(title['state'], from_date, to_date)
@@ -64,7 +67,7 @@ def create_subject_files(from_date, to_date):
                                     width, height, alto_url))
                     except:
                         e = sys.exc_info()[1]
-                        print "failed to process page %s, reason %s", page['url'], e
+                        print "failed to process page %s, reason %s" % (page['url'], e)
 
 
 def _write_group_file(state, from_date, to_date, first_page):
@@ -121,8 +124,12 @@ def _title_pages(title_url, from_date, to_date):
 
 def _issue_pages(issue_url):
     r = requests.get(issue_url)
-    issue = r.json()
-    return [{'url': page['url'], 'date_issued': issue['date_issued'], 'sequence': page['sequence']} for page in issue['pages']]
+    # sometime you get not found for an issue
+    if r.status_code != requests.codes.not_found:
+        issue = r.json()
+        return [{'url': page['url'], 'date_issued': issue['date_issued'], 'sequence': page['sequence']} for page in issue['pages']]
+    else:
+        return []
 
 
 def _page_dimensions(page_base_url):

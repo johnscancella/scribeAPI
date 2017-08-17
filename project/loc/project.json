@@ -1,9 +1,9 @@
 {
-  "title": "A Thousand Words",
-  "short_title": "1000words",
+  "title": "Beyond Words",
+  "short_title": "beyondwords",
   "summary": "Join us in discovering images in historic newspapers.",
   "background": "/images/background.jpg",
-  "admin_email": "tong.wang.70@gmail.com",
+  "admin_email": "beyond.words.loc@gmail.com",
   "logo": "/images/logo.png",
   "favicon": "/images/favicon.ico",
   "privacy_policy": "https://www.loc.gov/legal/#privacy_policy",
@@ -31,11 +31,6 @@
       "logo": "https://put.logo.url.here/"
     }
   ],
-
-  "analytics": {
-    "google_analytics_client_id": "UA-69673163-1"
-  },
-
   "menus": {
     "main": [
       {"label": "Intro", "page": "intro"},

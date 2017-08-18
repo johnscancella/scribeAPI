@@ -1,8 +1,8 @@
 '''
-This script query Chronam with a date range and create group file for each
-State. It also create groups.csv
+This script queries Chronam with a date range and creates a group file for each
+State. It also create groups.csv file
 
-Example python create_subjects.py -f 1917-04-06 -t 1918-11-11
+Example: python create_subjects.py -f 1917-04-06 -t 1918-11-11
 '''
 
 import sys

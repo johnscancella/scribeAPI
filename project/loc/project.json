@@ -31,6 +31,9 @@
       "logo": "https://put.logo.url.here/"
     }
   ],
+  "analytics": {
+    "loc_adobe_analytics": true
+  },
   "menus": {
     "main": [
       {"label": "Intro", "page": "intro"},

@@ -102,9 +102,6 @@ html, body,
   width: auto;
   height: 52px;
 }
-.main-nav .login {
-  line-height: 5.2em;
-}
 
 /* Pages */
 .page-content > h1 {
@@ -393,13 +390,8 @@ h3.groups-header {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 
-.login a {
-  color: rgba(255,255,255,0.4);
-  text-decoration: none;
-}
-
-.login a:hover {
-  color: rgba(255,255,255,1);
+.login {
+  display: none;
 }
 
 .classification-count {

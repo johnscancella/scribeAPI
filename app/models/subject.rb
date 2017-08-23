@@ -137,7 +137,7 @@ class Subject
   # if pvr is equal or greater than retire_limit, set self.status == retired.
   def check_retire_by_vote
     assesment_classifications = classifications.where(task_key: "completion_assessment_task").count
-    if assesment_classifications > 2
+    if assesment_classifications >= 2
       percentage_for_retire = retire_count / assesment_classifications.to_f
       if percentage_for_retire >= workflow.retire_limit
         increment_parents_subject_count_by -1 if self.retire! && parent_subject

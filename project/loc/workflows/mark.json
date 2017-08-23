@@ -1,7 +1,7 @@
 {
   "name":"mark",
   "label":"Mark Workflow",
-  "retire_limit": 0.75,
+  "retire_limit": 0.51,
   "generates_subjects": true,
   "generates_subjects_for": "transcribe",
   "show_completion_assessment_task": false,

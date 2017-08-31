@@ -1,8 +1,9 @@
 # Describe the Picture
 
-Most pictures have captions and/or descriptions. Enter the text exactly as you see it, including the capitalization and punctuation. However remove hyphenation that breaks words at the end of line. Use new lines to separate different parts of captions and descriptions.
+Most pictures have captions or descriptions. Enter the text exactly as you see it. Include capitalization and punctuation, but remove hyphenation that breaks words at the end of the line. Use new lines to separate different parts of captions and descriptions. 
 
-You may omit any text that for any reason is difficult to decipher. But keep in mind that you can zoom in or view the original high resolution images to get a better look.
+You can zoom in for better looks at the page. You can also select “View the original page” in the upper right corner of the screen to view the original high resolution image of the newspaper. 
+
 <p>
 <div id="accordion-help-modal">
   <h3>Photo Sample</h3>
@@ -20,4 +21,3 @@ You may omit any text that for any reason is difficult to decipher. But keep in 
     <p>You may leave the illustrator field empty if it is hard to decipher.
   </div>
 </div>
-

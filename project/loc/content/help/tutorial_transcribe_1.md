@@ -1,7 +1,9 @@
 #Transcribe
 
-Transcribe the text exactly as you see it. For additional help, each transcription prompt has an "Need help?" button providing field specific context.
+In the Transcribe task, you’ll transcribe the text exactly as you see it. Please transcribe titles, captions, and cutlines of the pictures. If the text is hard to read, do your best and keep going.  
 
-If the text is hard to read, give it your best shot and keep going. You may surround the words you are not sure with square brackets [ ].
+Some captions may be pre-populated by text from Chronicling America. You can edit the text or choose to delete and transcribe it.
 
-If the marked area contains no picture or only partial picture, click "Bad region?" button and then "Save" button.
+Click the “Need Help?” button to get additional information about each field. 
+
+If the marked area contains no picture or only a partial picture, click the “Bad Region?”button, then “Save.”

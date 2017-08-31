@@ -1,6 +1,12 @@
 # Zoom and Pan
 
-On the left side of the screen you'll find the zoom and pan tool. In addition to the tool, you can also use the following shortcut keys.
+You will often need to zoom in or pan across the newspaper page to read the text. Use the zoom and pan tool on the left side of the screen.
+
+<div>
+  <image width="152" height="105" src="/images/zoom_pan.png"></video>
+</div>
+
+You can also use the following shortcut keys.
 
 To zoom: <kbd>Control</kbd> <kbd>Alt</kbd> <kbd>+</kbd><kbd>-</kbd> 
 

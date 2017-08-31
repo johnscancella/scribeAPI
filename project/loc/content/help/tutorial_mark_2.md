@@ -1,10 +1,12 @@
 # Making Your Mark
 
-To mark a picture, click and drag the mark around the entire picture, including the caption and cutline if there is any. The cutline is generally a longer prose under the caption, describing the pciture.
+To Mark a picture, click and drag the mark around the entire picture, including the caption and cutline (if present). The cutline is generally a section of longer prose under the caption, further describing the picture. 
 
-After you have the mark around the area you want, click the green "Done" check-box at the bottom-right corner of the mark. 
+Once you’ve marked the area around the picture, click the green box at the bottom right corner. 
 
-If you'd like to remove one of your marks, click on it and then on the red x button in the upper-right corner of the mark.  
+Made a mistake? Adjust the edges of the box by clicking and dragging the dot at the corners. 
+
+You can also remove your mark by clicking on it and selecting the red X button on the upper right corner of the mark. Once the box is cleared, you can try again.
 
 <div class="video-wrapper">
   <video width="322" height="208" loop autoplay src="/images/mark_task.mp4"></video>

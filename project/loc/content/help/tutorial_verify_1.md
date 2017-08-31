@@ -1,5 +1,7 @@
 #Verify
 
-In this task, you'll perform quality control on the transcriptions. Select the best transcription from those provided. If none appear correct, you may choose to enter your own.
+In the Verify task, you’ll review the transcriptions that could not be matched in our system. Select the best transcription from the ones provided. 
 
-If miltiple transcriptions appear valid, choose the first one.
+Remember: we’re looking for the transcription that most closely matches the text on the newspaper page. 
+
+If none of the options appear to be correct, you can enter your own.

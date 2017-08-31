@@ -39,7 +39,8 @@
       {"label": "Intro", "page": "intro"},
       {"label": "Data", "page": "data"},
       {"label": "Gallery", "page": "gallery"},
-      {"label": "About", "page": "about"}
+      {"label": "About", "page": "about"},
+      {"label": "FAQ", "page": "faq"}
     ],
     "footer": []
   }

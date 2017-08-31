@@ -17,6 +17,7 @@ class GroupsController < ApplicationController
       @groups = Project.current.groups
     end
 
+    @groups = @groups.order_by(:name => 'asc')
     # Apply pagination:
     @groups = @groups.page(page).per(limit)
 

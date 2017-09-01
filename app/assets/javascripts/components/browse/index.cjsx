@@ -14,8 +14,8 @@ module.exports = React.createClass
       if option.value == 'category'
         categoryOptions = option.tool_config.options
     <div className='page-content custom-page'>
+      <h1>Picture Gallery</h1>
       <div>
-        <h2>Picture Gallery</h2>
         <BrowsePanel categoryOptions={categoryOptions} />
       </div>
     </div>           

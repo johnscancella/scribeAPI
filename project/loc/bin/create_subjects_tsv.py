@@ -9,11 +9,15 @@ import csv
 import sys
 import re
 import urllib
+import os
 import os.path
 import us
 
 CHRONAM_URL = 'http://chroniclingamerica.loc.gov'
-RESIZE_FACTOR = 0.25
+IMAGE_S3_BUCKET = 'ndnp-jpeg-surrogates'
+OCR_S3_BUCKET = 'ndnp-batches'
+# full resolution
+RESIZE_FACTOR = 1
 
 MONTH_NAMES = {1: "January",
                   2: "February",
@@ -30,6 +34,16 @@ MONTH_NAMES = {1: "January",
 
 STATE_COVER_IMAGE_URL = 'https://s3.amazonaws.com/beyond-words-images/flags/%s.png'
 
+def _image_url(batch, jp2_filename):
+    if batch.startswith('batch_'):
+        batch = batch[6:]
+    image_base = os.path.splitext(jp2_filename)[0]
+    return "http://s3.amazonaws.com/%s/%s/data/%s.jpg" % (IMAGE_S3_BUCKET, batch, image_base)
+
+def _ocr_url(batch, ocr_filename):
+    if batch.startswith('batch_'):
+        batch = batch[6:]
+    return "http://s3.amazonaws.com/%s/%s/data/%s" % (OCR_S3_BUCKET, batch, ocr_filename)
 
 def create_subject_files(csv_reader):
     group_file_count = {}
@@ -50,9 +64,9 @@ def create_subject_files(csv_reader):
             description = "%s %s. Page %s" % (page['title'], _format_date(page['issue_date']), page['sequence'])
             width = int(round(int(page['jp2_width'])*RESIZE_FACTOR))
             height = int(round(int(page['jp2_length'])*RESIZE_FACTOR))
-            image_url = "%simage_%dx%d.jpg" % (subject_url, width, height)
+            image_url = _image_url(page['batch'], page['jp2_filename'])
             thumbnail_url = "%sthumbnail.jpg" % subject_url
-            alto_url = "%socr.xml" % subject_url
+            alto_url = _ocr_url(page['batch'], page['ocr_filename'])
             f.write('%d,"%s","%s",%f,"%s","%s",%d,%d,"%s"\n'
                     % (group_file_count[group_filename], subject_url,
                         description, RESIZE_FACTOR, image_url, thumbnail_url,

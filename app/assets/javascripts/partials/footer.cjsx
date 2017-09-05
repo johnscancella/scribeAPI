@@ -11,9 +11,17 @@ Footer = React.createClass
 
   render: ->
     <div id="footer" className="scribe-footer">
-      <a href="http://scribeproject.github.io/" className="scribe-logo-container">
-        <img src={"/assets/scribe-logo-inv.png"} alt={"Scribe Logo"} ></img>
-      </a>
+    
+      {
+        if @props.partials? && @props.partials["footer_branding"]?
+          <div className="custom-footer-branding" dangerouslySetInnerHTML={{__html: marked(@props.partials["footer_branding"])}} />
+      }
+
+      <div className="scribe-footer">
+        <a href="http://scribeproject.github.io/" className="scribe-logo-container">
+          <img src={"/assets/scribe-logo-inv.png"} alt={"Scribe Logo"} ></img>
+        </a>
+      </div>
 
       <div className="scribe-footer-content">
         <div className="scribe-footer-heading">This project is built using Scribe: document transcription, crowdsourced.</div>

@@ -72,6 +72,7 @@ App = React.createClass
           discussUrl={project.discuss_url}
           blogUrl={project.blog_url}
           pages={project.pages}
+          title={project.title}
           short_title={project.short_title}
           logo={project.logo}
           menus={project.menus}

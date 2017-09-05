@@ -17,7 +17,7 @@ Footer = React.createClass
           <div className="custom-footer-branding" dangerouslySetInnerHTML={{__html: marked(@props.partials["footer_branding"])}} />
       }
 
-      <div className="scribe-footer">
+      <div className="scribe-footer-logo">
         <a href="http://scribeproject.github.io/" className="scribe-logo-container">
           <img src={"/assets/scribe-logo-inv.png"} alt={"Scribe Logo"} ></img>
         </a>

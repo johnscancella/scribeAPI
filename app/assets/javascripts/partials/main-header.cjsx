@@ -20,7 +20,7 @@ module.exports = React.createClass
             unless @props.logo?
               @props.short_title
             else
-              <img src={@props.logo} />
+              <img src={@props.logo} alt={@props.title}/>
           }
         </Link>
 

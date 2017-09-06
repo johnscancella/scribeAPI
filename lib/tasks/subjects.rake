@@ -126,7 +126,9 @@ namespace :subjects do
         # puts "  updating metadata: #{meta_data}"
 
         subject = subject_set.subjects.where("location.standard" => subj['file_path'], type: 'root').first
-        subject = subject_set.subjects.create if subject.nil?
+        new_subject = subject.nil?
+        subject = subject_set.subjects.create if new_subject
+        
         subject.update_attributes({
           location: {
             standard: subj['file_path'],
@@ -139,9 +141,12 @@ namespace :subjects do
           order: order,
           group: group
         })
-        subject.activate!
-        puts "Added subject: #{subject.location[:standard]}"
-
+        if new_subject
+          subject.activate!
+          puts "Added and activated subject: #{subject.location[:standard]}"
+        else
+          puts "Updated subject: #{subject.location[:standard]}"
+        end
       end
     end
   end

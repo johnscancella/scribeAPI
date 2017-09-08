@@ -110,9 +110,8 @@ def create_subject_files(csv_reader):
         with open(group_filename, 'a') as f:
             if not file_exist:
                 group_file_count[group_filename] = 0
-                f.write('order,subject_url,subject_description,resize,file_path,thumbnail,width,height,alto\n')
+                f.write('order,set_key,subject_url,subject_description,resize,file_path,thumbnail,width,height,alto\n')
                 _write_group_file(unicode(page['state']))
-            group_file_count[group_filename] += 1
             subject_url = '%s/lccn/%s/%s/ed-%s/seq-%s/' % (
                 CHRONAM_URL, page['lccn'], page['issue_date'], page['edition'], page['sequence'])
             description = "%s %s. Page %s" % (page['title'], _format_date(page['issue_date']), page['sequence'])
@@ -123,8 +122,9 @@ def create_subject_files(csv_reader):
             alto_url = _ocr_url(page['batch'], page['ocr_filename'])
             # make sure it exists on S3
             if s3_image_bucket.image_exists_on_s3(_image_obj_path(page['batch'], page['jp2_filename'])):
-                f.write('%d,"%s","%s",%f,"%s","%s",%d,%d,"%s"\n'
-                        % (group_file_count[group_filename], subject_url,
+                group_file_count[group_filename] += 1
+                f.write('%d,"%s","%s","%s",%f,"%s","%s",%d,%d,"%s"\n'
+                        % (group_file_count[group_filename], subject_url, subject_url,
                             description, RESIZE_FACTOR, image_url, thumbnail_url,
                             width, height,
                             alto_url))

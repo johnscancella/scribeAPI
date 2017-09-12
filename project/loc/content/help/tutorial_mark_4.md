@@ -3,7 +3,7 @@
 On the left side of the screen, you’ll find the zoom and pan tool. 
 
 <div>
-  <image width="152" height="105" src="/images/zoom_pan.png"></video>
+  <image width="152" height="105" src="/images/zoom_pan.png"></image>
 </div>
 
 You can also use the following shortcut keys.

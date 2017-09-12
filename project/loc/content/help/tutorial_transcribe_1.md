@@ -6,4 +6,4 @@ Some captions may be pre-populated by text from Chronicling America. You can edi
 
 Click the “Need Help?” button to get additional information about each field. 
 
-If the marked area contains no picture or only a partial picture, click the “Bad Region?”button, then “Save.”
+If the marked area contains no picture or only a partial picture, click the “Bad Region?” button and then “Save.”

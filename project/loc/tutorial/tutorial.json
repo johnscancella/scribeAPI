@@ -42,9 +42,15 @@
               }
           },
           "tutorial_transcribe_2": {
-              "next_task": null,
+              "next_task": "tutorial_transcribe_3",
               "help": {
                   "file": "tutorial_transcribe_2"
+              }
+          },
+          "tutorial_transcribe_3": {
+              "next_task": null,
+              "help": {
+                  "file": "tutorial_transcribe_3"
               }
           }
         }

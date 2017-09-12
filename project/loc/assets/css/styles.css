@@ -541,7 +541,6 @@ button,
     background-size: cover;
     font-family: 'Roboto Slab', serif;
     background-image: url("../images/hero.jpg");
-    background-image: url("http://thousand-words-public-2033915105.us-east-1.elb.amazonaws.com/images/hero.jpg");
     position: relative;
 }
 .usa-hero:before {

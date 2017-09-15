@@ -33,6 +33,9 @@ module.exports = React.createClass
               width = 1000
               height = Math.round(subj.region.height / subj.region.width * width)
               <div className="column">
+                
+                <img src="#{subj.meta_data.subject_url}image_#{width}x#{height}_from_#{x1},#{y1}_to_#{x2},#{y2}.jpg" className="large"/>
+
                 <div className="item-description">
                   {
                     if subj.data.caption
@@ -59,7 +62,6 @@ module.exports = React.createClass
                       </div>
                   }
                 </div>
-                <img src="#{subj.meta_data.subject_url}image_#{width}x#{height}_from_#{x1},#{y1}_to_#{x2},#{y2}.jpg" className="large"/>
 
                 <SocialShare url="#{location.origin}/#/view/#{subj.id}"/>
 

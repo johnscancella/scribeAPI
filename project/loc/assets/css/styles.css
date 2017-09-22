@@ -1002,3 +1002,7 @@ dl.stats-list dd {
     font-weight: bold;
     line-height: 1;
 }
+.scribe-logo-container {
+   pointer-events: none;
+   cursor: default;
+}

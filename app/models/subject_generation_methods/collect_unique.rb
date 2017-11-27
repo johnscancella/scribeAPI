@@ -16,7 +16,11 @@ module SubjectGenerationMethods
       if classification.child_subject.persisted?
 
         values = classification.child_subject.data['values'].nil? ? [] : classification.child_subject.data['values']
-        values.push ann unless values.include? ann
+        if classification.workflow.fuzzy_match
+          values.push ann unless values.map {|x| scrub(x)}.include? scrub(ann)
+        else
+          values.push ann unless values.include? ann
+        end
 
         atts[:data] = {'values' => values}
 
@@ -72,6 +76,11 @@ module SubjectGenerationMethods
       classification.child_subject.update_attributes atts
 
       classification.child_subject
+    end
+
+    def scrub(annotation)
+      # remove all extra whitespaces and punctuations, convert to lower case
+      Hash[*annotation.map{|k,str| [k,str.gsub(/[[:punct:]]/, ' ').gsub(/\s+/, ' ').downcase.strip]}.flatten]
     end
 
   end

@@ -23,6 +23,7 @@ class Workflow
   field    :order,                                           type: Integer,   default: 0
   field    :show_completion_assessment_task,                 type: Boolean,   default: true
   field    :show_bad_subject_button,                         type: Boolean,   default: true
+  field    :fuzzy_match,                                     type: Boolean,   default: false
 
   has_many     :subjects
   has_many     :classifications

@@ -55,6 +55,27 @@ module.exports = React.createClass
                         {subj.data.category}
                       </div>
                   }
+
+                  {
+                    if subj.data.values && subj.data.values[0].caption
+                      <div className="caption">
+                        {subj.data.values[0].caption}
+                      </div>
+                  }
+                  {
+                    if subj.data.values && subj.data.values[0].creator
+                      <div className="creator">
+                        By {subj.data.values[0].creator}
+                      </div>
+                  }
+                  {
+                    if subj.data.values && subj.data.values[0].category
+                      <div className="category">
+                        {subj.data.values[0].category}
+                      </div>
+                  }
+
+
                   {
                     if subj.meta_data.subject_description
                       <div className="citation">

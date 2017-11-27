@@ -6,6 +6,7 @@
   "generates_subjects_after": 3,
   "generates_subjects_method": "collect-unique",
   "subject_fetch_limit": 50,
+  "fuzzy_match": true,
 
   "tasks": {
 

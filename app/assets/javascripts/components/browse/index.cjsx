@@ -10,13 +10,10 @@ module.exports = React.createClass
   mixins: [Navigation, BaseWorkflowMethods]
   
   render: ->
-    for option, i in @getWorkflowByName('transcribe').tasks.illustration.tool_config.options
-      if option.value == 'category'
-        categoryOptions = option.tool_config.options
     <div className='page-content custom-page'>
       <h1>Picture Gallery</h1>
       <div>
-        <BrowsePanel categoryOptions={categoryOptions} />
+        <BrowsePanel categoryOptions={} />
       </div>
     </div>           
  

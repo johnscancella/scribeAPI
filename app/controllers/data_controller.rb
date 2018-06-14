@@ -1,7 +1,7 @@
 class DataController < ApplicationController
 
   def download
-    @subjects = Subject.complete
+    @subjects = Subject.columns
     respond_to do |format|
       format.json {render json: CompleteSubjectsSerializer.new(@subjects)}
     end

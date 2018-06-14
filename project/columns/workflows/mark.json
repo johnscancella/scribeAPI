@@ -1,0 +1,26 @@
+{
+  "name":"mark",
+  "label":"Mark Workflow",
+  "retire_limit": 0.51,
+  "generates_subjects": true,
+  "generates_subjects_for": "transcribe",
+
+  "first_task":"mark_column",
+
+  "tasks": {
+
+    "mark_column": {
+      "tool": "pickOneMarkOne",
+      "instruction": "Draw a rectangle around each unmarked **column** in the newspaper.",
+      "generates_subjects": true,
+      "tool_config" : {
+        "displays_transcribe_button": false,
+        "options": [
+          {"type": "rectangleTool", "label": "Column", "color": "#fe0000", "generates_subject_type": "column", "help": {"file": "m_column"}}
+        ]
+      },
+      "next_task": null
+    }
+ 
+  }
+}

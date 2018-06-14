@@ -1,9 +1,8 @@
 {
   "name":"mark",
   "label":"Mark Workflow",
-  "retire_limit": 0.51,
+  "retire_limit": 1,
   "generates_subjects": true,
-  "generates_subjects_for": "transcribe",
 
   "first_task":"mark_column",
 
